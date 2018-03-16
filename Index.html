@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>FinalReport</title>
+
+<script src="site_libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap/shim/respond.min.js"></script>
+<script src="site_libs/navigation/tabsets.js"></script>
+<link href="site_libs/highlightjs/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">TUN Data Challenge</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Index.html">FinalReport</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">FinalReport</h1>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p><span class="newthought">Multiple Sclerosis</span> defined by the National Multiple Sclerosis Society<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>(NMSS):</p>
+<blockquote>
+<p>“…involves an immune-mediated process in which an abnormal response of the body’s immune system is directed against the central nervous system (CNS), which is made up of the brain, spinal cord and optic nerves. The exact antigen — or target that the immune cells are sensitized to attack — remains unknown, which is why MS is considered by many experts to be ‘immune-mediated’ rather than ‘autoimmune’”</p>
+<footer>
+— National Multiple Sclerosis Society
+</footer>
+</blockquote>
+<p>Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 <span class="citation">@MSprevalence</span>. Furthermore, a new study is expected to be released this year which estimates MS incidence and prevalence to be around 1 million in the United States<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Understanding MS prevalence and those affected by it is critical to answering why someone would want to join one of the largest cycling fundraiser in the United States, Bike MS.</p>
+<p>Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donators. First, approximately 224 out of 100,000 women report living with MS – compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highst reported population of insured individuals with MS with 192 out of 100,000 – as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.</p>
+</div>
+<div id="business-questions" class="section level1">
+<h1>Business Questions</h1>
+<div id="what-are-the-greatest-growth-opportunities-for-new-corporate-teams" class="section level2">
+<h2>What are the greatest growth opportunities for new corporate teams?</h2>
+<p>Bike MS has reported that corporate teams with 10+ members are their key to a successful season of fundraising. They also have a goal of increasing active registration by almost 9% from 2017 <label for="tufte-mn-" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-" class="margin-toggle"><span class="marginnote">Last year, they had 74,000 riders and a total of 6,150 teams. Their goal for 2018 is 80,572 riders (40,000 new who have not participated within the last five years), and 6,489 teams.</span>. On the Bike MS Business Questions page<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, justification for targeting corporate teams:</p>
+<blockquote>
+<p>“Because of participant demographics (mostly male, middle age, higher income earners), we know that Bike MS is an ideal corporate event and that corporate teams of 10 or more cyclists are seven times more valuable than any other kind of team. Companies with a large professional employee base, especially those with a corporate culture of health and wellness – regardless of industry – are key prospects”</p>
+<footer>
+— Bike MS &amp; Teradata University Network
+</footer>
+</blockquote>
+<p>Now we have looked at donations from Fortune 1000 companies and estimate that their contribution is not as significant as they might think ….etc etc [plug in Konrad’s work]</p>
+<p>There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees <span class="citation">@SBA</span>. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:</p>
+<pre class="r"><code>participants$`Participant Connection to MS`[grep(&quot;MS&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Direct Connection to MS&quot;
+participants$`Participant Connection to MS`[grep(&quot;Other|other|Relative: Other&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Other&quot;
+participants$`Participant Connection to MS`[grep(&quot;Blank|None|No connection|NA&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;None&quot;
+participants$`Participant Connection to MS` &lt;- as.factor(participants$`Participant Connection to MS`)
+
+bad.states &lt;- c(&quot;Dallas&quot;, &quot;Alicante&quot;, &quot;Ardmore&quot;, &quot;Austin&quot;, &quot;Canyon Lake&quot;, &quot;Columbia Heights&quot;, &quot;Edinburg&quot;, &quot;Greendale&quot;, &quot;Houston&quot;,
+                &quot;Katy&quot;, &quot;Midwest City&quot;, &quot;Minneapolis&quot;, &quot;Morristown&quot;, &quot;Newport&quot;, &quot;None&quot;, &quot;Ridgefield Park&quot;, &quot;west haven&quot;)
+bad.state.rows &lt;- which(participants$`Address  -  Participant State/Province` %in% bad.states)
+participants &lt;- participants[-bad.state.rows, ]
+
+connect.ms.state &lt;- participants %&gt;%
+  select(`Address  -  Participant State/Province`, `Participant Connection to MS`, `Participant Occupation`) %&gt;%
+  filter(`Address  -  Participant State/Province` %in% filt.top.state) %&gt;%
+  group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
+  tally(!is.na(`Participant Connection to MS`))
+
+
+connect.ms.state &lt;- connect.ms.state[complete.cases(connect.ms.state), ]</code></pre>
+<pre class="r"><code>connection.viz &lt;- ggplot(connect.ms.state, aes(x = connect.ms.state$`Address  -  Participant State/Province`, y = `n`, 
+                                               fill = `Participant Connection to MS`)) +
+  geom_bar(stat = &quot;identity&quot;)
+connection.viz +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  labs(y = &quot;Number of Participants&quot;,
+       x = &quot;Participant State&quot;,
+       title = &quot;Participant Connection to MS per State&quot;)</code></pre>
+<div class="figure">
+<img src="Index_files/figure-html/unnamed-chunk-6-1.png" alt="In the most popular states, there are consistently high numbers of participants with direct connections to MS" width="672" />
+<p class="caption">
+In the most popular states, there are consistently high numbers of participants with direct connections to MS
+</p>
+</div>
+<p>We already know that on average individuals with the highest risk of developing MS are women in the Eastern Region of the United States. Knowing that on average participants have a personal connection to MS, encouraging populations where prevalence is high can actually make a difference. Understanding and building out a profile for the average participant can prove to be valuable - let’s take a look at some general stats about our riders starting with where the majority of participants are coming from.</p>
+<pre class="r"><code>tree.city &lt;- ggplot(top.city, aes(area = Count, fill = Count, label = City)) +
+  geom_treemap()+
+  geom_treemap_text(fontface = &quot;italic&quot;, colour = &quot;white&quot;, place = &quot;centre&quot;,
+                    grow = TRUE)
+tree.city</code></pre>
+<div class="figure">
+<img src="Index_files/figure-html/unnamed-chunk-8-1.png" alt="Tree map of where the most participants are coming from (the city map)." width="384" />
+<p class="caption">
+Tree map of where the most participants are coming from (the city map).
+</p>
+</div>
+<pre class="r"><code>tree.state &lt;- ggplot(top.state, aes(area = Count, fill = Count, label = State)) +
+  geom_treemap()+
+  geom_treemap_text(fontface = &quot;italic&quot;, colour = &quot;white&quot;, place = &quot;centre&quot;,
+                    grow = TRUE)
+tree.state</code></pre>
+<div class="figure">
+<img src="Index_files/figure-html/unnamed-chunk-8-2.png" alt="Tree map of where the most participants are coming from (the state map)." width="384" />
+<p class="caption">
+Tree map of where the most participants are coming from (the state map).
+</p>
+</div>
+<p>Let’s compare MS prevalence with the tree maps above to quickly see if we are on track with our assumption that where MS prevalence is high, we will see great participation. <img src="RegionalMSprev.jpg" title="Highest Prevalence of MS by Region" alt="Regional MS Prevalence" /></p>
+<pre class="r"><code># make a data frame of gender counts to make visualizing easier
+gender.df &lt;- as.data.frame(table(participants$`Participant Gender`))
+colnames(gender.df) &lt;- c(&quot;Gender&quot;, &quot;Count&quot;)
+glimpse(gender.df)</code></pre>
+<pre><code>## Observations: 2
+## Variables: 2
+## $ Gender &lt;fct&gt; Male, Female
+## $ Count  &lt;int&gt; 287795, 156488</code></pre>
+<pre class="r"><code>gender.overall &lt;- kable(gender.df, caption = &#39;Participant gender over all years&#39;)
+
+# visualize gender counts 
+gender.viz &lt;- ggplot(gender.df, aes(x = Gender, y = Count, fill = Gender)) + 
+  geom_bar(stat = &quot;identity&quot;)
+gender.viz + 
+  labs(x = &quot;Gender&quot;,
+       y = &quot;Number of Participants&quot;,
+       title = &quot;Gender of Participants&quot;) +
+  scale_y_continuous(labels = c(0, &#39;100,000&#39;, &#39;200,000&#39;, &#39;300,000&#39;))
+gender.overall</code></pre>
+<table>
+<caption>Participant gender over all years</caption>
+<thead>
+<tr class="header">
+<th align="left">Gender</th>
+<th align="right">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">287795</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="right">156488</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>gender.k &lt;- kable(gender.y, caption = &#39;Participant gender since 2013&#39;)
+g.year.viz &lt;- ggplot(data = gender.year, 
+                     aes(x = Year, y = Count, fill = Gender)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;)
+g.year.viz +
+  labs(title = &quot;Annual Participant Gender Count&quot;) +
+  labs(x = &quot;Event Year&quot;) +
+  labs(y = &quot;Count&quot;)
+gender.k</code></pre>
+<table>
+<caption>Participant gender since 2013</caption>
+<thead>
+<tr class="header">
+<th align="left">Gender</th>
+<th align="right">2013</th>
+<th align="right">2014</th>
+<th align="right">2015</th>
+<th align="right">2016</th>
+<th align="right">2017</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">67008</td>
+<td align="right">63082</td>
+<td align="right">58553</td>
+<td align="right">51641</td>
+<td align="right">47587</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="right">36241</td>
+<td align="right">34643</td>
+<td align="right">32301</td>
+<td align="right">28212</td>
+<td align="right">25112</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Just as Bike MS had briefed us, the average participant is male. Maybe we assume that, in general, more men than women cycle. However, in 2015 PeopleforBikes.org conducted a U.S. Bicycling Participation Survey and found that from a sample of 16,000 citizens 43% of women reported participating in cycling activities. Bike MS is missing out on targeting the female demographic, which also happens to have the highest prevalence and incidence of MS. Is there a particular industry women contribute to most in the workforce?</p>
+<table>
+<caption>Top 10 Reported Occupations of Female Participants</caption>
+<thead>
+<tr class="header">
+<th align="left">Participant Occupation</th>
+<th align="right">2013</th>
+<th align="right">2014</th>
+<th align="right">2015</th>
+<th align="right">2016</th>
+<th align="right">2017</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Healthcare</td>
+<td align="right">2251</td>
+<td align="right">2074</td>
+<td align="right">1888</td>
+<td align="right">1525</td>
+<td align="right">1305</td>
+</tr>
+<tr class="even">
+<td align="left">Education and Training</td>
+<td align="right">1212</td>
+<td align="right">1160</td>
+<td align="right">1092</td>
+<td align="right">815</td>
+<td align="right">701</td>
+</tr>
+<tr class="odd">
+<td align="left">Accounting</td>
+<td align="right">674</td>
+<td align="right">644</td>
+<td align="right">604</td>
+<td align="right">447</td>
+<td align="right">419</td>
+</tr>
+<tr class="even">
+<td align="left">Student</td>
+<td align="right">516</td>
+<td align="right">445</td>
+<td align="right">434</td>
+<td align="right">287</td>
+<td align="right">242</td>
+</tr>
+<tr class="odd">
+<td align="left">Sales</td>
+<td align="right">510</td>
+<td align="right">474</td>
+<td align="right">429</td>
+<td align="right">342</td>
+<td align="right">273</td>
+</tr>
+<tr class="even">
+<td align="left">Engineering</td>
+<td align="right">457</td>
+<td align="right">497</td>
+<td align="right">504</td>
+<td align="right">319</td>
+<td align="right">260</td>
+</tr>
+<tr class="odd">
+<td align="left">Information Technology (IT)</td>
+<td align="right">410</td>
+<td align="right">383</td>
+<td align="right">371</td>
+<td align="right">297</td>
+<td align="right">267</td>
+</tr>
+<tr class="even">
+<td align="left">Legal and Paralegal</td>
+<td align="right">397</td>
+<td align="right">399</td>
+<td align="right">364</td>
+<td align="right">248</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Marketing</td>
+<td align="right">385</td>
+<td align="right">413</td>
+<td align="right">375</td>
+<td align="right">266</td>
+<td align="right">223</td>
+</tr>
+<tr class="even">
+<td align="left">Executive/Management</td>
+<td align="right">343</td>
+<td align="right">332</td>
+<td align="right">299</td>
+<td align="right">247</td>
+<td align="right">209</td>
+</tr>
+</tbody>
+</table>
+<p>It appears women have the highest number of cyclists working in the healthcare industry. There is a common theme that connects each of the first priority business questions, which is generated by addressing greatest growth opportunites for corporate teams. Furthermore, our recommendation is to target corporations located in the East Coast specifically those operating in the healthcare sector. According to Business Insider, in 22 states Walmart is the largest employer, many of which are within easy travel distance from the most successful Bike MS events. More importantly, six out of the ten states defined as Eastern Region (highest overall MS prevalence) have Healthcare listed as its largest employer - Pennsylvania, Vermont, Rhode Island, Massachusetts, Connecticut, and Delaware. Can we tell if healthcare is represented in the Eastern Region?</p>
+<p><img src="Index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>The data shows us that only three of the six states who have Healthcare listed as their largest employer have large numbers of cyclists signing up for Bike MS events. In past years these numbers were higher, but have been steadily declining. Of the top states that participants record as their home state all of the major occupational industries are declining.</p>
+<pre class="r"><code>ggplot(state.occ) +
+
+      geom_point(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
+      geom_path(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
+      facet_wrap(~ `Address - Participant State`, scales=&quot;free_y&quot;, nrow = 2) +
+      
+      theme_pander() +
+      theme(legend.position=&quot;right&quot;) + 
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+      labs(x = &quot;Year&quot;,
+           y = &quot;Number of Participants&quot;)</code></pre>
+<div class="figure">
+<img src="Index_files/figure-html/unnamed-chunk-16-1.png" alt="A full width figure." width="1440" />
+<p class="caption">
+A full width figure.
+</p>
+</div>
+<pre class="r"><code>occupation.state &lt;- participants
+occupation.state$`Address  -  Participant State/Province` &lt;- as.factor(occupation.state$`Address  -  Participant State/Province`)
+healthcare &lt;- occupation.state %&gt;%
+  select(everything()) %&gt;%
+  filter(`Participant Occupation` == &quot;Healthcare&quot;) %&gt;%
+  group_by(`Address  -  Participant State/Province`) %&gt;%
+  tally() %&gt;%
+  arrange(desc(n)) %&gt;%
+  top_n(10)</code></pre>
+</div>
+<div id="can-we-apply-those-opportunities-to-specific-ridesmarkets-especially-our-biggest-events" class="section level2">
+<h2>Can we apply those opportunities to specific rides/markets, especially our biggest events?</h2>
+<p>Bike MS has supplied us with budget information for their top 20 events. Three out of the top 20 events are located in the Eastern region where we are recommending Bike MS focus their marketing/advertising efforts. Concentration of events and date of event are of particular interest, because we will saturate the market with too many events in one area especially if they are only a couple months apart.</p>
+<pre class="r"><code>states &lt;- map_data(&quot;state&quot;)
+gg &lt;- ggplot() 
+gg &lt;- gg + geom_map(data=states, map=states,
+                    aes(x=long, y=lat, map_id=region),
+                    color=&quot;white&quot;, fill=&quot;#cccccc&quot;, size=0.5)
+gg &lt;- gg + geom_point(data=arrange(topEvents18, desc(topEvents18$Budget)),
+                      aes(x=topEvents18$Lon, y=topEvents18$Lat, size=topEvents18$Budget),
+                      shape=21, color=&quot;white&quot;, fill=&quot;steelblue&quot;)
+gg &lt;- gg + geom_map(data=vor_df, map=vor_df,
+                    aes(x=long, y=lat, map_id=id),
+                    color=&quot;#a5a5a5&quot;, fill=&quot;#FFFFFF00&quot;, size=0.5)
+gg &lt;- gg + scale_size(range=c(2, 15))
+gg &lt;- gg + coord_map(&quot;albers&quot;, lat0=30, lat1=40)
+gg &lt;- gg + theme_map()
+gg &lt;- gg + theme(legend.position=&quot;none&quot;)
+gg</code></pre>
+<div class="figure">
+<img src="Index_files/figure-html/unnamed-chunk-19-1.png" alt="Voronoi of Top Events for 2018" width="960" />
+<p class="caption">
+Voronoi of Top Events for 2018
+</p>
+</div>
+<p>The voronoi diagram partitions the United States into regions whose distance to the seed (in our case event) is the shortest. This allows us to see which populations should be going to which event based on distance from the event. Following our central theme, one practical recommendation is to allocate resources to boost participation in the Northeast states and in particular the states where the largest employer is operating in healthcare. Referencing a visual shown above, we would like to highlight the following states and encourage increased advertising in the following states because of the low numbers of cyclists working in healthcare. Below are top priority states with their respective state-wide largest employer.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">State</th>
+<th>Employer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Connecticut</td>
+<td>Yale New Haven Health System</td>
+</tr>
+<tr class="even">
+<td align="center">Delaware</td>
+<td>Christiana Care Health System</td>
+</tr>
+<tr class="odd">
+<td align="center">Rhode Island</td>
+<td>Lifespan System of Hospitals</td>
+</tr>
+<tr class="even">
+<td align="center">Vermont</td>
+<td>The University of Vermont Medical Center</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally for your reference, here are the largest employers in each state. <img src="BILargestEmployer.png" title="Largest Employer for Each State" alt="Largest Employer Image" /> You will also notice that Walmart is within the target region, which would obviously be a great sponsor.</p>
+<pre class="r"><code>east.health.viz &lt;- ggplot(east.health, aes(x = reorder(`Participant State`, -Count), 
+                                           y = `Count`,
+                                           fill = `Participant State`)) + 
+  geom_bar(stat = &quot;identity&quot;)
+east.health.viz +
+  labs(x = &quot;Number of Participants&quot;,
+       y = &quot;State&quot;,
+       title = &quot;Number of Cyclists Working in Healthcare Within the Target Region&quot;)</code></pre>
+<p><img src="Index_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="appendix-material" class="section level1">
+<h1>Appendix Material</h1>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Read about Multiple Sclerosis at <a href="https://www.nationalmssociety.org/About-the-Society/MS-Prevalence">NMSS.org</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Link to the press release from NMSS(<a href="https://www.nationalmssociety.org/About-the-Society/News/Preliminary-Results-of-MS-Prevalence-Study" class="uri">https://www.nationalmssociety.org/About-the-Society/News/Preliminary-Results-of-MS-Prevalence-Study</a>)<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Visit TUN Data Challenge homepage to look at business questions and competition info <a href="http://www.teradatauniversitynetwork.com/Community/Student-Competitions/2018/Data-Challenge/Business-Questions/">TUN Data Challenge 2018</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

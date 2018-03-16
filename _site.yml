@@ -1,10 +1,11 @@
 name: "National Multiple Sclerosis Society : Bike MS"
 output_dir: "."
 navbar:
-  title: "FinalReport"
+  title: "TUN Data Challenge 2018"
   left:
     - text: "FinalReport"
-      href: FinalReport.html
+      href: Index.html
+
       
 output:
   tufte::tufte_html:
