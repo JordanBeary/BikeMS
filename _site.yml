@@ -1,0 +1,7 @@
+name: "National Multiple Sclerosis Society : Bike MS"
+output_dir: "."
+navbar:
+  title: "National Multiple Sclerosis Society : Bike MS"
+  left:
+    - text: "Bike MS Business Questions"
+      href: Participants.html
