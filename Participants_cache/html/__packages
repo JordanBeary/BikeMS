@@ -36,3 +36,5 @@ deldir
 sp
 rgdal
 bindrcpp
+tinytex
+tint
