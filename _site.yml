@@ -4,7 +4,7 @@ navbar:
   title: "National Multiple Sclerosis Society : Bike MS"
   left:
     - text: "Final Report"
-      href: Participants.html
+      href: FinalReport.html
       
 output:
   tufte::tufte_html:
