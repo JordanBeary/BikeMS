@@ -4,7 +4,7 @@ navbar:
   title: "TUN Data Challenge 2018"
   left:
     - text: "FinalReport"
-      href: Index.html
+      href: index.html
 
       
 output:
