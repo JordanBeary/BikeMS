@@ -1,0 +1,663 @@
+---
+title: "National Multiple Sclerosis Society : Bike MS"
+author: Ramya Priya Guntipalli, Jordan Beary, Konrad Miziolek, Eva Forrester
+date: "`r Sys.Date()`"
+output:
+  tufte::tufte_html:
+    tufte_variant: "envisioned" 
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+bibliography: skeleton.bib
+link-citations: yes
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(tint)
+library(tufte)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+options(htmltools.dir.version = FALSE)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# load your libraries
+library(knitr)
+library(yaml)
+library(magick)
+library(tufterhandout)
+library(stats)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(ggfortify)
+library(scales)
+library(plotly)
+library(plyr)
+library(lubridate)
+library(tidyverse)
+library(reshape2)
+library(ggfittext)
+library(treemapify)
+library(tidyr)
+library(pander)
+library(ggthemes)
+library(leaps)
+library(dygraphs)
+library(xts)
+library(data.table)
+library(maps)
+library(ggmap)
+library(mapproj)
+library(deldir)
+library(sp)
+library(rgdal)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+participants <- read_csv("C:\\Users\\J-Blazer\\Documents\\ETM 527\\Bike MS\\Data\\Participants\\2013-2017 Bike MS Participants.csv")
+```
+
+```{r cleaning, include=FALSE}
+# need to change fields from int to char 
+participants$`Team ID` <- as.character(participants$`Team ID`)
+class(participants$`Team ID`)
+participants$`Contact ID` <- as.character(participants$`Contact ID`)
+participants$`Address -  Participant ZIP/Postal Code` <- as.character(participants$`Address -  Participant ZIP/Postal Code`)
+participants$`Event ID` <- as.character(participants$`Event ID`)
+summary(participants)
+
+#change event date from character to date-time
+participants$`Event Date` <- mdy_hm(participants$`Event Date`)
+class(participants$`Event Date`)
+head(participants$`Event Date`, n = 5)
+
+# change character type to factor for binning
+unique(participants$`Is Prior Participant`)
+participants$`Is Prior Participant` <- as.factor(participants$`Is Prior Participant`)
+levels(participants$`Is Prior Participant`) <- list(No = "N/A", Yes = "Yes")
+head(participants$`Is Prior Participant`)
+
+# gender
+unique(participants$`Participant Gender`)
+participants$`Participant Gender` <- as.factor(participants$`Participant Gender`)
+levels(participants$`Participant Gender`) <- list(Male = "Male", Female = "Female")
+head(participants$`Participant Gender`)
+
+# team division
+unique(participants$`Team Division`)
+participants$`Team Division` <- as.factor(participants$`Team Division`)
+levels(participants$`Team Division`) <- list(`Friends and Family` = c("Friends and Family", "Family and Friends"), 
+                                             Corporate = c("Corporate", "Corporation"), 
+                                             Organization = "Organization (Clubs; Civic Groups; etc.)", `
+                                             Church Group` = c("Place of Worship", "Religious"), 
+                                             School = "School", 
+                                             Other = "Other")
+head(participants$`Team Division`)
+
+#fiscal year
+unique(participants$`Fiscal Year`)
+class(participants$`Fiscal Year`)
+participants$`Fiscal Year` <- as.character(participants$`Fiscal Year`)
+participants$`Fiscal Year` <- as.Date(participants$`Fiscal Year`, "%Y")
+participants$`Fiscal Year` <- year(participants$`Fiscal Year`)
+head(participants$`Fiscal Year`)
+
+```
+
+```{r include=FALSE}
+gender.vip <- data.frame(participants$`Event Date`, participants$`Participant Gender`, participants$`Participant Occupation`,
+                          participants$`Team Division`, participants$`Is Prior Participant`, participants$`Address  -  Participant City`,
+                          participants$`Total From Participant($)`, participants$`Fiscal Year`, 
+                         participants$`Address  -  Participant State/Province`, participants$`Internal Event Name`, participants$`Participant Employer`)
+colnames(gender.vip) <- c("Event Date", "Participant Gender", "Participant Occupation", "Team Division", "Is Prior Participant",
+                          "Address - Participant City", "Total From Participant($)", "Fiscal Year", "Address - Participant State",
+                          "Event Name", "Participant Employer")
+```
+
+# Introduction
+
+`r newthought('Multiple Sclerosis')` defined by the National Multiple Sclerosis Society^[Read about Multiple Sclerosis at [NMSS.org](https://www.nationalmssociety.org/About-the-Society/MS-Prevalence)](NMSS):
+
+>"...involves an immune-mediated process in which an abnormal response of the body’s immune system is directed against the central nervous system (CNS), which is made up of the brain, spinal cord and optic nerves. The exact antigen — or target that the immune cells are sensitized to attack — remains unknown, which is why MS is considered by many experts to be 'immune-mediated' rather than 'autoimmune'"
+>
+> `r tufte::quote_footer('--- National Multiple Sclerosis Society')`
+
+Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 @MSprevalence. Furthermore, a new study is expected to be released this year which estimates MS incidence and prevalence to be around 1 million in the United States^[Link to the press release from NMSS(https://www.nationalmssociety.org/About-the-Society/News/Preliminary-Results-of-MS-Prevalence-Study)]. Understanding MS prevalence and those affected by it is critical to answering why someone would want to join one of the largest cycling fundraiser in the United States, Bike MS.
+
+Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donators. First, approximately 224 out of 100,000 women report living with MS -- compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highst reported population of insured individuals with MS with 192 out of 100,000 -- as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.
+
+# Business Questions
+
+## What are the greatest growth opportunities for new corporate teams?
+
+Bike MS has reported that corporate teams with 10+ members are their key to a successful season of fundraising. They also have a goal of increasing active registration by almost 9% from 2017 `r margin_note("Last year, they had 74,000 riders and a total of 6,150 teams. Their goal for 2018 is 80,572 riders (40,000 new who have not participated within the last five years), and 6,489 teams.")`. On the Bike MS Business Questions page^[Visit TUN Data Challenge homepage to look at business questions and competition info [TUN Data Challenge 2018](http://www.teradatauniversitynetwork.com/Community/Student-Competitions/2018/Data-Challenge/Business-Questions/)], justification for targeting corporate teams: 
+
+> "Because of participant demographics (mostly male, middle age, higher income earners), we know that Bike MS is an ideal corporate event and that corporate teams of 10 or more cyclists are seven times more valuable than any other kind of team. Companies with a large professional employee base, especially those with a corporate culture of health and wellness – regardless of industry – are key prospects"
+>
+> `r tufte::quote_footer('--- Bike MS & Teradata University Network')`
+
+Now we have looked at donations from Fortune 1000 companies and estimate that their contribution is not as significant as they might think ....etc etc [plug in Konrad's work]
+
+
+There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees @SBA. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:
+
+```{r include=FALSE}
+# top 15 occupations
+count.occ <- as.data.frame(table(gender.vip$`Participant Occupation`))
+colnames(count.occ) <- c("Occupation", "Count")
+top.occ <- head(arrange(count.occ, desc(Count)), n = 15)
+
+# of the top 10 states what are the top occupations
+filt.top.state <- c("NC", "MO", "FL", "MN", "OH", "NY", "NJ", "PA", "TX", "CA")
+filt.top.occ <- c("Healthcare", "Engineering", "Information Technology (IT)", "Sales", "Executive/Management")
+state.occ <- as.data.frame(
+  gender.vip %>%
+  select(`Address - Participant State`, `Participant Occupation`, `Fiscal Year`) %>%
+  filter(`Address - Participant State` %in% filt.top.state , 
+         `Participant Occupation` %in% filt.top.occ) %>%
+  group_by(`Participant Occupation`, `Address - Participant State`, `Fiscal Year`) %>%
+  tally(!is.na(`Participant Occupation`))
+)
+state.occ$`Address - Participant State` <- factor(state.occ$`Address - Participant State`,
+                                                  levels=unique(state.occ$`Address - Participant State`),ordered=TRUE)
+
+avg.don.top.occ <- as.data.frame(
+  gender.vip %>%
+  select(`Event Name`, `Participant Occupation`, `Total From Participant($)`) %>%
+  filter(`Participant Occupation` %in% filt.top.occ)
+)
+
+avg.don.top.occ$`Participant Occupation` <- factor(avg.don.top.occ$`Participant Occupation`,levels = c("Healthcare", "Engineering", "Information Technology (IT)", "Sales", "Executive/Management"))
+
+
+avg.don.occ <- ddply(avg.don.top.occ,~`Participant Occupation`,summarise,mean=mean(`Total From Participant($)`))
+
+top.occ.tf <- apply(gender.vip, 1, function(x) any(x %in% c("Healthcare", "Engineering", "Information Technology (IT)", "Sales", "Executive/Management")))
+top.occ.all <- which(top.occ.tf == "TRUE")
+top.occ.dt <- gender.vip[top.occ.all, ]
+
+#state.occ <- grep(c("Healthcare", "Engineering", "Information Technology (IT)", "Sales", "Executive/Management"), gender.vip$`Participant Occupation`)
+
+#state.occ$`Address - Participant State` <- as.character(state.occ$`Address - Participant State`)
+spread.occ <- spread(state.occ, `Address - Participant State`, n) # this works but check the data ...very sus
+
+spread.occ[is.na(spread.occ)] <- 0
+spread.occ <- spread.occ[-50, ]
+
+spread.viz <- ggplot(data = gender.vip) + 
+  geom_bar(mapping = aes(x = `Participant Occupation`, fill = `Participant Occupation`)) +
+  facet_wrap(~ `Address - Participant State`, nrow = 10) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+spread.viz
+```
+
+```{r }
+participants$`Participant Connection to MS`[grep("MS", participants$`Participant Connection to MS`)] <- "Direct Connection to MS"
+participants$`Participant Connection to MS`[grep("Other|other|Relative: Other", participants$`Participant Connection to MS`)] <- "Other"
+participants$`Participant Connection to MS`[grep("Blank|None|No connection|NA", participants$`Participant Connection to MS`)] <- "None"
+participants$`Participant Connection to MS` <- as.factor(participants$`Participant Connection to MS`)
+
+bad.states <- c("Dallas", "Alicante", "Ardmore", "Austin", "Canyon Lake", "Columbia Heights", "Edinburg", "Greendale", "Houston",
+                "Katy", "Midwest City", "Minneapolis", "Morristown", "Newport", "None", "Ridgefield Park", "west haven")
+bad.state.rows <- which(participants$`Address  -  Participant State/Province` %in% bad.states)
+participants <- participants[-bad.state.rows, ]
+
+connect.ms.state <- participants %>%
+  select(`Address  -  Participant State/Province`, `Participant Connection to MS`, `Participant Occupation`) %>%
+  filter(`Address  -  Participant State/Province` %in% filt.top.state) %>%
+  group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %>%
+  tally(!is.na(`Participant Connection to MS`))
+
+
+connect.ms.state <- connect.ms.state[complete.cases(connect.ms.state), ]
+```
+
+```{r , fig.cap= "In the most popular states, there are consistently high numbers of participants with direct connections to MS", cache=TRUE}
+connection.viz <- ggplot(connect.ms.state, aes(x = connect.ms.state$`Address  -  Participant State/Province`, y = `n`, 
+                                               fill = `Participant Connection to MS`)) +
+  geom_bar(stat = "identity")
+connection.viz +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  labs(y = "Number of Participants",
+       x = "Participant State",
+       title = "Participant Connection to MS per State")
+```
+
+We already know that on average individuals with the highest risk of developing MS are women in the Eastern Region of the United States. Knowing that on average participants have a personal connection to MS, encouraging populations where prevalence is high can actually make a difference. Understanding and building out a profile for the average participant can prove to be valuable - let's take a look at some general stats about our riders starting with where the majority of participants are coming from. 
+
+```{r include=FALSE}
+# for city
+city.count <- as.data.frame(table(c(participants$`Address  -  Participant City`)))
+colnames(city.count) <- c("City", "Count")
+
+top.city <- head(arrange(city.count,desc(city.count$Count)), n = 20)
+
+# for state
+state.count <- as.data.frame(table(c(participants$`Address  -  Participant State/Province`)))
+colnames(state.count) <- c("State", "Count")
+
+top.state <- head(arrange(state.count,desc(state.count$Count)), n = 10)
+```
+
+```{r , fig.margin=TRUE, fig.cap=sprintf("Tree map of where the most participants are coming from (the %s map).", c("city", "state")), fig.width=4, fig.height=3, cache=TRUE}
+tree.city <- ggplot(top.city, aes(area = Count, fill = Count, label = City)) +
+  geom_treemap()+
+  geom_treemap_text(fontface = "italic", colour = "white", place = "centre",
+                    grow = TRUE)
+tree.city
+
+tree.state <- ggplot(top.state, aes(area = Count, fill = Count, label = State)) +
+  geom_treemap()+
+  geom_treemap_text(fontface = "italic", colour = "white", place = "centre",
+                    grow = TRUE)
+tree.state
+```
+
+Let's compare MS prevalence with the tree maps above to quickly see if we are on track with our assumption that where MS prevalence is high, we will see great participation. ![Regional MS Prevalence]
+
+```{r , fig.show='hold', cache=TRUE}
+# make a data frame of gender counts to make visualizing easier
+gender.df <- as.data.frame(table(participants$`Participant Gender`))
+colnames(gender.df) <- c("Gender", "Count")
+glimpse(gender.df)
+gender.overall <- kable(gender.df, caption = 'Participant gender over all years')
+
+# visualize gender counts 
+gender.viz <- ggplot(gender.df, aes(x = Gender, y = Count, fill = Gender)) + 
+  geom_bar(stat = "identity")
+gender.viz + 
+  labs(x = "Gender",
+       y = "Number of Participants",
+       title = "Gender of Participants") +
+  scale_y_continuous(labels = c(0, '100,000', '200,000', '300,000'))
+gender.overall
+```
+
+```{r include=FALSE}
+gender.year <- aggregate(gender.vip, by = list(gender.vip$`Participant Gender`, gender.vip$`Fiscal Year`), FUN = length)
+colnames(gender.year) <- c("Gender", "Year", "Count")
+gender.year <- gender.year[,c(1,2,3)]
+gender.y <- dcast(gender.year, Gender ~ Year)
+```
+
+```{r , fig.show='hold', cache=TRUE}
+gender.k <- kable(gender.y, caption = 'Participant gender since 2013')
+g.year.viz <- ggplot(data = gender.year, 
+                     aes(x = Year, y = Count, fill = Gender)) +
+  geom_bar(stat = "identity", position = "dodge")
+g.year.viz +
+  labs(title = "Annual Participant Gender Count") +
+  labs(x = "Event Year") +
+  labs(y = "Count")
+gender.k
+```
+
+Just as Bike MS had briefed us, the average participant is male. Maybe we assume that, in general, more men than women cycle. However, in 2015 PeopleforBikes.org conducted a U.S. Bicycling Participation Survey and found that from a sample of 16,000 citizens 43% of women reported participating in cycling activities. Bike MS is missing out on targeting the female demographic, which also happens to have the highest prevalence and incidence of MS. Is there a particular industry women contribute to most in the workforce? 
+
+```{r ,echo=FALSE, include=FALSE}
+female <- participants %>%
+  select(`Participant Gender`, `Participant Occupation`, `Address  -  Participant State/Province`, `Fiscal Year`) %>%
+  filter(`Participant Gender` == "Female")
+
+top.female.occ <- female %>%
+  select(`Participant Occupation`, `Fiscal Year`) %>%
+  group_by(`Participant Occupation`) %>%
+  tally(!is.na(`Participant Occupation`)) %>%
+  top_n(10)
+
+fem.top <- c("Accounting", "Administrative, Support and Clerical", "Education and Training", "Executive/Management","Engineering", "Healthcare", "Information Technology (IT)", "Legal and Paralegal", "Marketing", "Sales", "Student")
+
+female.occ <- female %>%
+  select(`Participant Occupation`, `Fiscal Year`) %>%
+  filter(`Participant Occupation` %in% fem.top) %>%
+  group_by(`Participant Occupation`, `Fiscal Year`) %>%
+  tally(!is.na(`Participant Occupation`)) %>%
+  arrange(desc(n))
+
+top.fem.occ.year <- dcast(female.occ, `Participant Occupation` ~ `Fiscal Year`)
+top.fem.occ.year <- top.fem.occ.year[ order(-top.fem.occ.year[,2]), ]
+```
+
+```{r echo=FALSE}
+kable(top.fem.occ.year, caption = "Top 10 Reported Occupations of Female Participants", row.names = FALSE)
+```
+
+
+It appears women have the highest number of cyclists working in the healthcare industry. There is a common theme that connects each of the first priority business questions, which is generated by addressing greatest growth opportunites for corporate teams.  Furthermore, our recommendation is to target corporations located in the East Coast specifically those operating in the healthcare sector. According to Business Insider, in 22 states Walmart is the largest employer, many of which are within easy travel distance from the most successful Bike MS events. More importantly, six out of the ten states defined as Eastern Region (highest overall MS prevalence) have Healthcare listed as its largest employer - Pennsylvania, Vermont, Rhode Island, Massachusetts, Connecticut, and Delaware. Can we tell if healthcare is represented in the Eastern Region? 
+
+```{r include=FALSE}
+east <- c("PA", "NY", "NJ", "MA", "ME", "RI", "CT", "NH", "VT", "DE")
+east.health <- participants %>%
+  select(`Participant Occupation`, `Address  -  Participant State/Province`) %>%
+  filter(`Address  -  Participant State/Province` %in% east, 
+         `Participant Occupation` == "Healthcare") %>%
+  group_by(`Address  -  Participant State/Province`) %>%
+  tally() %>%
+  arrange(desc(n))
+
+colnames(east.health) <- c("Participant State", "Count")
+```
+
+```{r ,echo=FALSE}
+east.health.viz <- ggplot(east.health, aes(x = reorder(`Participant State`, -Count), 
+                                           y = `Count`,
+                                           fill = `Participant State`)) + 
+  geom_bar(stat = "identity")
+east.health.viz +
+  labs(x = "Number of Participants",
+       y = "State",
+       title = "Number of Cyclists Working in Healthcare")
+```
+
+The data shows us that only three of the six states who have Healthcare listed as their largest employer have large numbers of cyclists signing up for Bike MS events. In past years these numbers were higher, but have been steadily declining. Of the top states that participants record as their home state all of the major occupational industries are declining.  
+
+
+
+```{r , fig.width = 15, fig.height = 4, fig.fullwidth = TRUE, fig.cap = "A full width figure.", warning=FALSE, message=FALSE, cache=TRUE}
+ggplot(state.occ) +
+
+      geom_point(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
+      geom_path(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
+      facet_wrap(~ `Address - Participant State`, scales="free_y", nrow = 2) +
+      
+      theme_pander() +
+      theme(legend.position="right") + 
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+      labs(x = "Year",
+           y = "Number of Participants")
+```
+
+```{r message=FALSE, warning=FALSE}
+occupation.state <- participants
+occupation.state$`Address  -  Participant State/Province` <- as.factor(occupation.state$`Address  -  Participant State/Province`)
+healthcare <- occupation.state %>%
+  select(everything()) %>%
+  filter(`Participant Occupation` == "Healthcare") %>%
+  group_by(`Address  -  Participant State/Province`) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  top_n(10)
+```
+
+## Can we apply those opportunities to specific rides/markets, especially our biggest events?
+
+Bike MS has supplied us with budget information for their top 20 events. Three out of the top 20 events are located in the Eastern region where we are recommending Bike MS focus their marketing/advertising efforts. Concentration of events and date of event are of particular interest, because we will saturate the market with too many events in one area especially if they are only a couple months apart.  
+
+```{r include=FALSE}
+topEvents18 <- read_csv("C:\\Users\\J-Blazer\\Documents\\ETM 527\\topEvents18.csv")
+vor_pts <- SpatialPointsDataFrame(cbind(topEvents18$Lon,
+                                        topEvents18$Lat),
+                                  topEvents18, match.ID=TRUE)
+SPointsDF_to_voronoi_SPolysDF <- function(sp) {
+ 
+  # tile.list extracts the polygon data from the deldir computation
+  vor_desc <- tile.list(deldir(sp@coords[,1], sp@coords[,2]))
+ 
+  lapply(1:(length(vor_desc)), function(i) {
+ 
+    # tile.list gets us the points for the polygons but we
+    # still have to close them, hence the need for the rbind
+    tmp <- cbind(vor_desc[[i]]$x, vor_desc[[i]]$y)
+    tmp <- rbind(tmp, tmp[1,])
+ 
+    # now we can make the Polygon(s)
+    Polygons(list(Polygon(tmp)), ID=i)
+ 
+  }) -> vor_polygons
+ 
+  # hopefully the caller passed in good metadata!
+  sp_dat <- sp@data
+ 
+  # this way the IDs _should_ match up w/the data & voronoi polys
+  rownames(sp_dat) <- sapply(slot(SpatialPolygons(vor_polygons),
+                                  'polygons'),
+                             slot, 'ID')
+ 
+  SpatialPolygonsDataFrame(SpatialPolygons(vor_polygons),
+                           data=sp_dat)
+ 
+}
+vor <- SPointsDF_to_voronoi_SPolysDF(vor_pts)
+ 
+vor_df <- fortify(vor)
+```
+
+```{r , fig.width = 10, fig.height = 7, fig.fullwidth = TRUE, fig.cap = "Voronoi of Top Events for 2018", warning=FALSE, message=FALSE, cache=TRUE}
+states <- map_data("state")
+gg <- ggplot() 
+gg <- gg + geom_map(data=states, map=states,
+                    aes(x=long, y=lat, map_id=region),
+                    color="white", fill="#cccccc", size=0.5)
+gg <- gg + geom_point(data=arrange(topEvents18, desc(topEvents18$Budget)),
+                      aes(x=topEvents18$Lon, y=topEvents18$Lat, size=topEvents18$Budget),
+                      shape=21, color="white", fill="steelblue")
+gg <- gg + geom_map(data=vor_df, map=vor_df,
+                    aes(x=long, y=lat, map_id=id),
+                    color="#a5a5a5", fill="#FFFFFF00", size=0.5)
+gg <- gg + scale_size(range=c(2, 15))
+gg <- gg + coord_map("albers", lat0=30, lat1=40)
+gg <- gg + theme_map()
+gg <- gg + theme(legend.position="none")
+gg
+```
+
+The voronoi diagram partitions the United States into regions whose distance to the seed (in our case event) is the shortest. This allows us to see which populations should be going to which event based on distance from the event. Following our central theme, one practical recommendation is to allocate resources to boost participation in the Northeast states and in particular the states where the largest employer is operating in healthcare. Referencing a visual shown above, we would like to highlight the following states and encourage increased advertising in the following states because of the low numbers of cyclists working in healthcare. Below are top priority states with their respective state-wide largest employer. 
+
+|State          | Employer
+|:-------------:|----------------------------------------
+|Connecticut    | Yale New Haven Health System
+|Delaware       | Christiana Care Health System
+|Rhode Island   | Lifespan System of Hospitals
+|Vermont        | The University of Vermont Medical Center
+
+Additionally for your reference, here are the largest employers in each state. ![Largest Employer Image] You will also notice that Walmart is within the target region, which would obviously be a great sponsor. 
+
+```{r fit.margin = TRUE}
+east.health.viz <- ggplot(east.health, aes(x = reorder(`Participant State`, -Count), 
+                                           y = `Count`,
+                                           fill = `Participant State`)) + 
+  geom_bar(stat = "identity")
+east.health.viz +
+  labs(x = "Number of Participants",
+       y = "State",
+       title = "Number of Cyclists Working in Healthcare Within the Target Region")
+```
+
+
+```{r warning=FALSE, include=FALSE}
+# mean donation for each event
+gender.gifts <- gender.vip %>%
+  select(`Participant Gender`, `Event Date`, `Total From Participant($)`) %>%
+  group_by(`Participant Gender`, `Event Date`)
+gender.gifts$`Event Date` <- as.Date(gender.gifts$`Event Date`)
+gender.gifts <- aggregate(gender.vip, by = list(gender.vip$`Participant Gender`, gender.vip$`Event Date`), FUN = mean)
+gender.gifts <-gender.gifts[,c(1,2,9)]
+colnames(gender.gifts) <- c("Gender", "Event Date", "Gift Amount")
+gender.gifts
+
+gender.gifts$`Event Date` <- as.Date(gender.gifts$`Event Date`)
+gender.gif <- aggregate(gender.gifts, by = list(gender.gifts$`Gender`, gender.gifts$`Event Date`), FUN = mean)
+gender.gif <-gender.gif[,c(1,2,5)]
+colnames(gender.gif) <- c("Gender", "Event Date", "Gift Amount")
+
+
+# mean donation for each fiscal year
+gender.gifts.year <- aggregate(gender.vip, by = list(gender.vip$`Participant Gender`, gender.vip$`Fiscal Year`), FUN = mean)
+gender.gifts.year <-gender.gifts.year[,c(1,2,9)]
+colnames(gender.gifts.year) <- c("Gender", "Year", "Gift Amount")
+gender.gifts.year
+  
+g.gift.year.viz <- ggplot(data = gender.gifts.year, 
+                     aes(x = gender.gifts.year$Year, y = gender.gifts.year$`Gift Amount`, fill = gender.gifts.year$Gender)) +
+  geom_bar(stat = "identity", position = "dodge")
+g.gift.year.viz +
+  labs(title = "Mean Participant Donation per Year by Gender") +
+  labs(x = "Fiscal Year") +
+  labs(y = "Gift Amount")
+```
+
+```{r eval=FALSE, warning=FALSE, include=FALSE}
+event.gifts <- aggregate(gender.vip, by = list(gender.vip$`Event Name`, gender.vip$`Fiscal Year`), FUN = mean)
+event.gifts <- event.gifts[,c(1,3,9)]
+as.data.frame(event.gifts)
+colnames(event.gifts) <- c("Event", "Date", "Gift Amount")
+
+event.gifts$Year <- format(event.gifts$Date, "%Y")
+event.gifts$Month <- format(event.gifts$Date, "%b")
+event.gifts$Day <- format(event.gifts$Date, "%d")
+event.gifts$CommonDate <- as.Date(as.character(as.POSIXct(event.gifts$Date)))
+
+event.viz <- ggplot(data = event.gifts, mapping = aes(x = CommonDate, y = `Gift Amount`, shape = Year, colour = Year)) +
+    geom_point() +
+    geom_line(aes(group = 1))
+event.viz <- event.viz + 
+  facet_wrap(~Year, ncol = 1, scales = "free_x") + theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  scale_y_continuous() +
+  scale_x_date(labels = date_format("%d-%b"), breaks = date_breaks("2 weeks"))
+event.viz
+
+```
+
+```{r eval=FALSE, include=FALSE}
+participants.event <- as.data.frame(
+  participants %>%
+    select(`Member ID`, `Internal Event Name`) %>%
+    group_by(`Internal Event Name`) %>%
+    tally()
+)
+participants.event <- arrange(participants.event, desc(n))
+participants.event
+
+participants.annual <- as.data.frame(
+  participants %>%
+    select(`Member ID`, `Fiscal Year`) %>%
+    group_by(`Fiscal Year`) %>%
+    tally()
+)
+participants.annual
+```
+
+# Appendix Material
+
+```{r  eval=FALSE, include=FALSE}
+class(participants)
+dim(participants)
+glimpse(participants)
+head(participants, n = 5)
+tail(participants, n = 5)
+summary(participants)
+```
+
+```{r eval=FALSE, include=FALSE}
+# acknowledge NA's 
+map(participants, ~sum(is.na(.)))
+```
+
+```{r  eval=FALSE, include=FALSE}
+participants.dt <- data.table(gender.vip)
+
+setkey(participants.dt, `Participant Occupation`, `Total From Participant($)`)
+
+participants.dt[,print(.SD), by = `Participant Occupation`]
+
+#participants.dt <- participants.dt[,.[(-`Total From Participant($)`)],
+#                                   by=list(`Participant Occupation`, `Total From #Participant($)`)]
+
+total.occ.gift <- participants.dt[,.(Total.Gift=sum(`Total From Participant($)`)), by = `Participant Occupation`][order(-Total.Gift)]
+
+occ.total <- ggplot(total.occ.gift, aes(x = `Participant Occupation`)) +
+  geom_bar(stat = "identity", aes(y = Total.Gift))
+occ.total
+
+avg.occ.gift <- participants.dt[,(Avg.Gift=mean(`Total From Participant($)`)),by=.(`Participant Occupation`)][order(-V1)]
+
+# std.dev for each participant grouped by occupation
+setkey(participants.dt, `Participant Occupation`)
+participants.dt["Retail Wholesale",(Sd.V3=sd(`Total From Participant($)`))]
+participants.dt["Retail Wholesale",]
+
+# employer
+setkey(participants.dt, `Participant Employer`)
+participants.dt[,.N, by = `Participant Employer`][order(-N)]
+setorder(setDT(participants.dt), -`Participant Employer`)[, head(.SD, 10), keyby][,.N, by = `Participant Employer`]
+employer <- ggplot(participants.dt, aes(x = `Participant Employer`)) +
+  geom_bar()
+employer
+```
+
+```{r  eval=FALSE, include=FALSE}
+# some basic data viz
+barplot(table(participants$`Participant Occupation`), ylab = "Count", main = "Occupations of our Participants",
+        ylim = c(0,2500), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+occ.count <- table(participants$`Participant Occupation`)
+occ.count
+
+occupation.omitNA <- data.table(occupation.omitNA)
+setkey(occupation.omitNA, `Participant Occupation`, `Participant Gender`)
+occupation.omitNA <- participants[!is.na(participants$`Participant Occupation`),]
+occ.count.omit.na <- occupation.omitNA[,.N, by=.(`Participant Occupation`,`Participant Gender`)]
+occ.count.omit.na <- occ.count.omit.na[!is.na(`Participant Gender`)][order(-`N`)]
+setnames(occ.count.omit.na, old = "V1", new = "Occupation")
+
+# Occupation Demographic
+top20.occupations.viz <- ggplot(data = occ.count.omit.na, aes(x = occupation.omitNA$`Participant Occupation`)) + 
+  geom_bar(na.rm = TRUE, aes(y = (..count..), fill = `Participant Gender`)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+top20.occupations.viz <- top20.occupations.viz + 
+  labs(x = "Occupations") + 
+  labs(title = "Frequency of Participant Occupation") + 
+  labs(y = "Count")
+top20.occupations.viz
+
+# Occupation Demographic
+top20.occupations.viz <- ggplot(data = occ.count.omit.na, aes(x = reorder(`Participant Occupation`, -`N`), 
+                                                              y = `N`, fill = `Participant Gender`)) + 
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+top20.occupations.viz <- top20.occupations.viz + 
+  labs(x = "Occupations") + 
+  labs(title = "Frequency of Participant Occupation") + 
+  labs(y = "Count")
+top20.occupations.viz
+
+# Prior Participant? Yes - No?
+prior.par.bar <- barplot(table(participants$`Is Prior Participant`), ylab = "Count", main = "Count of Prior Participants",
+        ylim = c(0,300000), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+
+# Team division bar plot
+team.division.bar <- barplot(table(participants$`Team Division`), ylab = "Count", main = "Team Division Demographic",
+        ylim = c(0,30000), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+```
+
+
+```{r  eval=FALSE, include=FALSE}
+g.year.viz <- ggplot(data = gender.year, 
+                     aes(x = Year, y = Count))+
+  geom_bar(stat = "identity", position = "dodge")
+g.year.viz +
+  labs(title = "Annual Participant Count") +
+  labs(x = "Event Year") +
+  labs(y = "Count")
+
+gt.count <- aggregate(gender.vip$`Participant Gender` ~ gender.vip$`Fiscal Year`, data = gender.vip, FUN = length)
+colnames(gt.count) <- c("Year", "Count")
+gt.count
+```
+
+```{r eval=FALSE, include=FALSE}
+topEvents18 <- read_csv("C:\\Users\\J-Blazer\\Documents\\ETM 527\\topEvents18.csv")
+cities.proj <- mapproject(topEvents18$Lon, topEvents18$Lat, "albers", param=c(30,40))
+par(mar=c(0,0,0,0))
+plot(cities.proj, asp=1, type="n", bty="n", xlab="", ylab="", axes = FALSE)
+points(cities.proj, pch=20, cex=0.1, col="red")
+topEventsVorn <- deldir(cities.proj$x, cities.proj$y)
+plot(topEventsVorn, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=1)
+```
+
+[Largest Employer Image]: BILargestEmployer.png "Largest Employer for Each State"
+[Regional MS Prevalence]: RegionalMSprev.jpg "Highest Prevalence of MS by Region"
