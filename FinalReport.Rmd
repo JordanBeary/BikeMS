@@ -1,6 +1,5 @@
 ---
-title: "National Multiple Sclerosis Society : Bike MS"
-authors: Ramya Priya Guntipalli, Jordan Beary, Konrad Miziolek, Eva Forrester
+title: "FinalReport"
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
