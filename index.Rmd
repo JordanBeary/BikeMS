@@ -137,6 +137,8 @@ There is no doubt that corporate teams have a large role to play in the success 
 count.occ <- as.data.frame(table(gender.vip$`Participant Occupation`))
 colnames(count.occ) <- c("Occupation", "Count")
 top.occ <- head(arrange(count.occ, desc(Count)), n = 15)
+top.occ.kab <- knitr::kable(top.occ, caption = "Top 15 Participant Occupations")
+top.occ.kab
 
 # of the top 10 states what are the top occupations
 filt.top.state <- c("NC", "MO", "FL", "MN", "OH", "NY", "NJ", "PA", "TX", "CA")
@@ -183,6 +185,14 @@ spread.viz
 ```
 
 ```{r ms.connect}
+con.ms <- participants %>%
+  select(`Participant Connection to MS`) %>%
+  group_by(`Participant Connection to MS`) %>%
+  tally(!is.na(`Participant Connection to MS`))
+con.ms <- con.ms[1:3,]
+colnames(con.ms)[2] <- "Count"
+kable(con.ms, caption = "More participants have a connection to MS")
+
 participants$`Participant Connection to MS`[grep("MS", participants$`Participant Connection to MS`)] <- "Direct Connection to MS"
 participants$`Participant Connection to MS`[grep("Other|other|Relative: Other", participants$`Participant Connection to MS`)] <- "Other"
 participants$`Participant Connection to MS`[grep("Blank|None|No connection|NA", participants$`Participant Connection to MS`)] <- "None"
@@ -199,6 +209,20 @@ connect.ms.state <- participants %>%
   group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %>%
   tally(!is.na(`Participant Connection to MS`))
 
+connect.east <- participants %>%
+  select(`Address  -  Participant State/Province`, `Participant Connection to MS`) %>%
+  filter(`Address  -  Participant State/Province` %in% east) %>%
+  group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %>%
+  tally(!is.na(`Participant Connection to MS`))
+
+con.east.viz <- ggplot(connect.east, aes(x = connect.east$`Address  -  Participant State/Province`, y = `n`, 
+                                               fill = `Participant Connection to MS`)) +
+  geom_bar(stat = "identity")
+con.east.viz +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  labs(y = "Number of Participants",
+       x = "Participant State",
+       title = "Participant Connection to MS per State")
 
 connect.ms.state <- connect.ms.state[complete.cases(connect.ms.state), ]
 ```
