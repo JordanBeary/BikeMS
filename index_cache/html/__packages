@@ -31,12 +31,12 @@ zoo
 xts
 data.table
 maps
+mapdata
 ggmap
 mapproj
 deldir
 sp
 rgdal
-bindrcpp
-mapdata
 gganimate
 animation
+bindrcpp

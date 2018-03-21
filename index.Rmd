@@ -249,7 +249,10 @@ connect.east <- participants %>%
 con.east.viz <- ggplot(connect.east, aes(x = connect.east$`Address  -  Participant State/Province`, y = `n`, 
                                                fill = `Participant Connection to MS`)) +
   geom_bar(stat = "identity")
-con.east.viz +
+con.east.viz + 
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   labs(y = "Number of Participants",
        x = "Participant State",
@@ -263,10 +266,13 @@ connection.viz <- ggplot(connect.ms.state, aes(x = reorder(connect.ms.state$`Add
                                                fill = `Participant Connection to MS`)) +
   geom_bar(stat = "identity")
 connection.viz +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   labs(y = "Number of Participants",
        x = "Participant State",
-       title = "Participant Connection to MS per State")
+       title = "Participant Connection to MS per State") +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 ```
 
 We already know that on average individuals with the highest risk of developing MS are women in the Eastern Region of the United States. Knowing that on average participants have a personal connection to MS, encouraging populations where prevalence is high can actually make a difference. Understanding and building out a profile for the average participant can prove to be valuable - let's take a look at some general stats about our riders starting with where the majority of participants are coming from. 
@@ -315,17 +321,19 @@ Just as we suspected, 3 out of the top 10 participant states are within the high
 # make a data frame of gender counts to make visualizing easier
 gender.df <- as.data.frame(table(participants$`Participant Gender`))
 colnames(gender.df) <- c("Gender", "Count")
-glimpse(gender.df)
 gender.overall <- kable(gender.df, caption = 'Participant gender over all years')
 
 # visualize gender counts 
 gender.viz <- ggplot(gender.df, aes(x = Gender, y = Count, fill = Gender)) + 
   geom_bar(stat = "identity")
 gender.viz + 
+  theme_minimal() +
   labs(x = "Gender",
        y = "Number of Participants",
        title = "Gender of Participants") +
-  scale_y_continuous(labels = c(0, '100,000', '200,000', '300,000'))
+  scale_y_continuous(labels = c('0', '100,000', '200,000', '300,000')) +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 gender.overall
 ```
 
@@ -343,6 +351,9 @@ g.year.viz <- ggplot(data = gender.year,
                      aes(x = Year, y = Count, fill = Gender)) +
   geom_bar(stat = "identity", position = "dodge")
 g.year.viz +
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
   labs(title = "Annual Participant Gender Count") +
   labs(x = "Event Year") +
   labs(y = "Count")
@@ -396,7 +407,10 @@ east.health.viz <- ggplot(east.health, aes(x = reorder(`Participant State`, -Cou
                                            y = `Count`,
                                            fill = `Participant State`)) + 
   geom_bar(stat = "identity")
-east.health.viz +
+east.health.viz + 
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
   labs(x = "Number of Participants",
        y = "State",
        title = "Number of Cyclists Working in Healthcare")
@@ -421,6 +435,7 @@ ggplot(state.occ) +
       labs(x = "Year",
            y = "Number of Participants")
 ```
+
 
 ```{r state.occ, message=FALSE, warning=FALSE}
 occupation.state <- participants
@@ -512,8 +527,9 @@ The voronoi diagram partitions the United States into regions whose distance to 
 
 
 
-Additionally for your reference, here are the largest employers in each state. ![Largest Employer Image] You will also notice that Walmart is within the target region, which would obviously be a great sponsor. 
+Additionally for your reference, here are the largest employers in each state. You will also notice that Walmart is within the target region, which would obviously be a great sponsor. 
 
+![Largest Employer Image]
 
 
 ```{r healthy.east, fit.margin = TRUE}
@@ -521,7 +537,10 @@ east.health.viz <- ggplot(east.health, aes(x = reorder(`Participant State`, -Cou
                                            y = `Count`,
                                            fill = `Participant State`)) + 
   geom_bar(stat = "identity")
-east.health.viz +
+east.health.viz + 
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
   labs(x = "Number of Participants",
        y = "State",
        title = "Number of Cyclists Working in Healthcare Within the Target Region")
@@ -533,21 +552,21 @@ east.health.viz +
 Involvement with Bike MS can take two forms, either you participate as a cyclist or you donate to the fundraiser. We have already seen that the top occupations of participants are Engineering, Healthcare, Sales, IT, and Executive Management.  From the donations data, we can discern what industries are the top donaters. 
 
 
-![Top Donating Occupations](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\topOccupationsdonation.png) 
+![Top Donating Occupations]
 
 
 The data shows us that the same occupations are responsible for the majority of the fundraising. The darker the color shows that the average donation is Men are responsible for a large sum of money, but mainly due to the significantly higher number of participants. The average donation from women is just as much as men. The national teams are also responsible for a significant amount of involvement - fundraising and participation. Here are some statistics on the top national teams over the years. 
 
 
-![Involvement of Top National Teams](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\national teams 1.png)
+![Involvement of Top National Teams]
 
 
 Each of these national teams have major offices across the United States and therefore can participate in the most popular Bike MS events. It is reflected 
 
-![Participation of Top National Teams](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\national teams 2.png)
+![Participation of Top National Teams]
 
 
-![Number of Teams per National Team](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\national teams 3.png)
+![Number of Teams per National Team]
 
 
 Upon exploration it was seen that the information was consistent with the rest of the data. The National Teams with the highest amount of revenue raised, varied from year to year during the 2013-2017 time period. Regardless of how much it varied these National Teams are responsible for a large portion of the overall revenue raised. Although some National Teams tend to repeat participation a larger portion of them do not, either way their teams tend to have more team members. The information here was consistent with other analyses showing the “Primary Connection to MS” overwhelmingly as “Friend has MS” followed by None/NA, and “Relative has MS”. It is important to recommend that Bike MS definitely prioritize keeping these teams engaged, but highlight the fact there is a lack of healthcare organizations among this list.
@@ -565,12 +584,14 @@ Again, the top national teams with the most involvement are from male dominated 
 Echoing the previous ansewr, the top performing corporate teams have employ a large population and have offices across the United States. Returning to our central themes, the data tells us that connection to multiple slerosis drives participants and donators to this massive fundraiser. The purpose of Bike MS is to fund research, advocate for social and political change, provide education, and sponsor services that help people with multiple sclerosis and their families. If the prevalence and incidence numbers are true then there is no reason participation and fundraising efforts should be declining. Let's take a look at the biggest common denominator for not only corporate teams, but everyone involved. 
 
 
-![Common Denominator](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\common denominator.png)
+![Common Denominator]
 
 
 Of all the responses of reported connection to MS from the corporate teams and participants, most people have a direct connection to a friend afflicted by MS. This finding does not come as a surprise given that the friend category would have the widest reach compared to sibling or spouse relationships. As participation and donations for this fundraiser decline, the one constant is that the overall prevalence and incidence of multiple sclerosis is something that persists. Focusing on the populations, occupations, and geographical locations that are impacted by this disease the most will ensure consistent fundraising and participation. Here is a visualization of the growing MS population in the United States that shows the magnitude of just the lives who are living with the disease. 
 
-```{r gify}
+
+
+```{r gify, message=FALSE, warning=FALSE}
 # growth of MS 
 # build dataframe of dates with weekly growth interval 
 start <- as.Date("2012-01-01")
@@ -609,9 +630,11 @@ usa.map <- usa.map + theme(legend.position=c(0.85, 0.2))
 usa.map <- usa.map + theme(legend.position = "none")
 usa.map <- usa.map + labs(title = "MS Prevalence and Incidence in the United States", 
                       subtitle = "2012 - 2017", caption = "Estimated MS population in 2012 was 400,000 with recent estimates projecting around 1 million.")
-usa.map
-gganimate(usa.map, 'MS.html', interval = 0.1)
+giffy <- gganimate(usa.map, interval = 0.1)
 ```
+
+
+![Prevalence Giffy] 
 
 
 ## Can we quantify the effect competing events are having in our top markets?
@@ -620,16 +643,16 @@ gganimate(usa.map, 'MS.html', interval = 0.1)
 To quantify the effect of these competing events on our top markets, it is important to understand the cause and objective of each fundraiser. Let's assume a cyclist only participates in one to two bike fundraisers during peak season (Spring and Summer), we already know that the participants choose Bike MS, or any fundraiser for that matter, because of it's connection to their life.  Here is some key information regarding the purpose of each competing fundraiser and their known markets that they cater to: 
 
 
-![Competing Events](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\competing events.png) 
+![Competing Events] 
 
 
 Without any knowledge on the amount of donations and registration a competing fundraiser is generating, we took a closer look at the donations and participation that Bike MS generated in the states that the competing events take place. 
 
 
-![Fundraising Interaction between Competing Events](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\funds raised by top markets.png)
+![Fundraising Interaction between Competing Events]
 
 
-![Participation Interaction between Competing Events](C:\Users\J-Blazer\Documents\ETM 527\Bike MS\BikeMS\participants from top markets.png)
+![Participation Interaction between Competing Events]
 
 
 
@@ -660,7 +683,9 @@ gender.gifts.year
   
 g.gift.year.viz <- ggplot(data = gender.gifts.year, 
                      aes(x = gender.gifts.year$Year, y = gender.gifts.year$`Gift Amount`, fill = gender.gifts.year$Gender)) +
-  geom_bar(stat = "identity", position = "dodge")
+  geom_bar(stat = "identity", position = "dodge") + theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 g.gift.year.viz +
   labs(title = "Mean Participant Donation per Year by Gender") +
   labs(x = "Fiscal Year") +
@@ -826,3 +851,12 @@ plot(topEventsVorn, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=1
 
 [Largest Employer Image]: BILargestEmployer.png "Largest Employer for Each State"
 [Regional MS Prevalence]: RegionalMSprev.jpg "Highest Prevalence of MS by Region"
+[Participation Interaction between Competing Events]: participantsfromtopmarkets.png
+[Fundraising Interaction between Competing Events]: fundsraisedbytopmarkets.png
+[Competing Events]: competingevents.png
+[Common Denominator]: commondenominator.png
+[Participation of Top National Teams]: nationalteams2.png
+[Number of Teams per National Team]: nationalteams3.png
+[Top Donating Occupations]: topOccupationsdonation.png
+[Involvement of Top National Teams]: nationalteams1.png
+[Prevalence Giffy]: MS.html
