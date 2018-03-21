@@ -199,6 +199,8 @@ $(document).ready(function () {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
+<p>The National Multiple Sclerosis Society (NMSS), founded in 1946, is the 70th largest nonprofit in the United States 1 , and is dedicated to fund research and perform outreach/public awareness and education regarding Multiple Sclerosis. Multiple Sclerosis (MS), a chronic and debilitating disease of the central nervous system where the immune system affects the myelin lining of neurons, is more frequent in women than men, and is typically diagnosed in patients between the ages of 20 and 50 2 . The causal mechanism of MS is unknown but hypothesized to be an interplay of an unknown environmental factor and genetic predisposition. Around 400,000 people in the United States have MS (with an additional 200 diagnosed weekly), and the frequency is about twice as high above the 37th parallel as below it. As such, Multiple Sclerosis represents a relevant, impactful disease with a need for research and education.</p>
+<p>The National Multiple Sclerosis Society raises funds primarily through individual donations and through sponsored charity bicycle events (BikeMS) which typically last one or two days 4 . These events occur in the spring, summer, and fall, and about 70,000 participants take part in one of about 75 different events across the country. As the largest charity bike fundraiser in the United States, the events collectively raise about <code>$</code>68 million. Teams are the largest contributor to the donation pot, representing about 87% of the money raised. However, as charities representing many distinct pathologies now rely on individual donors and bike rides, 5 the market share for BikeMS has fallen yearly since 2012 and is reflected in declining revenue and numbers of participants 6 . Retention of past participants is strong, but fewer and fewer new participants are joining. In 2017, the NMSS suffered a loss of $8 million 7 . To maintain a fundraising advantage and remain competitive in fundraising, the NMSS has partnered with Teradata University Network to provide their data and relevant business questions to be addressed.</p>
 <p><span class="newthought">Multiple Sclerosis</span> defined by the National Multiple Sclerosis Society<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>(NMSS):</p>
 <blockquote>
 <p>“…involves an immune-mediated process in which an abnormal response of the body’s immune system is directed against the central nervous system (CNS), which is made up of the brain, spinal cord and optic nerves. The exact antigen — or target that the immune cells are sensitized to attack — remains unknown, which is why MS is considered by many experts to be ‘immune-mediated’ rather than ‘autoimmune’”</p>
@@ -206,8 +208,18 @@ $(document).ready(function () {
 — National Multiple Sclerosis Society
 </footer>
 </blockquote>
-<p>Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 <span class="citation">@MSprevalence</span>. Furthermore, a new study is expected to be released this year which estimates MS incidence and prevalence to be around 1 million in the United States<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Understanding MS prevalence and those affected by it is critical to answering why someone would want to join one of the largest cycling fundraiser in the United States, Bike MS.</p>
+<p>Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 <span class="citation">@MSprevalence</span>.</p>
+<div class="figure">
+<img src="ms%20prevalence%20over%20time.jpg" alt="Regional MS Prevalence" />
+<p class="caption">Regional MS Prevalence</p>
+</div>
+<p>Furthermore, a new study is expected to be released this year which estimates MS incidence and prevalence to be around 1 million in the United States<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Understanding MS prevalence and those affected by it is critical to answering why someone would want to join one of the largest cycling fundraiser in the United States, Bike MS.</p>
 <p>Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donators. First, approximately 224 out of 100,000 women report living with MS – compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highst reported population of insured individuals with MS with 192 out of 100,000 – as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.</p>
+</div>
+<div id="business-problem" class="section level1">
+<h1>Business Problem</h1>
+<p>The NMSS is primarily interested in increasing the number of corporate donors: since demographics skew towards middle-aged, white, high-income earners, BikeMS receives much of its support from large corporate teams (featuring 10 or more riders)8. Thus, the overarching business question to address is how to increase the number of new corporate teams, by identifying companies with a large employee base and that are aligned with health/wellness goals. The second is to determine which events and markets are popular with the corporate demographic and use the knowledge to better drive event planning.</p>
+<p>An additional area of interest is determining the opportunities in digital marketing for attracting participants and tactically increasing donations by email reminders, social media advertising, and other channels. However, this is a secondary goal by the National Multiple Sclerosis Society.</p>
 </div>
 <div id="business-questions" class="section level1">
 <h1>Business Questions</h1>
@@ -222,6 +234,36 @@ $(document).ready(function () {
 </blockquote>
 <p>Now we have looked at donations from Fortune 1000 companies and estimate that their contribution is not as significant as they might think ….etc etc [plug in Konrad’s work]</p>
 <p>There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees <span class="citation">@SBA</span>. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:</p>
+<pre class="r"><code>con.ms &lt;- participants %&gt;%
+  select(`Participant Connection to MS`) %&gt;%
+  group_by(`Participant Connection to MS`) %&gt;%
+  tally(!is.na(`Participant Connection to MS`))
+con.ms &lt;- con.ms[1:3,]
+colnames(con.ms)[2] &lt;- &quot;Count&quot;
+kable(con.ms, caption = &quot;More participants have a connection to MS&quot;)</code></pre>
+<table>
+<caption>More participants have a connection to MS</caption>
+<thead>
+<tr class="header">
+<th align="left">Participant Connection to MS</th>
+<th align="right">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Blank</td>
+<td align="right">9967</td>
+</tr>
+<tr class="even">
+<td align="left">Care Manager of Person with MS</td>
+<td align="right">179</td>
+</tr>
+<tr class="odd">
+<td align="left">Caregiver of person with MS</td>
+<td align="right">16</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>participants$`Participant Connection to MS`[grep(&quot;MS&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Direct Connection to MS&quot;
 participants$`Participant Connection to MS`[grep(&quot;Other|other|Relative: Other&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Other&quot;
 participants$`Participant Connection to MS`[grep(&quot;Blank|None|No connection|NA&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;None&quot;
@@ -238,9 +280,24 @@ connect.ms.state &lt;- participants %&gt;%
   group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
   tally(!is.na(`Participant Connection to MS`))
 
+connect.east &lt;- participants %&gt;%
+  select(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
+  filter(`Address  -  Participant State/Province` %in% east) %&gt;%
+  group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
+  tally(!is.na(`Participant Connection to MS`))
 
-connect.ms.state &lt;- connect.ms.state[complete.cases(connect.ms.state), ]</code></pre>
-<pre class="r"><code>connection.viz &lt;- ggplot(connect.ms.state, aes(x = connect.ms.state$`Address  -  Participant State/Province`, y = `n`, 
+con.east.viz &lt;- ggplot(connect.east, aes(x = connect.east$`Address  -  Participant State/Province`, y = `n`, 
+                                               fill = `Participant Connection to MS`)) +
+  geom_bar(stat = &quot;identity&quot;)
+con.east.viz +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  labs(y = &quot;Number of Participants&quot;,
+       x = &quot;Participant State&quot;,
+       title = &quot;Participant Connection to MS per State&quot;)</code></pre>
+<p><img src="index_files/figure-html/ms.connect-1.png" width="672" /></p>
+<pre class="r"><code>connect.ms.state &lt;- connect.ms.state[complete.cases(connect.ms.state), ]
+
+connection.viz &lt;- ggplot(connect.ms.state, aes(x = reorder(connect.ms.state$`Address  -  Participant State/Province`, -n), y = `n`, 
                                                fill = `Participant Connection to MS`)) +
   geom_bar(stat = &quot;identity&quot;)
 connection.viz +
@@ -277,7 +334,12 @@ tree.state</code></pre>
 Tree map of where the most participants are coming from (the state map).
 </p>
 </div>
-<p>Let’s compare MS prevalence with the tree maps above to quickly see if we are on track with our assumption that where MS prevalence is high, we will see great participation. <img src="RegionalMSprev.jpg" title="Highest Prevalence of MS by Region" alt="Regional MS Prevalence" /></p>
+<p>Let’s compare MS prevalence with the tree maps above to quickly see if we are on track with our assumption that where MS prevalence is high, we will see great participation.</p>
+<div class="figure">
+<img src="RegionalMSprev.jpg" title="Highest Prevalence of MS by Region" alt="Regional MS Prevalence" />
+<p class="caption">Regional MS Prevalence</p>
+</div>
+<p>Just as we suspected, 3 out of the top 10 participant states are within the highest prevalence region. There is a large gender gap in MS prevalence and participation in Bike MS events, but let’s take a look at the hard numbers.</p>
 <pre class="r"><code># make a data frame of gender counts to make visualizing easier
 gender.df &lt;- as.data.frame(table(participants$`Participant Gender`))
 colnames(gender.df) &lt;- c(&quot;Gender&quot;, &quot;Count&quot;)
@@ -456,7 +518,7 @@ gender.k</code></pre>
 </table>
 <p>It appears women have the highest number of cyclists working in the healthcare industry. There is a common theme that connects each of the first priority business questions, which is generated by addressing greatest growth opportunites for corporate teams. Furthermore, our recommendation is to target corporations located in the East Coast specifically those operating in the healthcare sector. According to Business Insider, in 22 states Walmart is the largest employer, many of which are within easy travel distance from the most successful Bike MS events. More importantly, six out of the ten states defined as Eastern Region (highest overall MS prevalence) have Healthcare listed as its largest employer - Pennsylvania, Vermont, Rhode Island, Massachusetts, Connecticut, and Delaware. Can we tell if healthcare is represented in the Eastern Region?</p>
 <p><img src="index_files/figure-html/east.health-1.png" width="672" /></p>
-<p>The data shows us that only three of the six states who have Healthcare listed as their largest employer have large numbers of cyclists signing up for Bike MS events. In past years these numbers were higher, but have been steadily declining. Of the top states that participants record as their home state all of the major occupational industries are declining.</p>
+<p>The data shows us that only three of the six states who have Healthcare listed as their largest employer have large numbers of cyclists signing up for Bike MS events. In past years these numbers were higher, but have been steadily declining. Of the top states that participants record as their home state, all of the major occupational industries are declining.</p>
 <pre class="r"><code>ggplot(state.occ) +
 
       geom_point(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
@@ -547,9 +609,104 @@ east.health.viz +
        title = &quot;Number of Cyclists Working in Healthcare Within the Target Region&quot;)</code></pre>
 <p><img src="index_files/figure-html/healthy.east-1.png" width="672" /></p>
 </div>
+<div id="what-industries-have-had-the-strongest-involvement-in-bike-ms-in-the-last-five-years-and-what-occupations-were-responsible-for-most-of-our-fundraising" class="section level2">
+<h2>What industries have had the strongest involvement in Bike MS in the last five years and what occupations were responsible for most of our fundraising?</h2>
+<p>Involvement with Bike MS can take two forms, either you participate as a cyclist or you donate to the fundraiser. We have already seen that the top occupations of participants are Engineering, Healthcare, Sales, IT, and Executive Management. From the donations data, we can discern what industries are the top donaters.</p>
+<div class="figure">
+<img src="topOccupationsdonation.png" alt="Top Donating Occupations" />
+<p class="caption">Top Donating Occupations</p>
 </div>
-<div id="appendix-material" class="section level1">
-<h1>Appendix Material</h1>
+<p>The data shows us that the same occupations are responsible for the majority of the fundraising. The darker the color shows that the average donation is Men are responsible for a large sum of money, but mainly due to the significantly higher number of participants. The average donation from women is just as much as men. The national teams are also responsible for a significant amount of involvement - fundraising and participation. Here are some statistics on the top national teams over the years.</p>
+<div class="figure">
+<img src="national%20teams%201.png" alt="Involvement of Top National Teams" />
+<p class="caption">Involvement of Top National Teams</p>
+</div>
+<p>Each of these national teams have major offices across the United States and therefore can participate in the most popular Bike MS events. It is reflected</p>
+<div class="figure">
+<img src="national%20teams%202.png" alt="Participation of Top National Teams" />
+<p class="caption">Participation of Top National Teams</p>
+</div>
+<div class="figure">
+<img src="national%20teams%203.png" alt="Number of Teams per National Team" />
+<p class="caption">Number of Teams per National Team</p>
+</div>
+<p>Upon exploration it was seen that the information was consistent with the rest of the data. The National Teams with the highest amount of revenue raised, varied from year to year during the 2013-2017 time period. Regardless of how much it varied these National Teams are responsible for a large portion of the overall revenue raised. Although some National Teams tend to repeat participation a larger portion of them do not, either way their teams tend to have more team members. The information here was consistent with other analyses showing the “Primary Connection to MS” overwhelmingly as “Friend has MS” followed by None/NA, and “Relative has MS”. It is important to recommend that Bike MS definitely prioritize keeping these teams engaged, but highlight the fact there is a lack of healthcare organizations among this list.</p>
+</div>
+<div id="can-we-tie-together-these-industries-and-occupations-to-identify-gapsopportunities" class="section level2">
+<h2>Can we tie together these industries and occupations to identify gaps/opportunities?</h2>
+<p>Again, the top national teams with the most involvement are from male dominated fields. Our central themes all apply to this question - as we stated above there is a lack of healthcare organizations involved in putting together formal teams. Of particular interest, are the corporations that are spread out across the United States and those located on the East coast. Taking a closer look at Deloitte and Salesforce, for example in 2017, Deloitte reported employing almost 85,000 operating in 97 U.S. cities while Salesforce reported employing 25,000. Targeting companies with offices in multiple cities across the U.S. has the potential to produce highly involved national teams.</p>
+</div>
+<div id="what-is-the-common-denominator-for-our-top-performing-corporate-teams" class="section level2">
+<h2>What is the common denominator for our top performing corporate teams?</h2>
+<p>Echoing the previous ansewr, the top performing corporate teams have employ a large population and have offices across the United States. Returning to our central themes, the data tells us that connection to multiple slerosis drives participants and donators to this massive fundraiser. The purpose of Bike MS is to fund research, advocate for social and political change, provide education, and sponsor services that help people with multiple sclerosis and their families. If the prevalence and incidence numbers are true then there is no reason participation and fundraising efforts should be declining. Let’s take a look at the biggest common denominator for not only corporate teams, but everyone involved.</p>
+<div class="figure">
+<img src="common%20denominator.png" alt="Common Denominator" />
+<p class="caption">Common Denominator</p>
+</div>
+<p>Of all the responses of reported connection to MS from the corporate teams and participants, most people have a direct connection to a friend afflicted by MS. This finding does not come as a surprise given that the friend category would have the widest reach compared to sibling or spouse relationships. As participation and donations for this fundraiser decline, the one constant is that the overall prevalence and incidence of multiple sclerosis is something that persists. Focusing on the populations, occupations, and geographical locations that are impacted by this disease the most will ensure consistent fundraising and participation. Here is a visualization of the growing MS population in the United States that shows the magnitude of just the lives who are living with the disease.</p>
+<pre class="r"><code># growth of MS 
+# build dataframe of dates with weekly growth interval 
+start &lt;- as.Date(&quot;2012-01-01&quot;)
+end &lt;- as.Date(&quot;2017-01-08&quot;)
+grow.date &lt;- as.data.frame(seq(start, end, by = &quot;1 week&quot;))
+grow.ms &lt;- as.data.frame(seq(length = 263, from = 400001, by = 2290.0763))
+
+ms.growth &lt;- as.data.frame(cbind(grow.date, grow.ms))
+colnames(ms.growth) &lt;- c(&quot;Date&quot;, &quot;Weekly Increase&quot;)
+ms.growth &lt;- ms.growth %&gt;%
+  mutate(Country = &quot;United States&quot;)
+ms.growth &lt;- ms.growth %&gt;%
+  mutate(Longitude = 37.0902) %&gt;%
+  mutate(Latitude = 95.7129) %&gt;%
+  mutate(ID = &quot;main&quot;)
+
+ms.growth$`Weekly Increase` &lt;- round(ms.growth$`Weekly Increase`, digits = 0)
+
+usa &lt;- map_data(&quot;usa&quot;)
+
+usa.map &lt;- ggplot()
+usa.map &lt;- usa.map + geom_map(data=usa, map=usa,
+                    aes(long, lat, map_id=region),
+                    color=&quot;#2b2b2b&quot;, fill=NA, size=0.5)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: x, y</code></pre>
+<pre class="r"><code>usa.map &lt;- usa.map + geom_map(data=ms.growth, map=usa,
+                    aes(fill=`Weekly Increase`,
+                        map_id=ms.growth$ID, frame = ms.growth$Date),
+                    color=&quot;white&quot;, size=0.5)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: frame</code></pre>
+<pre class="r"><code>usa.map &lt;- usa.map + scale_fill_continuous(high = &quot;#132B43&quot;, low = &quot;#56B1F7&quot;)
+usa.map &lt;- usa.map + coord_map(&quot;polyconic&quot;)
+usa.map &lt;- usa.map + geom_text(aes(x=-93, y=37, label = ms.growth$`Weekly Increase`, frame=ms.growth$Date), cex=10, color = &quot;orange&quot;, fontface = &quot;bold&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: frame</code></pre>
+<pre class="r"><code>usa.map &lt;- usa.map + annotate(&quot;text&quot;, x = -100, y = 40, label = &quot;Total MS Population:&quot;, size = 5, color = &quot;orange&quot;, fontface = &quot;bold&quot;)
+usa.map &lt;- usa.map + theme_map()
+usa.map &lt;- usa.map + theme(plot.margin=margin(20,20,20,20))
+usa.map &lt;- usa.map + theme(legend.position=c(0.85, 0.2))
+usa.map &lt;- usa.map + theme(legend.position = &quot;none&quot;)
+usa.map &lt;- usa.map + labs(title = &quot;MS Prevalence and Incidence in the United States&quot;, 
+                      subtitle = &quot;2012 - 2017&quot;, caption = &quot;Estimated MS population in 2012 was 400,000 with recent estimates projecting around 1 million.&quot;)
+usa.map</code></pre>
+<p><img src="index_files/figure-html/gify-1.png" width="672" /></p>
+<pre class="r"><code>gganimate(usa.map, &#39;MS.html&#39;, interval = 0.1)</code></pre>
+<pre><code>## HTML file created at: MS.html</code></pre>
+</div>
+<div id="can-we-quantify-the-effect-competing-events-are-having-in-our-top-markets" class="section level2">
+<h2>Can we quantify the effect competing events are having in our top markets?</h2>
+<p>To quantify the effect of these competing events on our top markets, it is important to understand the cause and objective of each fundraiser. Let’s assume a cyclist only participates in one to two bike fundraisers during peak season (Spring and Summer), we already know that the participants choose Bike MS, or any fundraiser for that matter, because of it’s connection to their life. Here is some key information regarding the purpose of each competing fundraiser and their known markets that they cater to:</p>
+<div class="figure">
+<img src="competing%20events.png" alt="Competing Events" />
+<p class="caption">Competing Events</p>
+</div>
+<p>Without any knowledge on the amount of donations and registration a competing fundraiser is generating, we took a closer look at the donations and participation that Bike MS generated in the states that the competing events take place.</p>
+<div class="figure">
+<img src="funds%20raised%20by%20top%20markets.png" alt="Fundraising Interaction between Competing Events" />
+<p class="caption">Fundraising Interaction between Competing Events</p>
+</div>
+<div class="figure">
+<img src="participants%20from%20top%20markets.png" alt="Participation Interaction between Competing Events" />
+<p class="caption">Participation Interaction between Competing Events</p>
+</div>
+</div>
 </div>
 <div class="footnotes">
 <hr />

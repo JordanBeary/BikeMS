@@ -37,3 +37,6 @@ deldir
 sp
 rgdal
 bindrcpp
+mapdata
+gganimate
+animation
