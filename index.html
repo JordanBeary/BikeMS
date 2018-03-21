@@ -210,10 +210,14 @@ $(document).ready(function () {
 </blockquote>
 <p>Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 <span class="citation">@MSprevalence</span>.</p>
 <div class="figure">
-<img src="ms%20prevalence%20over%20time.jpg" alt="Regional MS Prevalence" />
+<img src="RegionalMSprev.jpg" title="Highest Prevalence of MS by Region" alt="Regional MS Prevalence" />
 <p class="caption">Regional MS Prevalence</p>
 </div>
 <p>Furthermore, a new study is expected to be released this year which estimates MS incidence and prevalence to be around 1 million in the United States<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Understanding MS prevalence and those affected by it is critical to answering why someone would want to join one of the largest cycling fundraiser in the United States, Bike MS.</p>
+<div class="figure">
+<img src="MSgenderGap.jpg" alt="MS Gender Gap" />
+<p class="caption">MS Gender Gap</p>
+</div>
 <p>Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donators. First, approximately 224 out of 100,000 women report living with MS – compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highst reported population of insured individuals with MS with 192 out of 100,000 – as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.</p>
 </div>
 <div id="business-problem" class="section level1">
@@ -234,7 +238,17 @@ $(document).ready(function () {
 </blockquote>
 <p>Now we have looked at donations from Fortune 1000 companies and estimate that their contribution is not as significant as they might think ….etc etc [plug in Konrad’s work]</p>
 <p>There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees <span class="citation">@SBA</span>. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:</p>
-<pre class="r"><code>con.ms &lt;- participants %&gt;%
+<pre class="r"><code>participants$`Participant Connection to MS`[grep(&quot;MS&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Direct Connection to MS&quot;
+participants$`Participant Connection to MS`[grep(&quot;Other|other|Relative: Other&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Other&quot;
+participants$`Participant Connection to MS`[grep(&quot;Blank|None|No connection|NA&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;None&quot;
+participants$`Participant Connection to MS` &lt;- as.factor(participants$`Participant Connection to MS`)
+
+bad.states &lt;- c(&quot;Dallas&quot;, &quot;Alicante&quot;, &quot;Ardmore&quot;, &quot;Austin&quot;, &quot;Canyon Lake&quot;, &quot;Columbia Heights&quot;, &quot;Edinburg&quot;, &quot;Greendale&quot;, &quot;Houston&quot;,
+                &quot;Katy&quot;, &quot;Midwest City&quot;, &quot;Minneapolis&quot;, &quot;Morristown&quot;, &quot;Newport&quot;, &quot;None&quot;, &quot;Ridgefield Park&quot;, &quot;west haven&quot;)
+bad.state.rows &lt;- which(participants$`Address  -  Participant State/Province` %in% bad.states)
+participants &lt;- participants[-bad.state.rows, ]
+
+con.ms &lt;- participants %&gt;%
   select(`Participant Connection to MS`) %&gt;%
   group_by(`Participant Connection to MS`) %&gt;%
   tally(!is.na(`Participant Connection to MS`))
@@ -251,30 +265,20 @@ kable(con.ms, caption = &quot;More participants have a connection to MS&quot;)</
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Blank</td>
-<td align="right">9967</td>
+<td align="left">Direct Connection to MS</td>
+<td align="right">272670</td>
 </tr>
 <tr class="even">
-<td align="left">Care Manager of Person with MS</td>
-<td align="right">179</td>
+<td align="left">None</td>
+<td align="right">52910</td>
 </tr>
 <tr class="odd">
-<td align="left">Caregiver of person with MS</td>
-<td align="right">16</td>
+<td align="left">Other</td>
+<td align="right">22069</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>participants$`Participant Connection to MS`[grep(&quot;MS&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Direct Connection to MS&quot;
-participants$`Participant Connection to MS`[grep(&quot;Other|other|Relative: Other&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;Other&quot;
-participants$`Participant Connection to MS`[grep(&quot;Blank|None|No connection|NA&quot;, participants$`Participant Connection to MS`)] &lt;- &quot;None&quot;
-participants$`Participant Connection to MS` &lt;- as.factor(participants$`Participant Connection to MS`)
-
-bad.states &lt;- c(&quot;Dallas&quot;, &quot;Alicante&quot;, &quot;Ardmore&quot;, &quot;Austin&quot;, &quot;Canyon Lake&quot;, &quot;Columbia Heights&quot;, &quot;Edinburg&quot;, &quot;Greendale&quot;, &quot;Houston&quot;,
-                &quot;Katy&quot;, &quot;Midwest City&quot;, &quot;Minneapolis&quot;, &quot;Morristown&quot;, &quot;Newport&quot;, &quot;None&quot;, &quot;Ridgefield Park&quot;, &quot;west haven&quot;)
-bad.state.rows &lt;- which(participants$`Address  -  Participant State/Province` %in% bad.states)
-participants &lt;- participants[-bad.state.rows, ]
-
-connect.ms.state &lt;- participants %&gt;%
+<pre class="r"><code>connect.ms.state &lt;- participants %&gt;%
   select(`Address  -  Participant State/Province`, `Participant Connection to MS`, `Participant Occupation`) %&gt;%
   filter(`Address  -  Participant State/Province` %in% filt.top.state) %&gt;%
   group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
@@ -286,10 +290,13 @@ connect.east &lt;- participants %&gt;%
   group_by(`Address  -  Participant State/Province`, `Participant Connection to MS`) %&gt;%
   tally(!is.na(`Participant Connection to MS`))
 
-con.east.viz &lt;- ggplot(connect.east, aes(x = connect.east$`Address  -  Participant State/Province`, y = `n`, 
+con.east.viz &lt;- ggplot(connect.east, aes(x = reorder(connect.east$`Address  -  Participant State/Province`, -`n`), y = `n`, 
                                                fill = `Participant Connection to MS`)) +
   geom_bar(stat = &quot;identity&quot;)
-con.east.viz +
+con.east.viz + 
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;black&quot;)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   labs(y = &quot;Number of Participants&quot;,
        x = &quot;Participant State&quot;,
@@ -301,10 +308,13 @@ connection.viz &lt;- ggplot(connect.ms.state, aes(x = reorder(connect.ms.state$`
                                                fill = `Participant Connection to MS`)) +
   geom_bar(stat = &quot;identity&quot;)
 connection.viz +
+  theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
   labs(y = &quot;Number of Participants&quot;,
        x = &quot;Participant State&quot;,
-       title = &quot;Participant Connection to MS per State&quot;)</code></pre>
+       title = &quot;Participant Connection to MS per State&quot;) +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;black&quot;))</code></pre>
 <div class="figure">
 <img src="index_files/figure-html/connect.viz-1.png" alt="In the most popular states, there are consistently high numbers of participants with direct connections to MS" width="672" />
 <p class="caption">
@@ -343,21 +353,19 @@ Tree map of where the most participants are coming from (the state map).
 <pre class="r"><code># make a data frame of gender counts to make visualizing easier
 gender.df &lt;- as.data.frame(table(participants$`Participant Gender`))
 colnames(gender.df) &lt;- c(&quot;Gender&quot;, &quot;Count&quot;)
-glimpse(gender.df)</code></pre>
-<pre><code>## Observations: 2
-## Variables: 2
-## $ Gender &lt;fct&gt; Male, Female
-## $ Count  &lt;int&gt; 287795, 156488</code></pre>
-<pre class="r"><code>gender.overall &lt;- kable(gender.df, caption = &#39;Participant gender over all years&#39;)
+gender.overall &lt;- kable(gender.df, caption = &#39;Participant gender over all years&#39;)
 
 # visualize gender counts 
 gender.viz &lt;- ggplot(gender.df, aes(x = Gender, y = Count, fill = Gender)) + 
   geom_bar(stat = &quot;identity&quot;)
 gender.viz + 
+  theme_minimal() +
   labs(x = &quot;Gender&quot;,
        y = &quot;Number of Participants&quot;,
        title = &quot;Gender of Participants&quot;) +
-  scale_y_continuous(labels = c(0, &#39;100,000&#39;, &#39;200,000&#39;, &#39;300,000&#39;))
+  scale_y_continuous(labels = c(&#39;0&#39;, &#39;100,000&#39;, &#39;200,000&#39;, &#39;300,000&#39;)) +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;black&quot;))
 gender.overall</code></pre>
 <table>
 <caption>Participant gender over all years</caption>
@@ -384,6 +392,9 @@ g.year.viz &lt;- ggplot(data = gender.year,
                      aes(x = Year, y = Count, fill = Gender)) +
   geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;)
 g.year.viz +
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;black&quot;)) +
   labs(title = &quot;Annual Participant Gender Count&quot;) +
   labs(x = &quot;Event Year&quot;) +
   labs(y = &quot;Count&quot;)
@@ -607,7 +618,10 @@ Voronoi of Top Events for 2018
                                            y = `Count`,
                                            fill = `Participant State`)) + 
   geom_bar(stat = &quot;identity&quot;)
-east.health.viz +
+east.health.viz + 
+  theme_minimal() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;black&quot;)) +
   labs(x = &quot;Number of Participants&quot;,
        y = &quot;State&quot;,
        title = &quot;Number of Cyclists Working in Healthcare Within the Target Region&quot;)</code></pre>
@@ -644,7 +658,7 @@ east.health.viz +
 <h2>What is the common denominator for our top performing corporate teams?</h2>
 <p>Echoing the previous ansewr, the top performing corporate teams have employ a large population and have offices across the United States. Returning to our central themes, the data tells us that connection to multiple slerosis drives participants and donators to this massive fundraiser. The purpose of Bike MS is to fund research, advocate for social and political change, provide education, and sponsor services that help people with multiple sclerosis and their families. If the prevalence and incidence numbers are true then there is no reason participation and fundraising efforts should be declining. Let’s take a look at the biggest common denominator for not only corporate teams, but everyone involved.</p>
 <div class="figure">
-<embed src="commondenominator.png)" />
+<img src="commondenominator.png" alt="Common Denominator" />
 <p class="caption">Common Denominator</p>
 </div>
 <p>Of all the responses of reported connection to MS from the corporate teams and participants, most people have a direct connection to a friend afflicted by MS. This finding does not come as a surprise given that the friend category would have the widest reach compared to sibling or spouse relationships. As participation and donations for this fundraiser decline, the one constant is that the overall prevalence and incidence of multiple sclerosis is something that persists. Focusing on the populations, occupations, and geographical locations that are impacted by this disease the most will ensure consistent fundraising and participation. Here is a visualization of the growing MS population in the United States that shows the magnitude of just the lives who are living with the disease.</p>
@@ -686,10 +700,11 @@ usa.map &lt;- usa.map + theme(legend.position=c(0.85, 0.2))
 usa.map &lt;- usa.map + theme(legend.position = &quot;none&quot;)
 usa.map &lt;- usa.map + labs(title = &quot;MS Prevalence and Incidence in the United States&quot;, 
                       subtitle = &quot;2012 - 2017&quot;, caption = &quot;Estimated MS population in 2012 was 400,000 with recent estimates projecting around 1 million.&quot;)
-usa.map</code></pre>
-<p><img src="index_files/figure-html/gify-1.png" width="672" /></p>
-<pre class="r"><code>gganimate(usa.map, interval = 0.1)</code></pre>
-<p><img src="index_files/figure-html/gify-2.png" width="672" /><img src="index_files/figure-html/gify-3.png" width="672" /><img src="index_files/figure-html/gify-4.png" width="672" /><img src="index_files/figure-html/gify-5.png" width="672" /><img src="index_files/figure-html/gify-6.png" width="672" /><img src="index_files/figure-html/gify-7.png" width="672" /><img src="index_files/figure-html/gify-8.png" width="672" /><img src="index_files/figure-html/gify-9.png" width="672" /><img src="index_files/figure-html/gify-10.png" width="672" /><img src="index_files/figure-html/gify-11.png" width="672" /><img src="index_files/figure-html/gify-12.png" width="672" /><img src="index_files/figure-html/gify-13.png" width="672" /><img src="index_files/figure-html/gify-14.png" width="672" /><img src="index_files/figure-html/gify-15.png" width="672" /><img src="index_files/figure-html/gify-16.png" width="672" /><img src="index_files/figure-html/gify-17.png" width="672" /><img src="index_files/figure-html/gify-18.png" width="672" /><img src="index_files/figure-html/gify-19.png" width="672" /><img src="index_files/figure-html/gify-20.png" width="672" /><img src="index_files/figure-html/gify-21.png" width="672" /><img src="index_files/figure-html/gify-22.png" width="672" /><img src="index_files/figure-html/gify-23.png" width="672" /><img src="index_files/figure-html/gify-24.png" width="672" /><img src="index_files/figure-html/gify-25.png" width="672" /><img src="index_files/figure-html/gify-26.png" width="672" /><img src="index_files/figure-html/gify-27.png" width="672" /><img src="index_files/figure-html/gify-28.png" width="672" /><img src="index_files/figure-html/gify-29.png" width="672" /><img src="index_files/figure-html/gify-30.png" width="672" /><img src="index_files/figure-html/gify-31.png" width="672" /><img src="index_files/figure-html/gify-32.png" width="672" /><img src="index_files/figure-html/gify-33.png" width="672" /><img src="index_files/figure-html/gify-34.png" width="672" /><img src="index_files/figure-html/gify-35.png" width="672" /><img src="index_files/figure-html/gify-36.png" width="672" /><img src="index_files/figure-html/gify-37.png" width="672" /><img src="index_files/figure-html/gify-38.png" width="672" /><img src="index_files/figure-html/gify-39.png" width="672" /><img src="index_files/figure-html/gify-40.png" width="672" /><img src="index_files/figure-html/gify-41.png" width="672" /><img src="index_files/figure-html/gify-42.png" width="672" /><img src="index_files/figure-html/gify-43.png" width="672" /><img src="index_files/figure-html/gify-44.png" width="672" /><img src="index_files/figure-html/gify-45.png" width="672" /><img src="index_files/figure-html/gify-46.png" width="672" /><img src="index_files/figure-html/gify-47.png" width="672" /><img src="index_files/figure-html/gify-48.png" width="672" /><img src="index_files/figure-html/gify-49.png" width="672" /><img src="index_files/figure-html/gify-50.png" width="672" /><img src="index_files/figure-html/gify-51.png" width="672" /><img src="index_files/figure-html/gify-52.png" width="672" /><img src="index_files/figure-html/gify-53.png" width="672" /><img src="index_files/figure-html/gify-54.png" width="672" /><img src="index_files/figure-html/gify-55.png" width="672" /><img src="index_files/figure-html/gify-56.png" width="672" /><img src="index_files/figure-html/gify-57.png" width="672" /><img src="index_files/figure-html/gify-58.png" width="672" /><img src="index_files/figure-html/gify-59.png" width="672" /><img src="index_files/figure-html/gify-60.png" width="672" /><img src="index_files/figure-html/gify-61.png" width="672" /><img src="index_files/figure-html/gify-62.png" width="672" /><img src="index_files/figure-html/gify-63.png" width="672" /><img src="index_files/figure-html/gify-64.png" width="672" /><img src="index_files/figure-html/gify-65.png" width="672" /><img src="index_files/figure-html/gify-66.png" width="672" /><img src="index_files/figure-html/gify-67.png" width="672" /><img src="index_files/figure-html/gify-68.png" width="672" /><img src="index_files/figure-html/gify-69.png" width="672" /><img src="index_files/figure-html/gify-70.png" width="672" /><img src="index_files/figure-html/gify-71.png" width="672" /><img src="index_files/figure-html/gify-72.png" width="672" /><img src="index_files/figure-html/gify-73.png" width="672" /><img src="index_files/figure-html/gify-74.png" width="672" /><img src="index_files/figure-html/gify-75.png" width="672" /><img src="index_files/figure-html/gify-76.png" width="672" /><img src="index_files/figure-html/gify-77.png" width="672" /><img src="index_files/figure-html/gify-78.png" width="672" /><img src="index_files/figure-html/gify-79.png" width="672" /><img src="index_files/figure-html/gify-80.png" width="672" /><img src="index_files/figure-html/gify-81.png" width="672" /><img src="index_files/figure-html/gify-82.png" width="672" /><img src="index_files/figure-html/gify-83.png" width="672" /><img src="index_files/figure-html/gify-84.png" width="672" /><img src="index_files/figure-html/gify-85.png" width="672" /><img src="index_files/figure-html/gify-86.png" width="672" /><img src="index_files/figure-html/gify-87.png" width="672" /><img src="index_files/figure-html/gify-88.png" width="672" /><img src="index_files/figure-html/gify-89.png" width="672" /><img src="index_files/figure-html/gify-90.png" width="672" /><img src="index_files/figure-html/gify-91.png" width="672" /><img src="index_files/figure-html/gify-92.png" width="672" /><img src="index_files/figure-html/gify-93.png" width="672" /><img src="index_files/figure-html/gify-94.png" width="672" /><img src="index_files/figure-html/gify-95.png" width="672" /><img src="index_files/figure-html/gify-96.png" width="672" /><img src="index_files/figure-html/gify-97.png" width="672" /><img src="index_files/figure-html/gify-98.png" width="672" /><img src="index_files/figure-html/gify-99.png" width="672" /><img src="index_files/figure-html/gify-100.png" width="672" /><img src="index_files/figure-html/gify-101.png" width="672" /><img src="index_files/figure-html/gify-102.png" width="672" /><img src="index_files/figure-html/gify-103.png" width="672" /><img src="index_files/figure-html/gify-104.png" width="672" /><img src="index_files/figure-html/gify-105.png" width="672" /><img src="index_files/figure-html/gify-106.png" width="672" /><img src="index_files/figure-html/gify-107.png" width="672" /><img src="index_files/figure-html/gify-108.png" width="672" /><img src="index_files/figure-html/gify-109.png" width="672" /><img src="index_files/figure-html/gify-110.png" width="672" /><img src="index_files/figure-html/gify-111.png" width="672" /><img src="index_files/figure-html/gify-112.png" width="672" /><img src="index_files/figure-html/gify-113.png" width="672" /><img src="index_files/figure-html/gify-114.png" width="672" /><img src="index_files/figure-html/gify-115.png" width="672" /><img src="index_files/figure-html/gify-116.png" width="672" /><img src="index_files/figure-html/gify-117.png" width="672" /><img src="index_files/figure-html/gify-118.png" width="672" /><img src="index_files/figure-html/gify-119.png" width="672" /><img src="index_files/figure-html/gify-120.png" width="672" /><img src="index_files/figure-html/gify-121.png" width="672" /><img src="index_files/figure-html/gify-122.png" width="672" /><img src="index_files/figure-html/gify-123.png" width="672" /><img src="index_files/figure-html/gify-124.png" width="672" /><img src="index_files/figure-html/gify-125.png" width="672" /><img src="index_files/figure-html/gify-126.png" width="672" /><img src="index_files/figure-html/gify-127.png" width="672" /><img src="index_files/figure-html/gify-128.png" width="672" /><img src="index_files/figure-html/gify-129.png" width="672" /><img src="index_files/figure-html/gify-130.png" width="672" /><img src="index_files/figure-html/gify-131.png" width="672" /><img src="index_files/figure-html/gify-132.png" width="672" /><img src="index_files/figure-html/gify-133.png" width="672" /><img src="index_files/figure-html/gify-134.png" width="672" /><img src="index_files/figure-html/gify-135.png" width="672" /><img src="index_files/figure-html/gify-136.png" width="672" /><img src="index_files/figure-html/gify-137.png" width="672" /><img src="index_files/figure-html/gify-138.png" width="672" /><img src="index_files/figure-html/gify-139.png" width="672" /><img src="index_files/figure-html/gify-140.png" width="672" /><img src="index_files/figure-html/gify-141.png" width="672" /><img src="index_files/figure-html/gify-142.png" width="672" /><img src="index_files/figure-html/gify-143.png" width="672" /><img src="index_files/figure-html/gify-144.png" width="672" /><img src="index_files/figure-html/gify-145.png" width="672" /><img src="index_files/figure-html/gify-146.png" width="672" /><img src="index_files/figure-html/gify-147.png" width="672" /><img src="index_files/figure-html/gify-148.png" width="672" /><img src="index_files/figure-html/gify-149.png" width="672" /><img src="index_files/figure-html/gify-150.png" width="672" /><img src="index_files/figure-html/gify-151.png" width="672" /><img src="index_files/figure-html/gify-152.png" width="672" /><img src="index_files/figure-html/gify-153.png" width="672" /><img src="index_files/figure-html/gify-154.png" width="672" /><img src="index_files/figure-html/gify-155.png" width="672" /><img src="index_files/figure-html/gify-156.png" width="672" /><img src="index_files/figure-html/gify-157.png" width="672" /><img src="index_files/figure-html/gify-158.png" width="672" /><img src="index_files/figure-html/gify-159.png" width="672" /><img src="index_files/figure-html/gify-160.png" width="672" /><img src="index_files/figure-html/gify-161.png" width="672" /><img src="index_files/figure-html/gify-162.png" width="672" /><img src="index_files/figure-html/gify-163.png" width="672" /><img src="index_files/figure-html/gify-164.png" width="672" /><img src="index_files/figure-html/gify-165.png" width="672" /><img src="index_files/figure-html/gify-166.png" width="672" /><img src="index_files/figure-html/gify-167.png" width="672" /><img src="index_files/figure-html/gify-168.png" width="672" /><img src="index_files/figure-html/gify-169.png" width="672" /><img src="index_files/figure-html/gify-170.png" width="672" /><img src="index_files/figure-html/gify-171.png" width="672" /><img src="index_files/figure-html/gify-172.png" width="672" /><img src="index_files/figure-html/gify-173.png" width="672" /><img src="index_files/figure-html/gify-174.png" width="672" /><img src="index_files/figure-html/gify-175.png" width="672" /><img src="index_files/figure-html/gify-176.png" width="672" /><img src="index_files/figure-html/gify-177.png" width="672" /><img src="index_files/figure-html/gify-178.png" width="672" /><img src="index_files/figure-html/gify-179.png" width="672" /><img src="index_files/figure-html/gify-180.png" width="672" /><img src="index_files/figure-html/gify-181.png" width="672" /><img src="index_files/figure-html/gify-182.png" width="672" /><img src="index_files/figure-html/gify-183.png" width="672" /><img src="index_files/figure-html/gify-184.png" width="672" /><img src="index_files/figure-html/gify-185.png" width="672" /><img src="index_files/figure-html/gify-186.png" width="672" /><img src="index_files/figure-html/gify-187.png" width="672" /><img src="index_files/figure-html/gify-188.png" width="672" /><img src="index_files/figure-html/gify-189.png" width="672" /><img src="index_files/figure-html/gify-190.png" width="672" /><img src="index_files/figure-html/gify-191.png" width="672" /><img src="index_files/figure-html/gify-192.png" width="672" /><img src="index_files/figure-html/gify-193.png" width="672" /><img src="index_files/figure-html/gify-194.png" width="672" /><img src="index_files/figure-html/gify-195.png" width="672" /><img src="index_files/figure-html/gify-196.png" width="672" /><img src="index_files/figure-html/gify-197.png" width="672" /><img src="index_files/figure-html/gify-198.png" width="672" /><img src="index_files/figure-html/gify-199.png" width="672" /><img src="index_files/figure-html/gify-200.png" width="672" /><img src="index_files/figure-html/gify-201.png" width="672" /><img src="index_files/figure-html/gify-202.png" width="672" /><img src="index_files/figure-html/gify-203.png" width="672" /><img src="index_files/figure-html/gify-204.png" width="672" /><img src="index_files/figure-html/gify-205.png" width="672" /><img src="index_files/figure-html/gify-206.png" width="672" /><img src="index_files/figure-html/gify-207.png" width="672" /><img src="index_files/figure-html/gify-208.png" width="672" /><img src="index_files/figure-html/gify-209.png" width="672" /><img src="index_files/figure-html/gify-210.png" width="672" /><img src="index_files/figure-html/gify-211.png" width="672" /><img src="index_files/figure-html/gify-212.png" width="672" /><img src="index_files/figure-html/gify-213.png" width="672" /><img src="index_files/figure-html/gify-214.png" width="672" /><img src="index_files/figure-html/gify-215.png" width="672" /><img src="index_files/figure-html/gify-216.png" width="672" /><img src="index_files/figure-html/gify-217.png" width="672" /><img src="index_files/figure-html/gify-218.png" width="672" /><img src="index_files/figure-html/gify-219.png" width="672" /><img src="index_files/figure-html/gify-220.png" width="672" /><img src="index_files/figure-html/gify-221.png" width="672" /><img src="index_files/figure-html/gify-222.png" width="672" /><img src="index_files/figure-html/gify-223.png" width="672" /><img src="index_files/figure-html/gify-224.png" width="672" /><img src="index_files/figure-html/gify-225.png" width="672" /><img src="index_files/figure-html/gify-226.png" width="672" /><img src="index_files/figure-html/gify-227.png" width="672" /><img src="index_files/figure-html/gify-228.png" width="672" /><img src="index_files/figure-html/gify-229.png" width="672" /><img src="index_files/figure-html/gify-230.png" width="672" /><img src="index_files/figure-html/gify-231.png" width="672" /><img src="index_files/figure-html/gify-232.png" width="672" /><img src="index_files/figure-html/gify-233.png" width="672" /><img src="index_files/figure-html/gify-234.png" width="672" /><img src="index_files/figure-html/gify-235.png" width="672" /><img src="index_files/figure-html/gify-236.png" width="672" /><img src="index_files/figure-html/gify-237.png" width="672" /><img src="index_files/figure-html/gify-238.png" width="672" /><img src="index_files/figure-html/gify-239.png" width="672" /><img src="index_files/figure-html/gify-240.png" width="672" /><img src="index_files/figure-html/gify-241.png" width="672" /><img src="index_files/figure-html/gify-242.png" width="672" /><img src="index_files/figure-html/gify-243.png" width="672" /><img src="index_files/figure-html/gify-244.png" width="672" /><img src="index_files/figure-html/gify-245.png" width="672" /><img src="index_files/figure-html/gify-246.png" width="672" /><img src="index_files/figure-html/gify-247.png" width="672" /><img src="index_files/figure-html/gify-248.png" width="672" /><img src="index_files/figure-html/gify-249.png" width="672" /><img src="index_files/figure-html/gify-250.png" width="672" /><img src="index_files/figure-html/gify-251.png" width="672" /><img src="index_files/figure-html/gify-252.png" width="672" /><img src="index_files/figure-html/gify-253.png" width="672" /><img src="index_files/figure-html/gify-254.png" width="672" /><img src="index_files/figure-html/gify-255.png" width="672" /><img src="index_files/figure-html/gify-256.png" width="672" /><img src="index_files/figure-html/gify-257.png" width="672" /><img src="index_files/figure-html/gify-258.png" width="672" /><img src="index_files/figure-html/gify-259.png" width="672" /><img src="index_files/figure-html/gify-260.png" width="672" /><img src="index_files/figure-html/gify-261.png" width="672" /><img src="index_files/figure-html/gify-262.png" width="672" /><img src="index_files/figure-html/gify-263.png" width="672" /><img src="index_files/figure-html/gify-264.png" width="672" /></p>
+giffy &lt;- gganimate(usa.map, interval = 0.1)</code></pre>
+<div class="figure">
+<img src="MS.gif" alt="Prevalence Giffy" />
+<p class="caption">Prevalence Giffy</p>
+</div>
 </div>
 <div id="can-we-quantify-the-effect-competing-events-are-having-in-our-top-markets" class="section level2">
 <h2>Can we quantify the effect competing events are having in our top markets?</h2>
