@@ -3,9 +3,10 @@ output_dir: "."
 navbar:
   title: "TUN Data Challenge 2018"
   left:
-    - text: "FinalReport"
+    - text: "Final Report"
       href: index.html
-
+    - text: "Appendix"
+      href: appendix.html
       
 output:
   tufte::tufte_html:

@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');
+}
+body {
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+}
+a {
+background-color: transparent;
+}
+a:active,
+a:hover {
+outline: 0;
+}
+strong {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border: 0;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+}
+pre {
+overflow: auto;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+input {
+color: inherit;
+font: inherit;
+margin: 0;
+}
+html input[disabled] {
+cursor: default;
+}
+input {
+line-height: normal;
+}
+input[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+td,
+th {
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a {
+color: #4078c0;
+text-decoration: none;
+}
+a:hover,
+a:active {
+text-decoration: underline;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #ddd;
+}
+hr:before {
+display: table;
+content: "";
+}
+hr:after {
+display: table;
+clear: both;
+content: "";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 15px;
+margin-bottom: 15px;
+line-height: 1.1;
+}
+h1 {
+font-size: 30px;
+}
+h2 {
+font-size: 21px;
+}
+h3 {
+font-size: 16px;
+}
+h4 {
+font-size: 14px;
+}
+h5 {
+font-size: 12px;
+}
+h6 {
+font-size: 11px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.select::-ms-expand {
+opacity: 0;
+}
+.octicon {
+font: normal normal normal 16px/1 octicons-link;
+display: inline-block;
+text-decoration: none;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.octicon-link:before {
+content: '\f05c';
+}
+.markdown-body:before {
+display: table;
+content: "";
+}
+.markdown-body:after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+display: inline-block;
+padding-right: 2px;
+margin-left: -18px;
+}
+.anchor:focus {
+outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1em;
+margin-bottom: 16px;
+font-weight: bold;
+line-height: 1.4;
+}
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+color: #000;
+vertical-align: middle;
+visibility: hidden;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2.25em;
+line-height: 1.2;
+border-bottom: 1px solid #eee;
+}
+h1 .anchor {
+line-height: 1;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.75em;
+line-height: 1.225;
+border-bottom: 1px solid #eee;
+}
+h2 .anchor {
+line-height: 1;
+}
+h3 {
+font-size: 1.5em;
+line-height: 1.43;
+}
+h3 .anchor {
+line-height: 1.2;
+}
+h4 {
+font-size: 1.25em;
+}
+h4 .anchor {
+line-height: 1.2;
+}
+h5 {
+font-size: 1em;
+}
+h5 .anchor {
+line-height: 1.1;
+}
+h6 {
+font-size: 1em;
+color: #777;
+}
+h6 .anchor {
+line-height: 1.1;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 4px;
+padding: 0;
+margin: 16px 0;
+background-color: #e7e7e7;
+border: 0 none;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li>p {
+margin-top: 16px;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+blockquote {
+padding: 0 15px;
+color: #777;
+border-left: 4px solid #ddd;
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+word-break: normal;
+word-break: keep-all;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #ddd;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+code {
+padding: 0;
+padding-top: 0.2em;
+padding-bottom: 0.2em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(0,0,0,0.04);
+border-radius: 3px;
+}
+code:before,
+code:after {
+letter-spacing: -0.2em;
+content: "\00a0";
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 16px;
+}
+.highlight pre,
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f7f7f7;
+border-radius: 3px;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+pre {
+word-wrap: normal;
+}
+pre code {
+display: inline;
+max-width: initial;
+padding: 0;
+margin: 0;
+overflow: initial;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+pre code:before,
+pre code:after {
+content: normal;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font-size: 11px;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.pl-c {
+color: #969896;
+}
+.pl-c1,
+.pl-s .pl-v {
+color: #0086b3;
+}
+.pl-e,
+.pl-en {
+color: #795da3;
+}
+.pl-s .pl-s1,
+.pl-smi {
+color: #333;
+}
+.pl-ent {
+color: #63a35c;
+}
+.pl-k {
+color: #a71d5d;
+}
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+color: #183691;
+}
+.pl-v {
+color: #ed6a43;
+}
+.pl-id {
+color: #b52a1d;
+}
+.pl-ii {
+background-color: #b52a1d;
+color: #f8f8f8;
+}
+.pl-sr .pl-cce {
+color: #63a35c;
+font-weight: bold;
+}
+.pl-ml {
+color: #693a17;
+}
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+color: #1d3e81;
+font-weight: bold;
+}
+.pl-mq {
+color: #008080;
+}
+.pl-mi {
+color: #333;
+font-style: italic;
+}
+.pl-mb {
+color: #333;
+font-weight: bold;
+}
+.pl-md {
+background-color: #ffecec;
+color: #bd2c00;
+}
+.pl-mi1 {
+background-color: #eaffea;
+color: #55a532;
+}
+.pl-mdr {
+color: #795da3;
+font-weight: bold;
+}
+.pl-mo {
+color: #1d3e81;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.task-list-item input {
+margin: 0 0.35em 0.25em -1.6em;
+vertical-align: middle;
+}
+:checked+.radio-label {
+z-index: 1;
+position: relative;
+border-color: #4078c0;
+}
+.sourceLine {
+display: inline-block;
+}
+code .kw { color: #000000; }
+code .dt { color: #ed6a43; }
+code .dv { color: #009999; }
+code .bn { color: #009999; }
+code .fl { color: #009999; }
+code .ch { color: #009999; }
+code .st { color: #183691; }
+code .co { color: #969896; }
+code .ot { color: #0086b3; }
+code .al { color: #a61717; }
+code .fu { color: #63a35c; }
+code .er { color: #a61717; background-color: #e3d2d2; }
+code .wa { color: #000000; }
+code .cn { color: #008080; }
+code .sc { color: #008080; }
+code .vs { color: #183691; }
+code .ss { color: #183691; }
+code .im { color: #000000; }
+code .va {color: #008080; }
+code .cf { color: #000000; }
+code .op { color: #000000; }
+code .bu { color: #000000; }
+code .ex { color: #000000; }
+code .pp { color: #999999; }
+code .at { color: #008080; }
+code .do { color: #969896; }
+code .an { color: #008080; }
+code .cv { color: #008080; }
+code .in { color: #008080; }
+</style>
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 id="additional-code-not-shown-in-final-report">Additional Code Not Shown in Final Report</h1>
+<p>Loading libraries:</p>
+<pre><code>library(readr)
+library(plyr)
+library(tidyr)
+library(lubridate)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+</code></pre>
+<p>#Cleaning NMSS Data</p>
+<h2 id="konrad--ramya-cleaning-donations-data-for-2013-2017">Konrad &amp; Ramya: Cleaning donations data for 2013-2017:</h2>
+<p>Reading in the data:</p>
+<pre><code>donations2013 &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Donations\\2013 Bike Donations Date Fixed.csv&quot;)
+donations2014 &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Donations\\2014 Bike Donations Date Fixed.csv&quot;)
+donations2015 &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Donations\\2015 Bike Donations Date Fixed.csv&quot;)
+donations2016 &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Donations\\2016 Bike Donations Date Fixed.csv&quot;)
+donations2017 &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Donations\\2017 Bike Donations Date Fixed.csv&quot;)
+</code></pre>
+<p>Comparing column names to make sure the data is in the right order and all fields are the same:</p>
+<pre><code>cols2013 &lt;- colnames(donations2013)
+cols2014 &lt;- colnames(donations2014)
+cols2015 &lt;- colnames(donations2015)
+cols2016 &lt;- colnames(donations2016)
+cols2017 &lt;- colnames(donations2017)
+
+
+identical(cols2013, cols2014)
+identical(cols2013, cols2015)
+identical(cols2013, cols2016)
+identical(cols2013, cols2017)
+
+
+remove(cols2013, cols2014, cols2015, cols2016, cols2017)
+</code></pre>
+<p>Changing some columns to factors:</p>
+<pre><code>cols &lt;- c(1, 2, 3, 4, 6, 7, 10:19, 21:32, 35, 36, 38, 39, 44:49)
+donations2013[,cols] &lt;- lapply(donations2013[,cols], factor)
+donations2014[,cols] &lt;- lapply(donations2014[,cols], factor)
+donations2015[,cols] &lt;- lapply(donations2015[,cols], factor)
+donations2016[,cols] &lt;- lapply(donations2016[,cols], factor)
+donations2017[,cols] &lt;- lapply(donations2017[,cols], factor)
+</code></pre>
+<h3 id="refactoring-certain-columns">Refactoring certain columns:</h3>
+<h4 id="donor-gender">Donor Gender:</h4>
+<pre><code>#summary(donations2013$`Donor Gender`)
+levels(donations2013$`Donor Gender`) &lt;- list(Female=c(&quot;Female&quot;, &quot;F&quot;, &quot;Feiale&quot;), Male=c(&quot;Male&quot;, &quot;M&quot;, &quot;Iale&quot;))
+#summary(donations2013$`Donor Gender`)
+
+
+#summary(donations2014$`Donor Gender`)
+levels(donations2014$`Donor Gender`) &lt;- list(Female=c(&quot;Female&quot;, &quot;F&quot;, &quot;Feiale&quot;), Male=c(&quot;Male&quot;))
+#summary(donations2014$`Donor Gender`)
+
+
+#summary(donations2015$`Donor Gender`)
+levels(donations2015$`Donor Gender`) &lt;- list(Female=c(&quot;Female&quot;, &quot;F&quot;, &quot;Femala&quot;), Male=c(&quot;Male&quot;))
+#summary(donations2015$`Donor Gender`)
+
+
+#summary(donations2016$`Donor Gender`)
+levels(donations2016$`Donor Gender`) &lt;- list(Female=c(&quot;Female&quot;, &quot;F&quot;, &quot;Femala&quot;), Male=c(&quot;Male&quot;))
+#summary(donations2016$`Donor Gender`)
+
+
+#summary(donations2017$`Donor Gender`)
+levels(donations2017$`Donor Gender`) &lt;- list(Female=c(&quot;Female&quot;, &quot;F&quot;, &quot;Femala&quot;, &quot;Famale&quot;), Male=c(&quot;Male&quot;, &quot;M&quot;))
+#summary(donations2017$`Donor Gender`)
+</code></pre>
+<h3 id="prior-participants">Prior participants:</h3>
+<pre><code>#summary(donations2013$`Is Prior Participant`)
+levels(donations2013$`Is Prior Participant`) &lt;- list(Yes = c(&quot;Yes&quot;))
+#summary(donations2013$`Is Prior Participant`)
+
+
+#summary(donations2014$`Is Prior Participant`)
+levels(donations2014$`Is Prior Participant`) &lt;- list(Yes = &quot;Yes&quot;)
+#summary(donations2014$`Is Prior Participant`)
+
+
+#summary(donations2015$`Is Prior Participant`)
+levels(donations2015$`Is Prior Participant`) &lt;- list(Yes = &quot;Yes&quot;)
+#summary(donations2015$`Is Prior Participant`)
+
+
+#summary(donations2016$`Is Prior Participant`)
+levels(donations2016$`Is Prior Participant`) &lt;- list(Yes = &quot;Yes&quot;)
+#summary(donations2016$`Is Prior Participant`)
+
+
+#summary(donations2017$`Is Prior Participant`)
+levels(donations2017$`Is Prior Participant`) &lt;- list(Yes = &quot;Yes&quot;)
+#summary(donations2017$`Is Prior Participant`)
+</code></pre>
+<h3 id="is-team-captain">Is Team Captain</h3>
+<pre><code>#summary(donations2013$`Is Team Captain`)
+levels(donations2013$`Is Team Captain`) &lt;- list(Yes =&quot;TRUE&quot;, No = &quot;FALSE&quot;)
+#summary(donations2013$`Is Team Captain`)
+
+
+#summary(donations2014$`Is Team Captain`)
+levels(donations2014$`Is Team Captain`) &lt;- list(Yes = c(&quot;TRUE&quot;, &quot;PRUE&quot;), No = &quot;FALSE&quot;)
+#summary(donations2014$`Is Team Captain`)
+
+
+#summary(donations2015$`Is Team Captain`)
+levels(donations2015$`Is Team Captain`) &lt;- list(Yes = &quot;TRUE&quot;, No = c(&quot;FALSE&quot;, &quot;BALSE&quot;))
+#summary(donations2015$`Is Team Captain`)
+
+#summary(donations2016$`Is Team Captain`)
+levels(donations2016$`Is Team Captain`) &lt;- list(Yes = c(&quot;TRUE&quot;, &quot;PRUE&quot;), No = &quot;FALSE&quot;)
+#summary(donations2016$`Is Team Captain`)
+
+#summary(donations2017$`Is Team Captain`)
+levels(donations2017$`Is Team Captain`) &lt;- list(Yes = c(&quot;TRUE&quot;), No = c(&quot;FALSE&quot;, &quot;BALSE&quot;, &quot;FALSA&quot;))
+#summary(donations2017$`Is Team Captain`)
+</code></pre>
+<h3 id="gift-payment-method">Gift Payment Method</h3>
+<pre><code>#summary(donations2013$`Gift Payment Method`)
+levels(donations2013$`Gift Payment Method`) &lt;- list(Cash = &quot;Cash&quot;, Check= &quot;Check&quot;, `Credit Card` = &quot;Credit Card&quot;)
+#summary(donations2013$`Gift Payment Method`)
+
+
+#summary(donations2014$`Gift Payment Method`)
+levels(donations2014$`Gift Payment Method`) &lt;- list(Cash = &quot;Cash&quot;, Check= &quot;Check&quot;, `Credit Card` = &quot;Credit Card&quot;)
+#summary(donations2014$`Gift Payment Method`)
+
+
+#summary(donations2015$`Gift Payment Method`)
+# No NAs or anything to refactor
+
+#summary(donations2016$`Gift Payment Method`)
+levels(donations2016$`Gift Payment Method`) &lt;- list(Cash = &quot;Cash&quot;, Check= &quot;Check&quot;, `Credit Card` = c(&quot;Credit Card&quot;, &quot;Credit Car&quot;))
+#summary(donations2016$`Gift Payment Method`)
+
+
+#summary(donations2017$`Gift Payment Method`)
+levels(donations2017$`Gift Payment Method`) &lt;- list(Cash = &quot;Cash&quot;, Check= &quot;Check&quot;, `Credit Card` = c(&quot;Credit Card&quot;, &quot;Credit Car&quot;))
+#summary(donations2017$`Gift Payment Method`)
+
+</code></pre>
+<h3 id="gift-type">Gift Type</h3>
+<pre><code>#summary(donations2013$`Gift Type`)
+levels(donations2013$`Gift Type`) &lt;- list(Offline=c(&quot;offline&quot;, &quot;ofbline&quot;), Online=&quot;online&quot;)
+#summary(donations2013$`Gift Type`)
+
+
+#summary(donations2014$`Gift Type`)
+levels(donations2014$`Gift Type`) &lt;- list(Offline=&quot;offline&quot;, Online=c(&quot;online&quot;, &quot;ojline&quot;))
+#summary(donations2014$`Gift Type`)
+
+
+#summary(donations2015$`Gift Type`)
+levels(donations2015$`Gift Type`) &lt;- list(Offline=&quot;offline&quot;, Online=&quot;online&quot;)
+#summary(donations2015$`Gift Type`)
+
+
+#summary(donations2016$`Gift Type`)
+levels(donations2016$`Gift Type`) &lt;- list(Offline=&quot;offline&quot;, Online=c(&quot;online&quot;, &quot;onhine&quot;, &quot;onlina&quot;))
+#summary(donations2016$`Gift Type`)
+             
+
+#summary(donations2017$`Gift Type`)
+levels(donations2017$`Gift Type`) &lt;- list(Offline=&quot;offline&quot;, Online=c(&quot;online&quot;, &quot;ojline&quot;, &quot;onlina&quot;))
+#summary(donations2017$`Gift Type`)
+</code></pre>
+<h3 id="offline-status">Offline status</h3>
+<pre><code>summary(donations2013$`Offline Status`)
+summary(donations2014$`Offline Status`)
+summary(donations2015$`Offline Status`)
+summary(donations2016$`Offline Status`)
+levels(donations2016$`Offline Status`)&lt;- list(confirmed = c(&quot;confirmed&quot;, &quot;confirme`&quot;), `Teamraiser Participant Gift` = c(&quot;(Teamraiser Participant Gift&quot;, &quot;Teamraiser Participant Gift&quot;))
+summary(donations2017$`Offline Status`)
+</code></pre>
+<h3 id="dealing-with-dates">Dealing with dates</h3>
+<ul>
+<li>Date format was changed in Excel * to eg 08/12/13 to enable easy conversion of dates.</li>
+</ul>
+<!-- end list -->
+
+<pre><code>#Since each dataset is the same, can identify all date fields from just 2013 data
+date_cols &lt;- which(names(donations2013)%in%c(&quot;Event Date&quot;, &quot;Date Recorded&quot;, &quot;Donor Opt-out Date&quot;, &quot;Registration Date&quot;, &quot;Team Creation Date&quot;))
+
+donations2013[, date_cols] &lt;- lapply(donations2013[, date_cols], as.Date, &quot;%m/%d/%y&quot;)
+donations2014[, date_cols] &lt;- lapply(donations2014[, date_cols], as.Date, &quot;%m/%d/%y&quot;)
+donations2015[, date_cols] &lt;- lapply(donations2015[, date_cols], as.Date, &quot;%m/%d/%y&quot;)
+donations2016[, date_cols] &lt;- lapply(donations2016[, date_cols], as.Date, &quot;%m/%d/%y&quot;)
+donations2017[, date_cols] &lt;- lapply(donations2017[, date_cols], as.Date, &quot;%m/%d/%y&quot;)
+</code></pre>
+<h3 id="writing-out-formatted-donations-data-to-an-rds-file">Writing out Formatted Donations Data to an RDS file</h3>
+<pre><code>saveRDS(donations2013, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2013.rds&quot;)
+saveRDS(donations2014, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2014.rds&quot;)
+saveRDS(donations2015, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2015.rds&quot;)
+saveRDS(donations2016, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2016.rds&quot;)
+saveRDS(donations2017, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2017.rds&quot;)
+
+</code></pre>
+<h2 id="konrad-cleaning-bike-teams-data">Konrad: Cleaning Bike Teams Data</h2>
+<pre><code>teams &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Bike Teams\\2013-2017 Bike Teams Date Format Fixed.csv&quot;)
+
+#summary(teams)
+factor_cols &lt;- c(1:5, 7, 8, 10, 11, 20:22, 26)
+teams[ ,factor_cols] &lt;- lapply(teams[ ,factor_cols], factor)
+
+# Removed time from team creation date and Event Date (in Excel)!!! 
+
+teams$`Team Creation Date` &lt;- as.Date(teams$`Team Creation Date`, format = '%m/%d/%y')
+teams$`Event Date` &lt;- as.Date(teams$`Event Date`, format = '%m/%d/%y')
+
+summary(teams$`Team Division`)
+
+levels(teams$`Team Division`) &lt;- list(Association = &quot;Association&quot;, Brewery=&quot;Beer/Brewery&quot;, `Bike Club`=&quot;Bike Club&quot;, `Bike Shop` = c(&quot;Bike Shop&quot;, &quot;Bike Shops&quot;), `Civic Team` = &quot;Civic Team&quot;, `Club/Organization` = &quot;Club/Organization&quot;, Corporate = c(&quot;Corporate&quot;, &quot;Corporation&quot;), `Family/Friends` = c(&quot;Family and Friends&quot;, &quot;Family/Friends&quot;, &quot;Frien`s and Family&quot;, &quot;Friend and Family&quot;, &quot;Friends and Family&quot;), Ohana = &quot;Ohana&quot;, `Ohana/Friends` = &quot;Ohana and Friends&quot;, Open = &quot;Open&quot;, `Open Team` = &quot;Open Team&quot;, Organization = c(&quot;Organization&quot;, &quot;Organization (Clubs, Civic Groups, etc.)&quot;, &quot;Organization (Clubs; Civic Groups; etc.)&quot;, &quot;Organization (Clubs; Civic Groups; Place of Worship; etc.)&quot;), Other = &quot;Other&quot;, `Place of Worship` = c(&quot;Place of Worship&quot;, &quot;Place of worship&quot;, &quot;Religious&quot;), School = &quot;School&quot;, `Small Business` = &quot;Small Business&quot;, `Volunteer Group` = &quot;Volunteer Group&quot;)
+
+#summary(teams$`Event Type`)
+#summary(teams$`Internal Event Name`)
+#summary(teams$`Event ID`)
+#summary(teams$`Team Creation Date`)
+
+#summary(teams$`Captain Email Domain`)
+#summary(teams$Company)
+#summary(teams$`Team Name`)
+#summary(teams$`Number of Participants`)
+
+saveRDS(teams, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Bike Teams/teams.rds&quot;)
+</code></pre>
+<h2 id="ramya-cleaning-bike-events">Ramya: Cleaning Bike Events</h2>
+<pre><code>BikeEvents&lt;-read.csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Events\\2013-2017 Bike Events.csv&quot;)
+
+str(BikeEvents)
+
+levels(BikeEvents$City)
+
+#Cleaning cities
+BikeEvents$City[BikeEvents$City == 'Athens, AL ']&lt;- &quot;Athens&quot;
+
+BikeEvents$City[BikeEvents$City == 'Cherry Hill, NJ with alternate start locations']&lt;-&quot;Cherry Hill&quot;
+#as.factor(BikeEvents$City[BikeEvents$City == 'Ridgeland, MS']&lt;- &quot;Ridgeland&quot;)
+
+BikeEvents$City[BikeEvents$City == 'St. Augustine ']&lt;-&quot;St. Augustine&quot;
+
+BikeEvents$City[BikeEvents$City == 'Sioux Falls area']&lt;-&quot;Sioux Falls&quot;
+
+BikeEvents$City[BikeEvents$City == 'Schodack ']&lt;-&quot;Schodack&quot;
+
+BikeEvents$City[BikeEvents$City == 'San Antonio ']&lt;-&quot;San Antonio&quot;
+
+BikeEvents$City[BikeEvents$City == 'New York City']&lt;-&quot;New York&quot; 
+
+BikeEvents$City[BikeEvents$City == 'New Albany ']&lt;-&quot;New Albany&quot;
+
+BikeEvents$City[BikeEvents$City == 'Keuka Park ']&lt;-&quot;Keuka Park&quot;
+BikeEvents$City[BikeEvents$City == 'Hollidaysburg, PA to State College']&lt;-&quot;Hollidaysburg&quot; 
+BikeEvents$City[BikeEvents$City == 'Duluth to White Bear Lake']&lt;-&quot;Duluth&quot;
+BikeEvents$City[BikeEvents$City == 'Duluth to the Twin Cities']&lt;-&quot;Duluth&quot;
+BikeEvents$City[BikeEvents$City == 'Fargo area']&lt;-&quot;Fargo&quot;
+BikeEvents$City[BikeEvents$City == 'Dallas ']&lt;-&quot;Dallas&quot;
+BikeEvents$City[BikeEvents$City == 'DeKalb']&lt;-&quot;Dekalb&quot;
+BikeEvents$City[BikeEvents$City == 'DeKalb ']&lt;-&quot;Dekalb&quot;
+
+summary(BikeEvents$Event.Date)
+
+#Date Conversion in R
+datecols_bikeevents&lt;-which(names(BikeEvents)%in%c(&quot;Event.Created.Date&quot;, &quot;Event.Date&quot;))
+
+for (i in datecols_bikeevents) {
+  BikeEvents[,i] = as.Date(BikeEvents[,i], '%m/%d/%y')
+}
+</code></pre>
+<h2 id="saving-the-work">Saving the work</h2>
+<pre><code>saveRDS(BikeEvents, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Bike Events/Bike Events.rds&quot;)
+</code></pre>
+<h2 id="jordan-cleaning-bike-participants">Jordan: Cleaning Bike Participants</h2>
+<h3 id="import-data">Import data</h3>
+<pre><code>participants &lt;- read_csv(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Participants\\2013-2017 Bike MS Participants.csv&quot;)
+</code></pre>
+<h3 id="basic-data-exploration">Basic data exploration</h3>
+<pre><code>class(participants)
+dim(participants)
+glimpse(participants)
+head(participants, n = 5)
+tail(participants, n = 5)
+summary(participants)
+</code></pre>
+<p>Able to see that some fields need to be converted from integers to characters. Also, easily able to identify which fields will need to be rid of NA values.</p>
+<pre><code># need to change fields from int to char 
+participants$`Team ID` &lt;- as.character(participants$`Team ID`)
+class(participants$`Team ID`)
+participants$`Contact ID` &lt;- as.character(participants$`Contact ID`)
+participants$`Address -  Participant ZIP/Postal Code` &lt;- as.character(participants$`Address -  Participant ZIP/Postal Code`)
+participants$`Event ID` &lt;- as.character(participants$`Event ID`)
+summary(participants)
+
+#change event date from character to date-time
+participants$`Event Date` &lt;- mdy_hm(participants$`Event Date`)
+class(participants$`Event Date`)
+head(participants$`Event Date`, n = 5)
+
+# acknowledge NA's 
+map(participants, ~sum(is.na(.)))
+</code></pre>
+<h2 id="writing-out-jordans-work">Writing out Jordan’s work</h2>
+<pre><code>saveRDS(participants, &quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Participants/Participants.rds&quot;)
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+donations2013 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2013.rds&quot;)
+donations2014 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2014.rds&quot;)
+donations2015 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2015.rds&quot;)
+donations2016 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2016.rds&quot;)
+donations2017 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2017.rds&quot;)
+
+participants &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Participants/Participants.rds&quot;)
+
+str(participants)
+</code></pre>
+<h1 id="creating-data-aggregations">Creating Data Aggregations</h1>
+<h2 id="from-donations-data">From donations data</h2>
+<pre><code>gen_2013 &lt;- summary(donations2013$`Donor Gender`)
+gen_2014 &lt;- summary(donations2014$`Donor Gender`)
+gen_2015 &lt;- summary(donations2015$`Donor Gender`)
+gen_2016 &lt;- summary(donations2016$`Donor Gender`)
+gen_2017 &lt;- summary(donations2017$`Donor Gender`)
+
+
+gender_year &lt;- tibble(c(2013, 2014, 2015, 2016, 2017), 
+                          c(gen_2013[1], gen_2014[1], gen_2015[1], gen_2016[1], gen_2017[1]), 
+                          c(gen_2013[2], gen_2014[2], gen_2015[2], gen_2016[2], gen_2017[2]), 
+                          c(gen_2013[3], gen_2014[3], gen_2015[3], gen_2016[3], gen_2017[3]))
+                          
+colnames(gender_year) &lt;- c(&quot;Year&quot;, &quot;Female&quot;, &quot;Male&quot;, &quot;NA&quot;)
+
+
+year_num &lt;- tibble(2013:2017, c(nrow(donations2013), nrow(donations2014), nrow(donations2015), nrow(donations2016), nrow(donations2017)))
+colnames(year_num) &lt;- c(&quot;Year&quot;, &quot;Number of Participants&quot;)
+
+
+tot_gifts2013 &lt;- sum(donations2013$`Gift Amount($)`, na.rm = TRUE)
+tot_gifts2014 &lt;- sum(donations2014$`Gift Amount($)`, na.rm = TRUE)
+tot_gifts2015 &lt;- sum(donations2015$`Gift Amount($)`, na.rm = TRUE)
+tot_gifts2016 &lt;- sum(donations2016$`Gift Amount($)`, na.rm = TRUE)
+tot_gifts2017 &lt;- sum(donations2017$`Gift Amount($)`, na.rm = TRUE)
+
+med_gifts2013 &lt;- median(donations2013$`Gift Amount($)`, na.rm = TRUE)
+med_gifts2014 &lt;- median(donations2014$`Gift Amount($)`, na.rm = TRUE)
+med_gifts2015 &lt;- median(donations2015$`Gift Amount($)`, na.rm = TRUE)
+med_gifts2016 &lt;- median(donations2016$`Gift Amount($)`, na.rm = TRUE)
+med_gifts2017 &lt;- median(donations2017$`Gift Amount($)`, na.rm = TRUE)
+
+tot_donations &lt;- tibble(2013:2017,
+                            c(tot_gifts2013, tot_gifts2014, tot_gifts2015, tot_gifts2016, tot_gifts2017),
+                            c(med_gifts2013, med_gifts2014, med_gifts2015, med_gifts2016, med_gifts2017))
+
+colnames(tot_donations) &lt;- c(&quot;Year&quot;, &quot;Total Donations&quot;, &quot;Median&quot;)
+
+add_tot_gifts2013 &lt;- sum(donations2013$`Additional Gift Amount($)`, na.rm = TRUE)
+add_tot_gifts2014 &lt;- sum(donations2014$`Additional Gift Amount($)`, na.rm = TRUE)
+add_tot_gifts2015 &lt;- sum(donations2015$`Additional Gift Amount($)`, na.rm = TRUE)
+add_tot_gifts2016 &lt;- sum(donations2016$`Additional Gift Amount($)`, na.rm = TRUE)
+add_tot_gifts2017 &lt;- sum(donations2017$`Additional Gift Amount($)`, na.rm = TRUE)
+
+add_med_gifts2013 &lt;- median(donations2013$`Additional Gift Amount($)`, na.rm = TRUE)
+add_med_gifts2014 &lt;- median(donations2014$`Additional Gift Amount($)`, na.rm = TRUE)
+add_med_gifts2015 &lt;- median(donations2015$`Additional Gift Amount($)`, na.rm = TRUE)
+add_med_gifts2016 &lt;- median(donations2016$`Additional Gift Amount($)`, na.rm = TRUE)
+add_med_gifts2017 &lt;- median(donations2017$`Additional Gift Amount($)`, na.rm = TRUE)
+
+add_donations &lt;- tibble(2013:2017,
+  c(add_tot_gifts2013, add_tot_gifts2014, add_tot_gifts2015, add_tot_gifts2016, add_tot_gifts2017), 
+  c(add_med_gifts2013, add_med_gifts2014, add_med_gifts2015, add_med_gifts2016, add_med_gifts2017))
+
+colnames(add_donations) &lt;- c(&quot;Year&quot;, &quot;Additional Donations&quot;, &quot;Median&quot;)
+</code></pre>
+<h2 id="plotting-donations-data">Plotting donations data</h2>
+<pre><code>ggplot(data = subset(donations2013, !is.na(`Donor Gender`))) + 
+  geom_bar(aes(`Donor Gender`, fill = `Donor Gender`), na.rm = TRUE) + 
+  xlab(&quot;Donor Gender&quot;) + 
+  ylab(&quot;Count&quot;) + 
+  ggtitle(&quot;2013 NMS Participants by gender&quot;)
+
+ggplot(data = subset(donations2013, !is.na(`Gift Payment Method`))) + 
+  geom_bar(aes(`Gift Payment Method`, fill = `Donor Gender`)) + 
+  xlab(&quot;Gift Payment Method&quot;) + 
+  ylab(&quot;Dollars&quot;) + 
+  ggtitle(&quot;2013 NMS Gift Payment Method Types by Gender&quot;)
+
+library(scales)
+ggplot(tot_donations, aes(Year, `Total Donations`/1000000)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  ylab(&quot;Gift Amount ($M)&quot;) + 
+  ggtitle(&quot;Gift amounts have fallen every year since 2014&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Gift amounts have fallen.png&quot;)
+
+
+ggplot(add_donations, aes(Year, `Additional Donations`/1000000)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  ylab(&quot;Additional gift Amount ($M)&quot;) + 
+  ggtitle(&quot;Additional gift amounts were increasing but fell in 2017&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Additional gift amounts were increasing.png&quot;)
+
+
+
+
+colnames(add_donations)
+
+
+ggplot() + 
+  geom_bar(data = tot_donations, aes(Year, `Total Donations` / 1000000), stat = &quot;identity&quot;) +
+  geom_bar(data = add_donations, aes(Year, `Additional Donations` /1000000), stat = &quot;identity&quot;, fill = &quot;red&quot;, alpha = 0.6)  
+  
+
+participants &lt;- tibble(2013:2017, c(nrow(donations2013), nrow(donations2014), nrow(donations2015), nrow(donations2016), nrow(donations2017)))
+
+colnames(participants) &lt;- c(&quot;Year&quot;, &quot;Participants&quot;)
+
+ggplot(participants) + 
+  geom_bar(aes(x = Year, y = Participants), stat = &quot;identity&quot;) + 
+  ylim(0, 1000000) + 
+  scale_y_continuous(labels= comma) +
+  ggtitle(&quot;Number of participants has fallen every year since 2013&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Number of participants has fallen.png&quot;)
+
+  
+don_per_part = tibble(2013:2017, tot_donations$`Total Donations` / participants$Participants)
+colnames(don_per_part) &lt;- c(&quot;Year&quot;, &quot;Average Donation&quot;)
+
+ggplot(don_per_part, aes(Year, `Average Donation`)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  ylab(&quot;Averate Gift Amount&quot;) + 
+  ggtitle(&quot;Average gift per participant has increased every year since 2013&quot;) + 
+    theme(plot.title = element_text(hjust = 0.5)) + 
+  ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Average gift per participant has increased.png&quot;)
+
+
+</code></pre>
+<h2 id="ramyas-bike-events-data-aggregation">Ramya’s Bike Events Data Aggregation</h2>
+<pre><code>#Average amount by total participants in all the states
+Amount_by_States&lt;-aggregate(BikeEvents$Total.From.Participant..., by=list(State = BikeEvents$State), FUN = mean)
+head(Amount_by_States)
+
+#Amount raised by participants from 2013-2017
+Amount_by_year &lt;-aggregate(BikeEvents$Total.From.Participant..., by = list(year = BikeEvents$Fiscal.Year), sum)
+Amount_by_year
+
+#selft donars over
+Donors_by_year &lt;-aggregate(BikeEvents$Total.From.Participant..., by = list(year = BikeEvents$Fiscal.Year), sum)
+Donors_by_year
+
+#Active registrations overs the years
+Active_registrations &lt;-aggregate(BikeEvents$Active.Registrations, by = list(year = BikeEvents$Fiscal.Year), sum)
+Active_registrations
+</code></pre>
+<h2 id="ramyas-plots">Ramya’s Plots</h2>
+<pre><code>library('ggplot2')
+Amounts_ggplot&lt;-ggplot(Amount_by_States, aes(x=Amount_by_States$State,y=Amount_by_States$x))+ 
+  theme(axis.text.x = element_text(face = &quot;bold&quot;, size = 8, angle = 90))+
+  geom_bar(stat = 'identity', fill = &quot;blue&quot;)+
+  ggtitle(&quot;Average amount raised by Bike Events participants across all the states&quot;) + 
+  labs(x ='States', y = 'Average amount')
+
+Amounts_ggplot
+ggsave(filename=&quot;D:/527- Data Mining/TUN Data Challenge/Data Visualizations/Amounts_ggplot.pdf&quot;, plot=Amounts_ggplot)
+
+ggplot(Amount_by_year, aes(x = Amount_by_year$year, y = Amount_by_year$x)) +
+  geom_bar(stat = 'identity', fill = &quot;blue&quot;)+ggtitle(&quot;Participants amount to Bike events slightly decreasing since 2014&quot;) + 
+  labs(x ='Year', y = 'Total amount')
+</code></pre>
+<pre><code>#Donars by year
+ggplot(Donors_by_year, aes(x = Donors_by_year$year, y = Donors_by_year$x))+
+  geom_bar(stat = 'identity', fill = &quot;blue&quot;)+ggtitle(&quot;Self donors gradually decreasing since 2014 &quot;) + 
+  labs(x ='Year', y = 'Total amount')
+
+</code></pre>
+<pre><code>#Donars by year
+ggplot(Active_registrations, aes(x = Active_registrations$year, y = Active_registrations$x)) +
+  geom_bar(stat = 'identity', fill = &quot;blue&quot;)+ggtitle(&quot;Active registrations have fallen since 2013 &quot;) + 
+  labs(x ='Year', y = 'No of registrations')
+</code></pre>
+<h2 id="participants-eda">Participants EDA</h2>
+<pre><code># some basic data viz
+barplot(table(participants$`Participant Occupation`), ylab = &quot;Count&quot;, main = &quot;Occupations of our Participants&quot;,
+        ylim = c(0,2500), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+
+occ.count &lt;- table(participants$`Participant Occupation`)
+occ.count
+occupation.viz &lt;- ggplot(data = participants, aes(x = participants$`Participant Occupation`)) + 
+  geom_bar(aes(y = (..count..), fill = `Participant Gender`)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+occupation.viz + labs(x = &quot;Occupations&quot;) + 
+  labs(title = &quot;Frequency of Participant Occupation&quot;) + 
+  labs(y = &quot;Count&quot;)
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+donations2013 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2013.rds&quot;)
+donations2014 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2014.rds&quot;)
+donations2015 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2015.rds&quot;)
+donations2016 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2016.rds&quot;)
+donations2017 &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Donations/Donations2017.rds&quot;)
+
+participants &lt;- readRDS(&quot;C:/Users/Konrad/Desktop/ETM 527/RDS Data/Participants/Participants.rds&quot;)
+
+#summary(donations2017$`Donor Gender`)
+#levels(donations2017$`Donor Gender`) &lt;- list(Male = &quot;Male&quot;, Female = &quot;Female&quot;, None = &quot;&quot;)
+</code></pre>
+<h1 id="creating-data-aggregations-1">Creating Data Aggregations</h1>
+<h2 id="from-donations-data-1">From donations data</h2>
+<pre><code># gen_2013 &lt;- summary(donations2013$`Donor Gender`)
+# gen_2014 &lt;- summary(donations2014$`Donor Gender`)
+# gen_2015 &lt;- summary(donations2015$`Donor Gender`)
+# gen_2016 &lt;- summary(donations2016$`Donor Gender`)
+# gen_2017 &lt;- summary(donations2017$`Donor Gender`)
+# 
+# 
+# gender_year &lt;- tibble(c(2013, 2014, 2015, 2016, 2017), 
+#                           c(gen_2013[1], gen_2014[1], gen_2015[1], gen_2016[1], gen_2017[1]), 
+#                           c(gen_2013[2], gen_2014[2], gen_2015[2], gen_2016[2], gen_2017[2]), 
+#                           c(gen_2013[3], gen_2014[3], gen_2015[3], gen_2016[3], gen_2017[3]),
+#                           c(gen_2013[4], gen_2014[4], gen_2015[4], gen_2016[4], gen_2017[4]))
+#                           
+# colnames(gender_year) &lt;- c(&quot;Year&quot;, &quot;Female&quot;, &quot;Male&quot;, &quot;None&quot;, &quot;NA&quot;)
+# 
+# 
+# year_num &lt;- tibble(2013:2017, c(nrow(donations2013), nrow(donations2014), nrow(donations2015), nrow(donations2016), nrow(donations2017)))
+# colnames(year_num) &lt;- c(&quot;Year&quot;, &quot;Number of Participants&quot;)
+# 
+# 
+# tot_gifts2013 &lt;- sum(donations2013$`Gift Amount($)`, na.rm = TRUE)
+# tot_gifts2014 &lt;- sum(donations2014$`Gift Amount($)`, na.rm = TRUE)
+# tot_gifts2015 &lt;- sum(donations2015$`Gift Amount($)`, na.rm = TRUE)
+# tot_gifts2016 &lt;- sum(donations2016$`Gift Amount($)`, na.rm = TRUE)
+# tot_gifts2017 &lt;- sum(donations2017$`Gift Amount($)`, na.rm = TRUE)
+# 
+# med_gifts2013 &lt;- median(donations2013$`Gift Amount($)`, na.rm = TRUE)
+# med_gifts2014 &lt;- median(donations2014$`Gift Amount($)`, na.rm = TRUE)
+# med_gifts2015 &lt;- median(donations2015$`Gift Amount($)`, na.rm = TRUE)
+# med_gifts2016 &lt;- median(donations2016$`Gift Amount($)`, na.rm = TRUE)
+# med_gifts2017 &lt;- median(donations2017$`Gift Amount($)`, na.rm = TRUE)
+# 
+# mean_gifts2013 &lt;- mean(donations2013$`Gift Amount($)`, na.rm = TRUE)
+# mean_gifts2014 &lt;- mean(donations2014$`Gift Amount($)`, na.rm = TRUE)
+# mean_gifts2015 &lt;- mean(donations2015$`Gift Amount($)`, na.rm = TRUE)
+# mean_gifts2016 &lt;- mean(donations2016$`Gift Amount($)`, na.rm = TRUE)
+# mean_gifts2017 &lt;- mean(donations2017$`Gift Amount($)`, na.rm = TRUE)
+# 
+# 
+# tot_donations &lt;- tibble(2013:2017,
+#                             c(tot_gifts2013, tot_gifts2014, tot_gifts2015, tot_gifts2016, tot_gifts2017),
+#                             c(med_gifts2013, med_gifts2014, med_gifts2015, med_gifts2016, med_gifts2017), 
+#                             c(mean_gifts2013, mean_gifts2014, mean_gifts2015, mean_gifts2016, mean_gifts2017))
+# 
+# colnames(tot_donations) &lt;- c(&quot;Year&quot;, &quot;Total Donations&quot;, &quot;Median&quot;, &quot;Mean&quot;)
+# 
+# add_tot_gifts2013 &lt;- sum(donations2013$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_tot_gifts2014 &lt;- sum(donations2014$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_tot_gifts2015 &lt;- sum(donations2015$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_tot_gifts2016 &lt;- sum(donations2016$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_tot_gifts2017 &lt;- sum(donations2017$`Additional Gift Amount($)`, na.rm = TRUE)
+# 
+# add_med_gifts2013 &lt;- median(donations2013$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_med_gifts2014 &lt;- median(donations2014$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_med_gifts2015 &lt;- median(donations2015$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_med_gifts2016 &lt;- median(donations2016$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_med_gifts2017 &lt;- median(donations2017$`Additional Gift Amount($)`, na.rm = TRUE)
+# 
+# add_mean_gifts2013 &lt;- mean(donations2013$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_mean_gifts2014 &lt;- mean(donations2014$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_mean_gifts2015 &lt;- mean(donations2015$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_mean_gifts2016 &lt;- mean(donations2016$`Additional Gift Amount($)`, na.rm = TRUE)
+# add_mean_gifts2017 &lt;- mean(donations2017$`Additional Gift Amount($)`, na.rm = TRUE)
+# 
+# 
+# add_donations &lt;- tibble(2013:2017,
+#   c(add_tot_gifts2013, add_tot_gifts2014, add_tot_gifts2015, add_tot_gifts2016, add_tot_gifts2017), 
+#   c(add_med_gifts2013, add_med_gifts2014, add_med_gifts2015, add_med_gifts2016, add_med_gifts2017), 
+#   c(add_mean_gifts2013, add_mean_gifts2014, add_mean_gifts2015, add_mean_gifts2016, add_mean_gifts2017))
+# 
+# colnames(add_donations) &lt;- c(&quot;Year&quot;, &quot;Additional Donations&quot;, &quot;Median&quot;, &quot;Mean&quot;)
+# 
+# 
+# write_rds(tot_donations, &quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Gift Amounts.rds&quot;)
+# write_rds(add_donations, &quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Additional Amounts.rds&quot;)
+# write_rds(gender_year, &quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Yearly Gender Breakdown.rds&quot;)
+# 
+# gen_tot_2013_gifts &lt;- aggregate(donations2013$`Gift Amount($)`, by = list(donations2013$`Donor Gender`), FUN = sum)
+# gen_med_2013_gifts &lt;- aggregate(donations2013$`Gift Amount($)`, by = list(donations2013$`Donor Gender`), FUN = median)  
+# gen_mean_2013_gifts &lt;- aggregate(donations2013$`Gift Amount($)`, by = list(donations2013$`Donor Gender`), FUN = mean)
+# 
+# gen_tot_2014_gifts &lt;- aggregate(donations2014$`Gift Amount($)`, by = list(donations2014$`Donor Gender`), FUN = sum)
+# gen_med_2014_gifts &lt;- aggregate(donations2014$`Gift Amount($)`, by = list(donations2014$`Donor Gender`), FUN = median)  
+# gen_mean_2014_gifts &lt;- aggregate(donations2014$`Gift Amount($)`, by = list(donations2014$`Donor Gender`), FUN = mean)
+# 
+# gen_tot_2015_gifts &lt;- aggregate(donations2015$`Gift Amount($)`, by = list(donations2015$`Donor Gender`), FUN = sum)
+# gen_med_2015_gifts &lt;- aggregate(donations2015$`Gift Amount($)`, by = list(donations2015$`Donor Gender`), FUN = median)  
+# gen_mean_2015_gifts &lt;- aggregate(donations2015$`Gift Amount($)`, by = list(donations2015$`Donor Gender`), FUN = mean)
+# 
+# gen_tot_2016_gifts &lt;- aggregate(donations2016$`Gift Amount($)`, by = list(donations2016$`Donor Gender`), FUN = sum)
+# gen_med_2016_gifts &lt;- aggregate(donations2016$`Gift Amount($)`, by = list(donations2016$`Donor Gender`), FUN = median)  
+# gen_mean_2016_gifts &lt;- aggregate(donations2016$`Gift Amount($)`, by = list(donations2016$`Donor Gender`), FUN = mean)
+# 
+# gen_tot_2017_gifts &lt;- aggregate(donations2017$`Gift Amount($)`, by = list(donations2017$`Donor Gender`), FUN = sum)
+# gen_med_2017_gifts &lt;- aggregate(donations2017$`Gift Amount($)`, by = list(donations2017$`Donor Gender`), FUN = median)  
+# gen_mean_2017_gifts &lt;- aggregate(donations2017$`Gift Amount($)`, by = list(donations2017$`Donor Gender`), FUN = mean)
+# 
+# gender_year_totals &lt;- rbind(gen_tot_2013_gifts, gen_tot_2014_gifts, gen_tot_2015_gifts, gen_tot_2016_gifts, gen_tot_2017_gifts)
+# 
+# gender_year_med &lt;- rbind(gen_med_2013_gifts, gen_med_2014_gifts, gen_med_2015_gifts, gen_med_2016_gifts, gen_med_2017_gifts)
+# 
+# gender_year_mean &lt;- rbind(gen_mean_2013_gifts, gen_mean_2014_gifts, gen_mean_2015_gifts, gen_mean_2016_gifts, gen_mean_2017_gifts)
+# 
+# gender_totals &lt;- tibble(rep(2013:2017, each = 3), 
+#                         rep(c(&quot;Female&quot;, &quot;Male&quot;, &quot;None&quot;), times = 5), 
+#                         gender_year_totals$x, 
+#                         gender_year_med$x, 
+#                         gender_year_mean$x)
+# 
+# colnames(gender_totals) &lt;- c(&quot;Year&quot;, &quot;Gender&quot;, &quot;Total Gifts&quot;, &quot;Median&quot;, &quot;Mean&quot;)
+# 
+# write_rds(gender_totals, &quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Gender Year Totals Breakdown.rds&quot;)
+
+tot_donations &lt;- read_rds(&quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Gift Amounts.rds&quot;)
+add_donations &lt;- read_rds(&quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Additional Amounts.rds&quot;)
+gender_year &lt;- read_rds(&quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Yearly Gender Breakdown.rds&quot;)
+gender_totals &lt;- read_rds(&quot;C:/Users/Konrad/Desktop/ETM 527/Calculated/Gender Year Totals Breakdown.rds&quot;)
+</code></pre>
+<h5 id="total-donations">Total Donations</h5>
+<pre><code>ggplot(tot_donations, aes(Year, `Total Donations`)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels = comma) + 
+  ylab(&quot;Participants&quot;) + 
+  ggtitle(&quot;The number of participants has fallen every year since 2014&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.title = element_text(size = 18, face = &quot;bold&quot;)) #+
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Participant numbers fallen.png&quot;)
+
+ggplot(participants, aes(`Fiscal Year`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels = comma) + 
+  ylab(&quot;Participants&quot;) + 
+  xlab(&quot;Fiscal Year&quot;) + 
+  ggtitle(&quot;Number of participants has decreased every year&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(plot.title = element_text(size =18, face = &quot;bold&quot;)) #+
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Number of participants decreased every year.png&quot;, width = 10)
+</code></pre>
+<h2 id="sum-of-donations">Sum of Donations</h2>
+<pre><code>ggplot(tot_donations, aes(Year, `Total Donations`/1000000)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  ylab(&quot;Gift Amount ($M)&quot;) + 
+  ggtitle(&quot;Total gift amounts have fallen every year since 2014&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) #+ 
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Gift amounts have fallen.png&quot;)
+</code></pre>
+<h3 id="mean-donations">Mean Donations</h3>
+<pre><code>ggplot(tot_donations, aes(Year, Mean)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  ylab(&quot;Gift Amount&quot;) + 
+  ggtitle(&quot;Mean gift amount continues to rise&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) #+ 
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Gift amounts have fallen.png&quot;)
+</code></pre>
+<h3 id="median-donations">Median Donations</h3>
+<pre><code>ggplot(tot_donations, aes(Year, Median)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  ylab(&quot;Gift Amount&quot;) + 
+  ggtitle(&quot;Median gift amount remains unchanged&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) #+ 
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Gift amounts have fallen.png&quot;)
+</code></pre>
+<h5 id="gender-totals">Gender Totals</h5>
+<pre><code>ggplot(gender_totals[order(gender_totals$Gender),], aes(Year, `Total Gifts`/1000000, fill = Gender)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;, suffix = &quot;M&quot;)) + 
+  scale_fill_manual(values=c(&quot;#A92A2A&quot;, &quot;#205A8F&quot;, &quot;#B4BFC3&quot;)) +
+  ylab(&quot;Gift Amount (M)&quot;) + 
+  ggtitle(&quot;Total gift amount has decreased&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.title = element_text(size =18, face = &quot;bold&quot;)) #+
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Total gift amounts by gender.png&quot;, width = 12)
+
+ggplot(gender_totals, aes(Year, Median, fill = Gender)) + 
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) + 
+  scale_fill_manual(values=c(&quot;#A92A2A&quot;, &quot;#205A8F&quot;, &quot;#B4BFC3&quot;)) +
+  ylab(&quot;Gift Amount ($)&quot;) + 
+  ggtitle(&quot;Median gift amount remains unchanged&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(plot.title = element_text(size =18, face = &quot;bold&quot;)) #+
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Median gift amounts by gender.png&quot;, width = 12)
+
+
+ggplot(gender_totals, aes(Year, Mean, fill = Gender)) + 
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) + 
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;)) +  
+  scale_fill_manual(values = c(&quot;#A92A2A&quot;, &quot;#205A8F&quot;, &quot;#B4BFC3&quot;)) +
+  ylab(&quot;Gift Amount ($)&quot;) + 
+  ggtitle(&quot;Mean gift amount has fluctuated&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(plot.title = element_text(size =18, face = &quot;bold&quot;)) #+
+  #ggsave(&quot;C:\\Users\\Konrad\\Desktop\\ETM 527\\Mean gift amounts by gender.png&quot;, width = 12)
+
+</code></pre>
+<pre><code>library(dplyr)
+library(magrittr)
+library(tidyr)
+library(knitr)
+library(tibble)
+library(readxl)
+library(graphics)
+library(ggplot2)
+library(scales)
+library(RColorBrewer)
+
+nt &lt;-
+read_excel(&quot;C:/Users/eva/Documents/ETM 527/Data Challenge 2018/National Teams/2013-2017 National Team Activity.xlsx&quot;, skip = 1, na = c(&quot;NA&quot;, &quot; &quot;, &quot;-999&quot;),
+           col_types = c(&quot;text&quot;, &quot;text&quot;, &quot;text&quot;, 
+                         &quot;text&quot;, &quot;text&quot;, &quot;text&quot;, &quot;date&quot;, &quot;text&quot;, 
+                         &quot;numeric&quot;, &quot;numeric&quot;, &quot;numeric&quot;, 
+                         &quot;numeric&quot;, &quot;numeric&quot;, &quot;text&quot;, &quot;text&quot;, 
+                         &quot;text&quot;, &quot;text&quot;, &quot;text&quot;, &quot;text&quot;, &quot;text&quot;, 
+                         &quot;text&quot;, &quot;numeric&quot;, &quot;text&quot;, &quot;text&quot;, 
+                         &quot;text&quot;, &quot;text&quot;, &quot;text&quot;))
+
+dim(nt)
+
+#Removing the &quot;Corporate Name&quot; field as it was blank for all recornt
+nt$'Corporate Name' &lt;- NULL
+str(nt)
+</code></pre>
+<pre><code>nt$`Event Chapter` &lt;- as.factor(nt$`Event Chapter`)
+nt$`Event Category` &lt;- as.factor(nt$`Event Category`)
+nt$`Event Type` &lt;- as.factor(nt$`Event Type`)
+nt$`Local Team Name` &lt;- as.factor(nt$`Local Team Name`)
+nt$`Event Name` &lt;- as.factor(nt$`Event Name`)
+nt$Location &lt;- as.factor(nt$Location)
+
+cols_to_factor &lt;- 12:ncol(nt)
+
+nt[, cols_to_factor] &lt;- lapply(nt[, cols_to_factor], as.factor) 
+</code></pre>
+<pre><code># Fill down team names
+for (i in 2:nrow(nt))
+{
+  if (is.na(nt$`National Team Name`[i]) &amp; !is.na(nt$`National Team Name`[i-1]))
+  {
+    nt$`National Team Name`[i] &lt;- nt$`National Team Name`[i-1]
+  }
+}
+View(nt)
+</code></pre>
+<pre><code># add NA in the Team Name where applicable
+nt$`National Team Name` &lt;- as.factor(nt$`National Team Name`)
+summary(nt$`National Team Name`)
+
+nt$`National Team Name`[nt$`National Team Name` == &quot;N/A&quot;] &lt;- NA  #selects all matching rows and changes to NA
+summary(nt$`National Team Name`)
+
+</code></pre>
+<pre><code>
+
+Not.National.Team = subset(nt, is.na(nt$`National Team Name`), select =`National Team Name`:`Primary Connection To MS`)
+Not.National.Team = Not.National.Team[,c(5,6,2,3,4,7:26)]
+
+nt &lt;- nt[which(!is.na(nt$`National Team Name`)),]
+nt &lt;- nt[which(!is.na(nt$`Local Team Name`)),]
+</code></pre>
+<pre><code>NameLocation &lt;- nt$Location
+summary(NameLocation)
+BlankLocation &lt;- nt[which(is.na(nt$Location)), ]
+View(BlankLocation)
+</code></pre>
+<pre><code>
+
+</code></pre>
+<pre><code>
+View(nt)
+
+sink(&quot;C:/Users/eva/Documents/ETM 527/Data Challenge 2018/National Teams/National Teams Basic Exploration.txt&quot;)
+class(nt)
+dim(nt)
+glimpse(nt)
+head(nt)
+tail(nt)
+summary(nt)
+str(nt)
+sink()
+</code></pre>
+<pre><code>library(dplyr)
+teams.count = count(nt,team =nt$`National Team Name`)
+teams.count$team = factor(teams.count$team, levels = teams.count$team[order(teams.count$n)])
+filter.top.count = filter(teams.count,n&gt;15)
+
+ggplot(filter.top.count, aes(team,n)) + 
+  geom_bar(stat = &quot;identity&quot;, aes(`team`, fill = `team`)) + coord_flip()+theme(axis.text=element_text(size=7),
+        axis.title=element_text(size=14,face=&quot;bold&quot;))+
+  ylab(&quot;Count&quot;) + 
+  xlab(&quot;National Team&quot;) + 
+  ggtitle(&quot;2013 NMSS National Team Participation&quot;)+
+  scale_size_continuous()
+ggsave(&quot;C:/Users/eva/Documents/ETM 527/Data Challenge 2018/National Teams/National Team Participation.png&quot;)
+
+Teams.Revenue = nt[c(1, 9)]
+Teams.Revenue = aggregate(Teams.Revenue$`Revenue Raised`, by=list(`National Team Name`=Teams.Revenue$`National Team Name`), FUN=sum)
+names(Teams.Revenue) = c(&quot;National Team Name&quot;, &quot;Total Revenue Raised&quot;)
+Teams.Revenue$`National Team Name` = factor(Teams.Revenue$`National Team Name`, levels = Teams.Revenue$`National Team Name`[order(Teams.Revenue$`Total Revenue Raised`)])
+filter.top.revenue = filter(Teams.Revenue,`Total Revenue Raised`&gt;100000)
+
+ggplot(filter.top.revenue, aes(`National Team Name`, `Total Revenue Raised`/10000))+ 
+  geom_bar(stat = &quot;identity&quot;, aes(`National Team Name`, fill = `National Team Name`)) +
+  scale_y_continuous(labels=dollar_format(prefix=&quot;$&quot;))+
+  ylab(&quot;Total Revenue Raised (in 10 thousands)&quot;) + 
+  xlab(&quot;National Team Name&quot;) +   coord_flip()+ 
+  ggtitle(&quot;2013 NMSS Top Fundraising National Teams&quot;)+ scale_fill_discrete(breaks = rev(levels(filter.top.revenue$`National Team Name`)))
+scale_size_continuous()
+ggsave(&quot;C:/Users/eva/Documents/ETM 527/Data Challenge 2018/National Teams/Visuals/Top Funraising National Team.png&quot;)
+
+Connection = count(Not.National.Team, pcms=Not.National.Team$`Primary Connection To MS`)
+Connection2 = count(nt, pcms=nt$`Primary Connection To MS`)
+
+Connection$pcms = factor(Connection$pcms, levels = Connection$pcms[order(Connection$n)])
+Connection2$pcms = factor(Connection2$pcms, levels = Connection2$pcms[order(Connection2$n)])
+
+connect &lt;- cbind(Connection,Connection2)
+connect &lt;- cbind(Connection, Connection2[,2])
+
+Connect &lt;- rowSums(connect[2:3]) 
+connect &lt;- cbind(connect,Connect)
+
+connect &lt;- connect[,c(1,4)]
+connect$Connect &lt;- as.integer(connect$Connect)
+connect$pcms = factor(connect$pcms, levels = connect$pcms[order(connect$Connect)])
+connect &lt;- arrange(connect, desc(Connect))
+
+names(connect) = c(&quot;Primary Connection to MS&quot;, &quot;Number of Participants&quot;)
+</code></pre>
+<pre><code>ggplot(connect, aes(`Primary Connection to MS`, `Number of Participants`))+
+   geom_bar(stat =  &quot;identity&quot;, aes(`Primary Connection to MS`, fill = `Primary Connection to MS`))+
+   xlab(&quot;Primary Connection To MS&quot;) +
+   ylab(&quot;Number of Team Members&quot;) + coord_flip() + theme(axis.text=element_text(size=7),
+        axis.title=element_text(size=14,face=&quot;bold&quot;))+
+   ggtitle(&quot;2013 NMSS Primary Connection to MS National &amp; Not National Teams&quot;)+
+   scale_size_continuous()+ scale_y_continuous()
+ggsave(&quot;C:/Users/eva/Documents/ETM 527/Data Challenge 2018/National Teams/Visuals/Primary Connection to MS.png&quot;)
+
+</code></pre>
+<pre><code># SaveRDS
+saveRDS(nt,&quot;National_Teams_cleaned&quot;)
+saveRDS(Not.National.Team,&quot;Not_Nationa_Team_from_NT&quot;)
+</code></pre>
+<h1 id="business-question--what-is-the-common-denominator-for-our-top-performing-corporate-teams">Business question : What is the common denominator for our top performing corporate teams?</h1>
+<p>#(Is it industry, culture, executive involvement, connection to MS, other?)</p>
+<pre><code>library(tidyverse)
+library(ggpubr)
+library(ggplot2)
+library(magrittr)
+</code></pre>
+<h1 id="just-want-corporate-teams">just want corporate teams</h1>
+<pre><code>corp &lt;- teams %&gt;%
+  select(everything()) %&gt;%
+  filter(`Team Division` == &quot;Corporate&quot;)
+</code></pre>
+<h1 id="clean-up">clean up</h1>
+<pre><code>corp$`Fiscal Year` &lt;- as.factor(corp$`Fiscal Year`)
+corp$`Team Goal($)` &lt;- as.numeric(corp$`Team Goal($)`)
+corp$`Number of Participants` &lt;- as.numeric(corp$`Number of Participants`)
+corp$Company[corp$Company == &quot;Team BP&quot;] &lt;- &quot;BP&quot;
+</code></pre>
+<h1 id="try-some-correlations">try some correlations</h1>
+<pre><code>corp.goal.part &lt;- cor(corp$`Team Goal($)`, corp$`Number of Participants`, method = &quot;pearson&quot;, use = &quot;complete.obs&quot;)
+summary(corp.goal.part)
+
+plot(x, y, main = &quot;Correlation : Team Goal Increase with More Team Members&quot;,
+     xlab = &quot;Number of Participants&quot;, ylab = &quot;Total Team Gift&quot;,
+     pch = 19, frame = FALSE)
+abline(lm(y ~ x, data = corp), col = &quot;blue&quot;)
+</code></pre>
+<h1 id="number-of-participats">number of participats</h1>
+<pre><code>corp.event &lt;- corp %&gt;%
+  select(`Internal Event Name`, `Fiscal Year`, `Number of Participants`, Company) %&gt;%
+  group_by(`Fiscal Year`, Company) %&gt;%
+  filter(!is.na(Company))
+
+corp.event.participants &lt;- corp.event %&gt;%
+  select(`Fiscal Year`, `Number of Participants`, Company) %&gt;%
+  group_by(`Fiscal Year`, Company) %&gt;%
+  summarise(sum(`Number of Participants`))
+
+colnames(corp.event.participants)[3] &lt;- &quot;N&quot;
+
+year.participants &lt;- corp.event.participants %&gt;%
+  select(`Fiscal Year`, `N`) %&gt;%
+  group_by(`Fiscal Year`) %&gt;%
+  summarise(sum(N))
+</code></pre>
+<h1 id="top-10-corps">top 10 corps</h1>
+<pre><code>top.10.corp &lt;- corp %&gt;%
+  select(everything()) %&gt;%
+  group_by(Company) %&gt;%
+  filter(!is.na(Company)) %&gt;%
+  summarise(sum(`Total Confirmed Gifts in Team History($)`)) %&gt;%
+  top_n(10)
+</code></pre>
+<h1 id="dataframe-of-vars-for-top-corps">dataframe of vars for top corps</h1>
+<pre><code>top.corps &lt;- top.10.corp$Company
+
+top.corps.common &lt;- corp %&gt;%
+  select(everything()) %&gt;%
+  filter(Company %in% top.corps)
+</code></pre>
+<h1 id="trying-to-time-series">trying to time series</h1>
+<pre><code>corp$`Event Date` &lt;- as.Date(corp$`Event Date`, &quot;%m/%d/%Y&quot;)
+top.corps.common$`Date` &lt;- as.Date(top.corps.common$`Event Date`, &quot;%m/%d/%Y&quot;)
+top.corps.common$DateYear &lt;- lubridate::year(top.corps.common$Date)
+
+corp.gift.ts &lt;- ts(corp$`Team Total Confirmed ($)`, frequency = , start = 2013)
+
+tsData &lt;- top.corps.common[,28]
+decomposeRes &lt;- decompose(tsData, type = &quot;additive&quot;)
+</code></pre>
+<h1 id="ggplot-number-of-participants-for-top-corp-teams">ggplot number of participants for top corp teams</h1>
+<pre><code>corp.event.viz &lt;- ggplot(top.corps.common, aes(x = `Date`, y = `Number of Participants`, fill = Company)) +
+  geom_area()
+corp.event.viz
+</code></pre>
+<h1 id="plotly-avg-number-of-participants-for-top-corporate-teams">plotly avg number of participants for top corporate teams</h1>
+<pre><code>avg.participants.top.corps &lt;- top.corps.common %&gt;%
+  select(Company, `Number of Participants`) %&gt;%
+  group_by(Company) %&gt;%
+  summarise(avg = mean(`Number of Participants`))
+
+density &lt;- density(avg.participants.top.corps$`avg`)
+
+overall.avg.number.participants &lt;- plotly::plot_ly(x = ~density$x, y = ~density$y, type = 'scatter', mode = 'lines', fill = 'tozeroy') %&gt;%
+  layout(xaxis = list(title = 'Number of Participants'),
+         yaxis = list(title = 'Density'))
+overall.avg.number.participants
+</code></pre>
+<h1 id="area-for-each-company">area for each company</h1>
+<pre><code>top.corps.participants &lt;- top.corps.common %&gt;%
+  select(Company, `Event ID`, `Number of Participants`) %&gt;%
+  filter(Company %in% top.corps) %&gt;%
+  group_by(Company,`Event ID`) %&gt;%
+  summarise(sum = sum(`Number of Participants`))
+
+Company %in% top.corps
+
+team1 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;BP&quot;),]
+density1 &lt;- density(team1$`Number of Participants`)
+
+team2 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;Calpine Corporation&quot;),]
+density2 &lt;- density(team2$`Number of Participants`)
+
+team3 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;CGG&quot;),]
+density3 &lt;- density(team3$`Number of Participants`)
+
+team4 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;ConocoPhillips&quot;),]
+density4 &lt;- density(team4$`Number of Participants`)
+
+team5 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;ExxonMobil Cycling Team&quot;),]
+density5 &lt;- density(team5$`Number of Participants`)
+
+team6 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;Noble Drilling Services Inc.&quot;),]
+density6 &lt;- density(team6$`Number of Participants`)
+
+team7 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;Saint Arnold Brewing Company&quot;),]
+density7 &lt;- density(team7$`Number of Participants`)
+
+team8 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;Salesforce Bike MS&quot;),]
+density8 &lt;- density(team8$`Number of Participants`)
+
+team9 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;Team Shell&quot;),]
+density9 &lt;- density(team9$`Number of Participants`)
+
+team10 &lt;- top.corps.common[which(top.corps.participants$Company == &quot;The Houstonian Club, Hotel and Spa&quot;),]
+density10 &lt;- density(team10$`Number of Participants`)
+
+top.corps.participants.viz &lt;- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'lines', name = 'BP', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density2$x, y = ~density2$y, name = 'Calpine Corporation', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density3$x, y = ~density3$y, name = 'CGG', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density4$x, y = ~density4$y, name = 'ConocoPhillips', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density5$x, y = ~density5$y, name = 'ExxonMobil Cycling Team', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density6$x, y = ~density6$y, name = 'Noble Drilling Services Inc.', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density7$x, y = ~density7$y, name = 'Saint Arnold Brewing Company', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density8$x, y = ~density8$y, name = 'Salesforce Bike MS', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density9$x, y = ~density9$y, name = 'Team Shell', fill = 'tozeroy') %&gt;%
+  add_trace(x = ~density10$x, y = ~density10$y, name = 'The Houstonian Club, Hotel and Spa', fill = 'tozeroy') %&gt;%
+  layout(xaxis = list(title = 'Number of Participants per Event'),
+         yaxis = list(title = 'Density'),
+         main)
+top.corps.participants.viz
+</code></pre>
+<h1 id="stream-plots">stream plots</h1>
+<pre><code>corp.density.link = api_create(top.corps.participants.viz, filename=&quot;Participant Density for Top Corporate Teams&quot;)
+corp.density.link
+
+east.health.viz &lt;- ggplot(east.health, aes(x = reorder(`Participant State`, -Count), 
+                                           y = `Count`,
+                                           fill = `Participant State`)) + 
+  geom_bar(stat = &quot;identity&quot;)
+east.health.viz +
+  labs(x = &quot;Number of Participants&quot;,
+       y = &quot;State&quot;,
+       title = &quot;Number of Cyclists Working in Healthcare Within the Target Region&quot;)
+</code></pre>
+<h1 id="mean-donation-for-each-event">mean donation for each event</h1>
+<pre><code>gender.gifts &lt;- gender.vip %&gt;%
+  select(`Participant Gender`, `Event Date`, `Total From Participant($)`) %&gt;%
+  group_by(`Participant Gender`, `Event Date`)
+gender.gifts$`Event Date` &lt;- as.Date(gender.gifts$`Event Date`)
+gender.gifts &lt;- aggregate(gender.vip, by = list(gender.vip$`Participant Gender`, gender.vip$`Event Date`), FUN = mean)
+gender.gifts &lt;-gender.gifts[,c(1,2,9)]
+colnames(gender.gifts) &lt;- c(&quot;Gender&quot;, &quot;Event Date&quot;, &quot;Gift Amount&quot;)
+gender.gifts
+
+gender.gifts$`Event Date` &lt;- as.Date(gender.gifts$`Event Date`)
+gender.gif &lt;- aggregate(gender.gifts, by = list(gender.gifts$`Gender`, gender.gifts$`Event Date`), FUN = mean)
+gender.gif &lt;-gender.gif[,c(1,2,5)]
+colnames(gender.gif) &lt;- c(&quot;Gender&quot;, &quot;Event Date&quot;, &quot;Gift Amount&quot;)
+</code></pre>
+<h1 id="mean-donation-for-each-fiscal-year">mean donation for each fiscal year</h1>
+<pre><code>gender.gifts.year &lt;- aggregate(gender.vip, by = list(gender.vip$`Participant Gender`, gender.vip$`Fiscal Year`), FUN = mean)
+gender.gifts.year &lt;-gender.gifts.year[,c(1,2,9)]
+colnames(gender.gifts.year) &lt;- c(&quot;Gender&quot;, &quot;Year&quot;, &quot;Gift Amount&quot;)
+gender.gifts.year
+  
+g.gift.year.viz &lt;- ggplot(data = gender.gifts.year, 
+                     aes(x = gender.gifts.year$Year, y = gender.gifts.year$`Gift Amount`, fill = gender.gifts.year$Gender)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;)
+g.gift.year.viz +
+  labs(title = &quot;Mean Participant Donation per Year by Gender&quot;) +
+  labs(x = &quot;Fiscal Year&quot;) +
+  labs(y = &quot;Gift Amount&quot;)
+
+event.gifts &lt;- aggregate(gender.vip, by = list(gender.vip$`Event Name`, gender.vip$`Fiscal Year`), FUN = mean)
+event.gifts &lt;- event.gifts[,c(1,3,9)]
+as.data.frame(event.gifts)
+colnames(event.gifts) &lt;- c(&quot;Event&quot;, &quot;Date&quot;, &quot;Gift Amount&quot;)
+
+event.gifts$Year &lt;- format(event.gifts$Date, &quot;%Y&quot;)
+event.gifts$Month &lt;- format(event.gifts$Date, &quot;%b&quot;)
+event.gifts$Day &lt;- format(event.gifts$Date, &quot;%d&quot;)
+event.gifts$CommonDate &lt;- as.Date(as.character(as.POSIXct(event.gifts$Date)))
+
+event.viz &lt;- ggplot(data = event.gifts, mapping = aes(x = CommonDate, y = `Gift Amount`, shape = Year, colour = Year)) +
+    geom_point() +
+    geom_line(aes(group = 1))
+event.viz &lt;- event.viz + 
+  facet_wrap(~Year, ncol = 1, scales = &quot;free_x&quot;) + theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  scale_y_continuous() +
+  scale_x_date(labels = date_format(&quot;%d-%b&quot;), breaks = date_breaks(&quot;2 weeks&quot;))
+event.viz
+
+participants.event &lt;- as.data.frame(
+  participants %&gt;%
+    select(`Member ID`, `Internal Event Name`) %&gt;%
+    group_by(`Internal Event Name`) %&gt;%
+    tally()
+)
+participants.event &lt;- arrange(participants.event, desc(n))
+participants.event
+
+participants.annual &lt;- as.data.frame(
+  participants %&gt;%
+    select(`Member ID`, `Fiscal Year`) %&gt;%
+    group_by(`Fiscal Year`) %&gt;%
+    tally()
+)
+participants.annual
+
+class(participants)
+dim(participants)
+glimpse(participants)
+head(participants, n = 5)
+tail(participants, n = 5)
+summary(participants)
+
+# acknowledge NA's 
+map(participants, ~sum(is.na(.)))
+
+participants.dt &lt;- data.table(gender.vip)
+
+setkey(participants.dt, `Participant Occupation`, `Total From Participant($)`)
+
+participants.dt[,print(.SD), by = `Participant Occupation`]
+
+#participants.dt &lt;- participants.dt[,.[(-`Total From Participant($)`)],
+#                                   by=list(`Participant Occupation`, `Total From #Participant($)`)]
+
+total.occ.gift &lt;- participants.dt[,.(Total.Gift=sum(`Total From Participant($)`)), by = `Participant Occupation`][order(-Total.Gift)]
+
+occ.total &lt;- ggplot(total.occ.gift, aes(x = `Participant Occupation`)) +
+  geom_bar(stat = &quot;identity&quot;, aes(y = Total.Gift))
+occ.total
+
+avg.occ.gift &lt;- participants.dt[,(Avg.Gift=mean(`Total From Participant($)`)),by=.(`Participant Occupation`)][order(-V1)]
+
+# std.dev for each participant grouped by occupation
+setkey(participants.dt, `Participant Occupation`)
+participants.dt[&quot;Retail Wholesale&quot;,(Sd.V3=sd(`Total From Participant($)`))]
+participants.dt[&quot;Retail Wholesale&quot;,]
+
+# employer
+setkey(participants.dt, `Participant Employer`)
+participants.dt[,.N, by = `Participant Employer`][order(-N)]
+setorder(setDT(participants.dt), -`Participant Employer`)[, head(.SD, 10), keyby][,.N, by = `Participant Employer`]
+employer &lt;- ggplot(participants.dt, aes(x = `Participant Employer`)) +
+  geom_bar()
+employer
+</code></pre>
+<h1 id="some-basic-data-viz">some basic data viz</h1>
+<pre><code>barplot(table(participants$`Participant Occupation`), ylab = &quot;Count&quot;, main = &quot;Occupations of our Participants&quot;,
+        ylim = c(0,2500), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+occ.count &lt;- table(participants$`Participant Occupation`)
+occ.count
+
+occupation.omitNA &lt;- data.table(occupation.omitNA)
+setkey(occupation.omitNA, `Participant Occupation`, `Participant Gender`)
+occupation.omitNA &lt;- participants[!is.na(participants$`Participant Occupation`),]
+occ.count.omit.na &lt;- occupation.omitNA[,.N, by=.(`Participant Occupation`,`Participant Gender`)]
+occ.count.omit.na &lt;- occ.count.omit.na[!is.na(`Participant Gender`)][order(-`N`)]
+setnames(occ.count.omit.na, old = &quot;V1&quot;, new = &quot;Occupation&quot;)
+</code></pre>
+<h1 id="occupation-demographic">Occupation Demographic</h1>
+<pre><code>top20.occupations.viz &lt;- ggplot(data = occ.count.omit.na, aes(x = occupation.omitNA$`Participant Occupation`)) + 
+  geom_bar(na.rm = TRUE, aes(y = (..count..), fill = `Participant Gender`)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+top20.occupations.viz &lt;- top20.occupations.viz + 
+  labs(x = &quot;Occupations&quot;) + 
+  labs(title = &quot;Frequency of Participant Occupation&quot;) + 
+  labs(y = &quot;Count&quot;)
+top20.occupations.viz
+</code></pre>
+<h1 id="occupation-demographic-1">Occupation Demographic</h1>
+<pre><code>top20.occupations.viz &lt;- ggplot(data = occ.count.omit.na, aes(x = reorder(`Participant Occupation`, -`N`), 
+                                                              y = `N`, fill = `Participant Gender`)) + 
+  geom_bar(stat = &quot;identity&quot;) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+top20.occupations.viz &lt;- top20.occupations.viz + 
+  labs(x = &quot;Occupations&quot;) + 
+  labs(title = &quot;Frequency of Participant Occupation&quot;) + 
+  labs(y = &quot;Count&quot;)
+top20.occupations.viz
+</code></pre>
+<h1 id="prior-participant-yes---no">Prior Participant? Yes - No?</h1>
+<pre><code>prior.par.bar &lt;- barplot(table(participants$`Is Prior Participant`), ylab = &quot;Count&quot;, main = &quot;Count of Prior Participants&quot;,
+        ylim = c(0,300000), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+</code></pre>
+<h1 id="team-division-bar-plot">Team division bar plot</h1>
+<pre><code>team.division.bar &lt;- barplot(table(participants$`Team Division`), ylab = &quot;Count&quot;, main = &quot;Team Division Demographic&quot;,
+        ylim = c(0,30000), las = 2, col=rgb(0.2,0.4,0.6,0.6))
+
+g.year.viz &lt;- ggplot(data = gender.year, 
+                     aes(x = Year, y = Count))+
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;)
+g.year.viz +
+  labs(title = &quot;Annual Participant Count&quot;) +
+  labs(x = &quot;Event Year&quot;) +
+  labs(y = &quot;Count&quot;)
+
+gt.count &lt;- aggregate(gender.vip$`Participant Gender` ~ gender.vip$`Fiscal Year`, data = gender.vip, FUN = length)
+colnames(gt.count) &lt;- c(&quot;Year&quot;, &quot;Count&quot;)
+gt.count
+</code></pre>
+<h3 id="prep-for-voronoi">prep for voronoi</h3>
+<pre><code>topEvents18 &lt;- read_csv(&quot;C:\\Users\\J-Blazer\\Documents\\ETM 527\\topEvents18.csv&quot;)
+cities.proj &lt;- mapproject(topEvents18$Lon, topEvents18$Lat, &quot;albers&quot;, param=c(30,40))
+par(mar=c(0,0,0,0))
+plot(cities.proj, asp=1, type=&quot;n&quot;, bty=&quot;n&quot;, xlab=&quot;&quot;, ylab=&quot;&quot;, axes = FALSE)
+points(cities.proj, pch=20, cex=0.1, col=&quot;red&quot;)
+topEventsVorn &lt;- deldir(cities.proj$x, cities.proj$y)
+plot(topEventsVorn, wlines=&quot;tess&quot;, wpoints=&quot;none&quot;, number=FALSE, add=TRUE, lty=1)
+</code></pre>
+<h3 id="can-we-quantify-the-effect-competing-events-are-having-in-our-top-markets">Can we quantify the effect competing events are having in our top markets?</h3>
+<pre><code>library(dplyr)
+library(ggplot2)
+
+Bike_events = readRDS(&quot;D:/527- Data Mining/TUN Data Challenge/Datasets/Bike_Events.rds&quot;)
+
+# these are top markets in  terms of active registrations pulled from Bike events
+markets = c(&quot;TX&quot;,&quot;PA&quot;,&quot;MN&quot;,&quot;NY&quot;,&quot;MA&quot;,&quot;NC&quot;,&quot;CO&quot;,&quot;OH&quot;,&quot;CA&quot;,&quot;KS&quot;,&quot;MO&quot;,&quot;WA&quot;,&quot;CA&quot;,&quot;IL&quot;,&quot;NJ&quot;)
+
+#retrieving active registrations for top markets
+All.events.registrations = Bike_events%&gt;%
+  select(Security.Category.Name,Fiscal.Year,State,Active.Registrations)%&gt;%
+  group_by(Security.Category.Name,Fiscal.Year,State)%&gt;%
+  summarise(sum(Active.Registrations))%&gt;%
+  filter(State %in% markets)
+write.table(All.events.registrations,&quot;Events.registrations.State.csv&quot;, sep = &quot;,&quot;)
+
+All.events.funds = Bike_events%&gt;%
+  select(Security.Category.Name,Fiscal.Year,Total.of.All.Confirmed.Gifts...,Total.Event.Gifts...,Total.From.Participant...,Total.Team.Gifts...,Total.Not.From.Participant...,City,State)%&gt;%
+  group_by(Security.Category.Name,Fiscal.Year,State)%&gt;%
+   filter(State %in% markets)
+
+All.events.funds$TotalAmount = rowSums(All.events.funds[,3:7])
+
+All.events.funds=All.events.funds%&gt;%
+  select(Security.Category.Name,Fiscal.Year,Total.of.All.Confirmed.Gifts...,Total.Event.Gifts...,Total.From.Participant...,Total.Team.Gifts...,Total.Not.From.Participant...,City,State,TotalAmount)%&gt;%
+  group_by(Security.Category.Name,Fiscal.Year,State)%&gt;%
+  summarise(sum(TotalAmount))
+
+write.table(All.events.funds,&quot;All.events.funds.csv&quot;, sep = &quot;,&quot;)
+</code></pre>
+
+</body>
+</html>

@@ -1,12 +1,17 @@
 ---
-title: "FinalReport"
+title: 'TUN Data Challenge 2018 : Bike MS'
+author: "Jordan Beary, Ramya Priya Guntipalli, Konrad Miziolek, Eva Forrester"
+date: "March 23, 2018"
 ---
-
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
 library(tint)
 library(tufte)
 # invalidate cache when the tufte version changes
-knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+knitr::opts_chunk$set(
+	cache.extra = packageVersion("tint"),
+	include = TRUE,
+	tidy = FALSE
+)
 options(htmltools.dir.version = FALSE)
 ```
 
@@ -18,18 +23,17 @@ library(magick)
 library(tufterhandout)
 library(stats)
 library(readr)
-library(dplyr)
 library(ggplot2)
 library(ggfortify)
 library(scales)
 library(plotly)
-library(plyr)
 library(lubridate)
 library(tidyverse)
 library(reshape2)
 library(ggfittext)
 library(treemapify)
 library(tidyr)
+library(plyr)
 library(pander)
 library(ggthemes)
 library(leaps)
@@ -45,6 +49,7 @@ library(sp)
 library(rgdal)
 library(gganimate)
 library(animation)
+library(dplyr)
 ```
 
 ```{r 2,message=FALSE, warning=FALSE, include=FALSE}
@@ -108,19 +113,27 @@ colnames(gender.vip) <- c("Event Date", "Participant Gender", "Participant Occup
                           "Event Name", "Participant Employer")
 ```
 
+## GitHub
+
+Before getting started please reference the team's GitHub pages for any and all code related to producing the analysis for this project, which includes data cleaning scripts, references, data sets, and external images:
+
+* GitHub Webpage and final report : [JordanBeary](https://github.com/JordanBeary/BikeMS)
+* Data cleansing and manipulation, data sets, and storing miscellaneous files : [konradmiz](https://github.com/konradmiz/ETM-527)
+
 # Introduction
 
-The National Multiple Sclerosis Society (NMSS), founded in 1946, is the 70th largest nonprofit in the United States 1 , and is dedicated to fund research and perform outreach/public awareness and education regarding Multiple Sclerosis. Multiple Sclerosis (MS), a chronic and debilitating disease of the central nervous system where the immune system affects the myelin lining of neurons, is more frequent in women than men, and is typically diagnosed in patients between the ages of 20 and 50 2 . The causal mechanism of MS is unknown but hypothesized to be an interplay of an unknown environmental factor and genetic predisposition. Around 400,000 people in the United States have MS (with an additional 200 diagnosed weekly), and the frequency is about twice as high above the 37th parallel as below it. As such, Multiple Sclerosis represents a relevant, impactful disease with a need for research and education.
+The National Multiple Sclerosis Society (NMSS), founded in 1946, is the 70th largest nonprofit in the United States^[Link to Forbes article [Forbes.com](https://www.forbes.com/companies/national-multiple-sclerosis-society/)], and is dedicated to fund research and perform outreach/public awareness and education regarding Multiple Sclerosis. Multiple Sclerosis (MS), is more frequent in women than men, and is typically diagnosed in patients between the ages of 20 and 50^[Read about Multiple Sclerosis at [NMSS.org](https://www.nationalmssociety.org/About-the-Society/MS-Prevalence)]. The causal mechanism of MS is unknown but hypothesized to be an interplay of an unknown environmental factor and genetic predisposition. Around 400,000 people in the United States have MS (with an additional 200 diagnosed weekly), and the frequency is about twice as high above the 37th parallel as below it. As such, Multiple Sclerosis represents a relevant, impactful disease with a need for research and education^[Quick MS statistics [Healthline](https://www.healthline.com/health/multiple-sclerosis/facts-statistics-infographic)].
 
-The National Multiple Sclerosis Society raises funds primarily through individual donations and through sponsored charity bicycle events (BikeMS) which typically last one or two days 4 . These events occur in the spring, summer, and fall, and about 70,000 participants take part in one of about 75 different events across the country. As the largest charity bike fundraiser in the United States, the events collectively raise about `$`68 million. Teams are the largest contributor to the donation pot, representing about 87% of the money raised. However, as charities representing many distinct pathologies now rely on individual donors and bike rides, 5 the market share for BikeMS has fallen yearly since 2012 and is reflected in declining revenue and numbers of participants 6 . Retention of past participants is strong, but fewer and fewer new participants are joining. In 2017, the NMSS suffered a loss of $8 million 7 . To maintain a fundraising advantage and remain competitive in fundraising, the NMSS has partnered with Teradata University Network to provide their data and relevant business questions to be addressed.
+The National Multiple Sclerosis Society raises funds primarily through individual donations and through sponsored charity bicycle events (Bike MS) which typically last one or two days^[Visit TUN Data Challenge homepage to look at business questions and competition info [TUN Data Challenge 2018](http://www.teradatauniversitynetwork.com/Community/Student-Competitions/2018/Data-Challenge/Business-Questions/)]. These events occur in the spring, summer, and fall, and about 70,000 participants take part in one of about 75 different events across the country. As the largest charity bike fundraiser in the United States, the events collectively raise about `$`68 million. Teams are the largest contributor to the donation pot, representing about 87% of the money raised. However, as charities representing many distinct pathologies now rely on individual donors and bike rides, the market share for Bike MS has fallen yearly since 2012 and is reflected in declining revenue and numbers of participants. Retention of past participants is strong, but fewer and fewer new participants are joining. In 2017, the NMSS suffered a loss of $8 million^[Link to Forbes article [Forbes.com](https://www.forbes.com/companies/national-multiple-sclerosis-society/)]. To maintain a fundraising advantage and remain competitive in fundraising, the NMSS has partnered with Teradata University Network to provide their data and relevant business questions to be addressed.
 
-`r newthought('Multiple Sclerosis')` defined by the National Multiple Sclerosis Society^[Read about Multiple Sclerosis at [NMSS.org](https://www.nationalmssociety.org/About-the-Society/MS-Prevalence)](NMSS):
+
+Multiple Sclerosis defined by the National Multiple Sclerosis Society^[Read about Multiple Sclerosis at [NMSS.org](https://www.nationalmssociety.org/About-the-Society/MS-Prevalence)]:
 
 >"...involves an immune-mediated process in which an abnormal response of the body’s immune system is directed against the central nervous system (CNS), which is made up of the brain, spinal cord and optic nerves. The exact antigen — or target that the immune cells are sensitized to attack — remains unknown, which is why MS is considered by many experts to be 'immune-mediated' rather than 'autoimmune'"
 >
 > `r tufte::quote_footer('--- National Multiple Sclerosis Society')`
 
-Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000 @MSprevalence. 
+Data on the prevalence of MS is extremely difficult to find, mainly because it is not consistently reported or required to be reported in the United States. However, the NMSS trust 2008-2012 estimated prevalence at around 400,000. 
 
 ![Regional MS Prevalence]
 
@@ -128,11 +141,11 @@ Furthermore, a new study is expected to be released this year which estimates MS
 
 ![MS Gender Gap]
 
-Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donators. First, approximately 224 out of 100,000 women report living with MS -- compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highst reported population of insured individuals with MS with 192 out of 100,000 -- as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.
+Insurance data was collected from 2008 to 2012 and analyzed by the American Academy of Neurology. The standard prevalence metric is number of MS patients out of 100,000. There are some interesting trends looking at gender and geospatial demographics, which could lead to engaging a population that might be willing to help increase the number of participants/cyclists and donors. First, approximately 224 out of 100,000 women report living with MS -- compared to just 72 out of 100,000 men. Second, the Eastern Region of the United States has the highest reported population of insured individuals with MS with 192 out of 100,000 -- as opposed to 111 our of 100,000 in the Western Region. With this information, we as analysts can begin generating potential solutions for the decreasing number of participants and fundraising efforts for Bike MS.
 
 # Business Problem
 
-The NMSS is primarily interested in increasing the number of corporate donors: since demographics skew towards middle-aged, white, high-income earners, BikeMS receives much of its support from large corporate teams (featuring 10 or more riders)8. Thus, the overarching business question to address is how to increase the number of new corporate teams, by identifying companies with a large employee base and that are aligned with health/wellness goals. The second is to determine which events and markets are popular with the corporate demographic and use the knowledge to better drive event planning. 
+The NMSS is primarily interested in increasing the number of corporate donors: since demographics skew towards middle-aged, white, high-income earners, Bike MS receives much of its support from large corporate teams (featuring 10 or more riders)8. Thus, the overarching business question to address is how to increase the number of new corporate teams, by identifying companies with a large employee base and that are aligned with health/wellness goals. The second is to determine which events and markets are popular with the corporate demographic and use the knowledge to better drive event planning. 
 
 An additional area of interest is determining the opportunities in digital marketing for attracting participants and tactically increasing donations by email reminders, social media advertising, and other channels. However, this is a secondary goal by the National Multiple Sclerosis Society.
 
@@ -141,16 +154,74 @@ An additional area of interest is determining the opportunities in digital marke
 
 ## What are the greatest growth opportunities for new corporate teams?
 
-Bike MS has reported that corporate teams with 10+ members are their key to a successful season of fundraising. They also have a goal of increasing active registration by almost 9% from 2017 `r margin_note("Last year, they had 74,000 riders and a total of 6,150 teams. Their goal for 2018 is 80,572 riders (40,000 new who have not participated within the last five years), and 6,489 teams.")`. On the Bike MS Business Questions page^[Visit TUN Data Challenge homepage to look at business questions and competition info [TUN Data Challenge 2018](http://www.teradatauniversitynetwork.com/Community/Student-Competitions/2018/Data-Challenge/Business-Questions/)], justification for targeting corporate teams: 
+Bike MS has reported that corporate teams with 10+ members are their key to a successful season of fundraising. They also have a goal of increasing active registration by almost 9% from 2017. Last year there were 74,000 riders and a total of 6,150 teams and their goal for 2018 is 80,572 riders (40,000 new who have not participated within the last five years), and 6,489 teams. On the Bike MS Business Questions page^[Visit TUN Data Challenge homepage to look at business questions and competition info [TUN Data Challenge 2018](http://www.teradatauniversitynetwork.com/Community/Student-Competitions/2018/Data-Challenge/Business-Questions/)], justification for targeting corporate teams: 
 
 > "Because of participant demographics (mostly male, middle age, higher income earners), we know that Bike MS is an ideal corporate event and that corporate teams of 10 or more cyclists are seven times more valuable than any other kind of team. Companies with a large professional employee base, especially those with a corporate culture of health and wellness – regardless of industry – are key prospects"
 >
 > `r tufte::quote_footer('--- Bike MS & Teradata University Network')`
 
-Now we have looked at donations from Fortune 1000 companies and estimate that their contribution is not as significant as they might think ....etc etc [plug in Konrad's work]
+Now we have looked at donations from Fortune 1000  and 500 companies and estimate that their contribution is not as significant as they might think. While the summation of donations is large for these companies, but participants employed by these companies are not more likely to donate any more than a participant in the Friends and Family division. 
+
+```{r fortune, eval=FALSE, include=FALSE}
+participants_joined <- readRDS("C:\\Users\\J-Blazer\\Documents\\ETM 527\\Bike MS\\Fortune500 Matching.rds")
+
+f500 <- read_csv("C:\\Users\\J-Blazer\\Documents\\ETM 527\\Bike MS\\Fortune 1000 Donations.csv")
+
+f500$Company <- toupper(f500$Company)
+
+f500$Company <- gsub("CORPORATION", "", f500$Company)
+f500$Company <- gsub("COMPANY", "", f500$Company)
+f500$Company <- gsub("INCORPORATED", "", f500$Company)
+f500$Company <- gsub("THE", "", f500$Company)
+f500$Company <- gsub(" CORP", "", f500$Company)
+f500$Company <- gsub(" INC", "", f500$Company)
+f500$Company <- gsub(" CO", "", f500$Company)
+
+f500$Company <- trimws(f500$Company, which = "both")
+
+participants_joined$fortune500 <- NA
+
+fortune_max <- vector(mode = "numeric", length = nrow(f500))
 
 
-There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees @SBA. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:
+for (i in 1:nrow(participants_joined)) {
+  for (k in 1:nrow(f500)) {
+    fortune_max[] <- 0
+    if (RecordLinkage::jarowinkler(participants_joined$`Participant Employer`[i],  f500$Company[k]) > 0.9) {
+      fortune_max[k] <- RecordLinkage::jarowinkler(participants_joined$`Participant Employer`[i],  f500$Company[k])
+      
+      participants_joined$fortune500[i] <- f500$Company[which(fortune_max == max(fortune_max))]
+    }
+  }
+
+}
+
+
+check_match <- participants_joined %>%
+  select(`Participant Employer`, fortune500) %>%
+  filter(!is.na(fortune500))
+
+f500_part <- participants_joined %>%
+  filter(!is.na(fortune500))
+
+not_f500 <- dplyr::setdiff(participants_joined, f500_part)
+
+
+ggplot(f500_part, aes(`Total of All Confirmed Gifts($)`+ 1)) +
+  geom_density(color = "blue", size = 0.8, alpha = 0.5) + 
+  scale_y_log10() + 
+  geom_density(data = not_f500, aes(`Total of All Confirmed Gifts($)`+ 1), color = "red", size = 0.8, alpha = 0.5)
+```
+
+![Fortune 1000]
+
+
+
+![Fortune 500]
+
+
+There is no doubt that corporate teams have a large role to play in the success of Bike MS, by bringing characteristics like corporate donation matching, inter-company competition, large teams, and the localization of generally wealthy individuals. However, In 2017 there were a total of 28.8 million registered small businesses in the United States, with anywhere from 1 to 5,000 employees. To find specific corporations that fit the bill of the most successful existing Bike MS corporations might be a perfectly good way of going about answering this question, but in my opinion extremely onerous and potentially yield the same fleeting results each event is experiencing now. Here is where the introductory information can be used to our advantage. Instead, maybe we should be thinking from the perspective of a potential donor. What would make yourself a donor of one fundraiser over another? There is a huge number of illnesses that impact larger populations of the United States than the estimated 1 million individuals living with MS. My best guess is that donors, riders, and volunteers are propelled to Bike MS because of the personal impact it has had on their own life. These are data-driven insights - not just assumptions:
+
 
 ```{r top.occ, include=FALSE}
 # top 15 occupations
@@ -399,7 +470,7 @@ kable(top.fem.occ.year, caption = "Top 10 Reported Occupations of Female Partici
 ```
 
 
-It appears women have the highest number of cyclists working in the healthcare industry. There is a common theme that connects each of the first priority business questions, which is generated by addressing greatest growth opportunites for corporate teams.  Furthermore, our recommendation is to target corporations located in the East Coast specifically those operating in the healthcare sector. According to Business Insider, in 22 states Walmart is the largest employer, many of which are within easy travel distance from the most successful Bike MS events. More importantly, six out of the ten states defined as Eastern Region (highest overall MS prevalence) have Healthcare listed as its largest employer - Pennsylvania, Vermont, Rhode Island, Massachusetts, Connecticut, and Delaware. Can we tell if healthcare is represented in the Eastern Region? 
+It appears women have the highest number of cyclists working in the healthcare industry. There is a common theme that connects each of the first priority business questions, which is generated by addressing greatest growth opportunities for corporate teams.  Furthermore, our recommendation is to target corporations located in the East Coast specifically those operating in the healthcare sector. According to Business Insider, in 22 states Walmart is the largest employer, many of which are within easy travel distance from the most successful Bike MS events. More importantly, six out of the ten states defined as Eastern Region (highest overall MS prevalence) have Healthcare listed as its largest employer - Pennsylvania, Vermont, Rhode Island, Massachusetts, Connecticut, and Delaware. Can we tell if healthcare is represented in the Eastern Region? 
 
 
 
@@ -424,7 +495,7 @@ The data shows us that only three of the six states who have Healthcare listed a
 
 
 
-```{r facet.participants, fig.width = 15, fig.height = 4, fig.fullwidth = TRUE, fig.cap = "A full width figure.", warning=FALSE, message=FALSE, cache=TRUE}
+```{r facet.participants, fig.width = 15, fig.height = 6, fig.fullwidth = TRUE, warning=FALSE, message=FALSE, cache=TRUE}
 ggplot(state.occ) +
 
       geom_point(aes(x = `Fiscal Year`, y = `n`, colour = `Participant Occupation`)) +
@@ -551,7 +622,7 @@ east.health.viz +
 
 ## What industries have had the strongest involvement in Bike MS in the last five years and what occupations were responsible for most of our fundraising?
 
-Involvement with Bike MS can take two forms, either you participate as a cyclist or you donate to the fundraiser. We have already seen that the top occupations of participants are Engineering, Healthcare, Sales, IT, and Executive Management.  From the donations data, we can discern what industries are the top donaters. 
+Involvement with Bike MS can take two forms, either you participate as a cyclist or you donate to the fundraiser. We have already seen that the top occupations of participants are Engineering, Healthcare, Sales, IT, and Executive Management.  From the donations data, we can discern what industries are the top donors. 
 
 
 ![Top Donating Occupations]
@@ -583,7 +654,7 @@ Again, the top national teams with the most involvement are from male dominated 
 ## What is the common denominator for our top performing corporate teams?
 
 
-Echoing the previous ansewr, the top performing corporate teams have employ a large population and have offices across the United States. Returning to our central themes, the data tells us that connection to multiple slerosis drives participants and donators to this massive fundraiser. The purpose of Bike MS is to fund research, advocate for social and political change, provide education, and sponsor services that help people with multiple sclerosis and their families. If the prevalence and incidence numbers are true then there is no reason participation and fundraising efforts should be declining. Let's take a look at the biggest common denominator for not only corporate teams, but everyone involved. 
+Echoing the previous answer, the top performing corporate teams have employ a large population and have offices across the United States. Returning to our central themes, the data tells us that connection to multiple sclerosis drives participants and donors to this massive fundraiser. The purpose of Bike MS is to fund research, advocate for social and political change, provide education, and sponsor services that help people with multiple sclerosis and their families. If the prevalence and incidence numbers are true then there is no reason participation and fundraising efforts should be declining. Let's take a look at the biggest common denominator for not only corporate teams, but everyone involved. 
 
 
 ![Common Denominator]
@@ -656,8 +727,92 @@ Without any knowledge on the amount of donations and registration a competing fu
 
 ![Participation Interaction between Competing Events]
 
+It's difficult to attribute the decrease in overall participation and donations in a particular market to the saturation of cycling fundraisers or competing events. Best Buddies is one of the biggest competitors in this arena and their biggest event, the Hyannis Port Challenge, is held in Massachusetts. The most obvious way of quantifying the effect Best Buddies has on Bike MS events is to analyze the surrounding 
+
+```{r events, message=FALSE, warning=FALSE, include=FALSE}
+BikeEvents <- read_csv("C:\\Users\\J-Blazer\\OneDrive\\ETM 527 DataSets\\Events\\2013-2017 Bike Events.csv")
 
 
+BikeEvents$City[BikeEvents$City == 'Athens, AL ']<- "Athens"
+BikeEvents$City[BikeEvents$City == 'Cherry Hill, NJ with alternate start locations']<-"Cherry Hill"
+BikeEvents$City[BikeEvents$City == 'St. Augustine ']<-"St. Augustine"
+BikeEvents$City[BikeEvents$City == 'Sioux Falls area']<-"Sioux Falls"
+BikeEvents$City[BikeEvents$City == 'Schodack ']<-"Schodack"
+BikeEvents$City[BikeEvents$City == 'San Antonio ']<-"San Antonio"
+BikeEvents$City[BikeEvents$City == 'New York City']<-"New York" 
+BikeEvents$City[BikeEvents$City == 'New Albany ']<-"New Albany"
+BikeEvents$City[BikeEvents$City == 'Keuka Park ']<-"Keuka Park"
+BikeEvents$City[BikeEvents$City == 'Hollidaysburg, PA to State College']<-"Hollidaysburg" 
+BikeEvents$City[BikeEvents$City == 'Duluth to White Bear Lake']<-"Duluth"
+BikeEvents$City[BikeEvents$City == 'Duluth to the Twin Cities']<-"Duluth"
+BikeEvents$City[BikeEvents$City == 'Fargo area']<-"Fargo"
+BikeEvents$City[BikeEvents$City == 'Dallas ']<-"Dallas"
+BikeEvents$City[BikeEvents$City == 'DeKalb']<-"Dekalb"
+BikeEvents$City[BikeEvents$City == 'DeKalb ']<-"Dekalb"
+
+BikeEvents$`Event Dat` <- mdy_hm(BikeEvents$`Event Date`)
+BikeEvents$`Event Date` <- as.Date(BikeEvents$`Event Dat`)
+BikeEvents$Month <- format(BikeEvents$`Event Date`, "%B")
+BikeEvents$Month <- as.factor(BikeEvents$Month)
+
+
+bestbudsHP <- BikeEvents %>%
+  select(`Fiscal Year`, `Security Category Name`,`Event Date`, City, State, `Total of All Confirmed Gifts($)`, 
+         `Active Registrations`, Month) %>%
+  group_by(`Fiscal Year`, `Month`, State) %>%
+  filter(Month == "June")
+
+HPradius <- c("MA", "RI", "DE", "MD", "NY", "PA", "CT")
+
+bestbudsHP.ts <- bestbudsHP %>%
+  select(everything()) %>%
+  group_by(`State`, `Event Date`) %>%
+  filter(State %in% HPradius) %>%
+  summarise(sum(`Active Registrations`))
+```
+
+```{r bestbuddies}
+bestbudsHP <- bestbudsHP %>%
+  dplyr::select(everything()) %>%
+  dplyr::group_by(`Security Category Name`) %>%
+  dplyr::filter(State %in% HPradius)
+
+bestbudsgroup <- bestbudsHP %>%
+  dplyr::select(`Fiscal Year`, `Security Category Name`, `Active Registrations`) %>%
+  dplyr::group_by(`Security Category Name`, `Fiscal Year`) %>%
+  dplyr::summarise(`Active Registrations` = sum(`Active Registrations`))
+
+bestbudsHP.viz <- ggplot(bestbudsHP, aes(x = `Fiscal Year`, y = `Active Registrations`)) +
+  geom_bar(aes(fill = `Security Category Name`), stat = "identity", position=position_dodge()) +
+  geom_smooth(aes(colour = "lm"), method = "lm", se = FALSE)
+bestbudsHP.viz +
+  labs(title = "Effect of Best Buddies on Northeast Market")
+  
+
+bestbudsgroup.viz <- ggplot(bestbudsgroup, aes(x = `Fiscal Year`, y = `Active Registrations`, colour = `Security Category Name`)) +
+  geom_point() +
+  geom_line()
+bestbudsgroup.viz
+```
+
+
+These two visualizations in parallel provide the perfect insight into how Best Buddies is effecting Bike MS metrics. We are able to see that specifically in Massachusetts, where the Hyannis Port Challenge is held, there is no significant change in active registrations from 2014 to 2017. We have fit a line to the average registration and see a slight decline from 2013 to 2017, but we do not believe this to be a function of Best Buddies' impact. 
+
+
+## What are the greatest opportunities for digital marketing investments? Where have we seen the greatest ROI? 
+
+
+Bike MS uses three main channels or platforms to engage their target market - Social, Display Ads, and Search Engine. Using their marketing reports from 2015 to 2017 we were able to see the growth of each platform and conversion rates that were recorded due to the budget increase for each channel. There was a direct correlation between the amount of money spend on social media platforms and total conversions. Registration was the  metric used to describe conversion. Here is the breakdown of conversions per channel: 
+
+
+![Digital Marketing]
+
+
+From 2016 to 2017 Bike MS allocated 75% of their digital marketing budget to social media and the remaining 25% display ads and search engine. Judging by the conversion from social media they saw in 2017 their return on investment was positive and we would recommend that they continue prioritizing social media as the primary source of digital marketing. 
+
+# Conclusion
+
+Our data-driven insights conclude that there are major growth opportunities targeting the female population and workforce. The prevalence of multiple sclerosis and those with personal connections to it can have a significant impact on the future of this large fundraiser. In the Northeastern states where Bike MS events are most successful and MS prevalence is highest, teams from large healthcare organizations can drive up female registration and donations. We see the gender gap in participation as the biggest weakness. Bike MS will continue to see positive interaction or conversion through Social Media platforms as their main channel of digital marketing – especially as the millennial population begins to find job stability. 
 
 
 ```{r gender.means, warning=FALSE, include=FALSE}
@@ -673,7 +828,7 @@ gender.gifts
 
 gender.gifts$`Event Date` <- as.Date(gender.gifts$`Event Date`)
 gender.gif <- aggregate(gender.gifts, by = list(gender.gifts$`Gender`, gender.gifts$`Event Date`), FUN = mean)
-gender.gif <-gender.gif[,c(1,2,5)]
+gender.gif <- gender.gif[,c(1,2,5)]
 colnames(gender.gif) <- c("Gender", "Event Date", "Gift Amount")
 
 
@@ -863,3 +1018,6 @@ plot(topEventsVorn, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=1
 [Top Donating Occupations]: topOccupationsdonation.png
 [Involvement of Top National Teams]: nationalteams1.png
 [Prevalence Giffy]: MS.gif
+[Digital Marketing]: digitalmarketing.png
+[Fortune 1000]: fortune1000.png
+[Fortune 500]: fortune500.png
