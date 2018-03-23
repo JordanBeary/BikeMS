@@ -1,6 +1,10 @@
 # TUN Data Challenge 2018 : National Multiple Sclerosis Society - Bike MS
 
-To provide some context for our analysis, here is some background information about Bike MS and the business problems they have been facing the past couple of years. The following can be found on the `Business Questions` page on the Teradata University Network Data Challenge website:
+GitHub Webpage to view Final Report, Appendix (including additional code not shown in final report), and Progress Log can be found here:
+
+https://jordanbeary.github.io/BikeMS/
+
+To provide some context for our analysis, here is some background information about Bike MS and the business problems they have been facing in recent years. The following can be found on the `Business Questions` page on the Teradata University Network Data Challenge website:
 
 Bike MS is the National MS Society’s largest fundraising campaign, engaging over 70,000 participants to raise $68 million in over 75 rides across the country. It is the largest charity cycling series in the United States.
 
