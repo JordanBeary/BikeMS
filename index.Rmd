@@ -5,13 +5,8 @@ date: "March 23, 2018"
 ---
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
 library(tint)
-library(tufte)
-# invalidate cache when the tufte version changes
-knitr::opts_chunk$set(
-	cache.extra = packageVersion("tint"),
-	include = TRUE,
-	tidy = FALSE
-)
+# invalidate cache when the package version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
 options(htmltools.dir.version = FALSE)
 ```
 
@@ -145,7 +140,7 @@ Insurance data was collected from 2008 to 2012 and analyzed by the American Acad
 
 # Business Problem
 
-The NMSS is primarily interested in increasing the number of corporate donors: since demographics skew towards middle-aged, white, high-income earners, Bike MS receives much of its support from large corporate teams (featuring 10 or more riders)8. Thus, the overarching business question to address is how to increase the number of new corporate teams, by identifying companies with a large employee base and that are aligned with health/wellness goals. The second is to determine which events and markets are popular with the corporate demographic and use the knowledge to better drive event planning. 
+The NMSS is primarily interested in increasing the number of corporate donors: since demographics skew towards middle-aged, white, high-income earners, Bike MS receives much of its support from large corporate teams (featuring 10 or more riders). Thus, the overarching business question to address is how to increase the number of new corporate teams, by identifying companies with a large employee base and that are aligned with health/wellness goals. The second is to determine which events and markets are popular with the corporate demographic and use the knowledge to better drive event planning. 
 
 An additional area of interest is determining the opportunities in digital marketing for attracting participants and tactically increasing donations by email reminders, social media advertising, and other channels. However, this is a secondary goal by the National Multiple Sclerosis Society.
 

@@ -1,16 +1,14 @@
 ---
 title: "Additional Code Not Shown in Final Report"
-output: github_document
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
-library(tufte)
 library(tint)
 # invalidate cache when the tufte version changes
 knitr::opts_chunk$set(
 	cache.extra = packageVersion("tint"),
 	include = FALSE,
-	tidy = FALSE
+	tidy = TRUE
 )
 options(htmltools.dir.version = FALSE)
 ```

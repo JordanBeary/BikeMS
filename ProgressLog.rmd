@@ -1,0 +1,45 @@
+---
+title: "Project Log"
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(tint)
+# invalidate cache when the package version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+options(htmltools.dir.version = FALSE)
+```
+
+
+![](ResearchProgressLog-01.png)
+
+![](ResearchProgressLog-02.png)
+
+![](ResearchProgressLog-03.png)
+
+![](ResearchProgressLog-04.png)
+
+![](ResearchProgressLog-05.png)
+
+![](ResearchProgressLog-06.png)
+
+![](ResearchProgressLog-07.png)
+
+![](ResearchProgressLog-08.png)
+
+![](ResearchProgressLog-09.png)
+
+![](ResearchProgressLog-10.png)
+
+![](ResearchProgressLog-11.png)
+
+![](ResearchProgressLog-12.png)
+
+![](ResearchProgressLog-13.png)
+
+![](ResearchProgressLog-14.png)
+
+![](ResearchProgressLog-15.png)
+
+![](ResearchProgressLog-16.png)
+
+
